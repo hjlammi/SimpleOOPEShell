@@ -83,4 +83,57 @@ public class OmaListaTest {
         lista.lisaaAlkuun("AB");
         assertEquals("AB", lista.hae("AB"));
     }
+
+    /*
+     * Poistaa listalta annettua oliota equals-mielessä vastaavan alkion.
+     */
+
+    @Test
+    public void tyhjastaPoistaminen() {
+        OmaLista lista = new OmaLista();
+        assertEquals(null, lista.poista("ab"));
+    }
+
+    @Test
+    public void eiPoistettavaaAlkiota() {
+        OmaLista lista = new OmaLista();
+        lista.lisaaAlkuun("Ab");
+        lista.lisaaAlkuun("bb");
+        lista.lisaaAlkuun("AB");
+        assertEquals(null, lista.poista("ab"));
+    }
+
+    @Test
+    public void alkionPoisto1kokoisestaListasta() {
+        OmaLista lista = new OmaLista();
+        lista.lisaaAlkuun("bb");
+        assertEquals("bb", lista.poista("bb"));
+    }
+
+    @Test
+    public void poistoListasta() {
+        OmaLista lista = new OmaLista();
+        lista.lisaaAlkuun("Ab");
+        lista.lisaaAlkuun("bb");
+        lista.lisaaAlkuun("AB");
+        assertEquals("bb", lista.poista("bb"));
+    }
+
+    @Test
+    public void parametriNull() {
+        OmaLista lista = new OmaLista();
+        lista.lisaaAlkuun("Ab");
+        lista.lisaaAlkuun("bb");
+        lista.lisaaAlkuun("AB");
+        assertEquals(null, lista.poista(null));
+    }
+
+    @Test
+    public void poistetaanNull() {
+        OmaLista lista = new OmaLista();
+        lista.lisaaAlkuun("Ab");
+        lista.lisaaAlkuun(null);
+        lista.lisaaAlkuun("AB");
+        assertEquals(null, lista.poista(null));
+    }
 }
