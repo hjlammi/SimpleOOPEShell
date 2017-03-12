@@ -3,3 +3,6 @@ target/
 oope.iml
 src/main/main.iml
 src/test/test.iml
+.classpath
+.project
+.settings/
