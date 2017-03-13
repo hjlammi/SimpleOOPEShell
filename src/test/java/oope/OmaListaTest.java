@@ -136,4 +136,114 @@ public class OmaListaTest {
         lista.lisaaAlkuun("AB");
         assertEquals(null, lista.poista(null));
     }
+
+    /*
+     * Lisää listaan järjestyksessä.
+     */
+    @Test
+    public void lisataanTyhjaanListaan() {
+        OmaLista lista = new OmaLista();
+        assertEquals(true, lista.lisaa(1));
+        assertEquals(1, lista.koko());
+        assertEquals(1, lista.alkio(0));
+    }
+
+    @Test
+    public void lisataanKolmenListaan() {
+        OmaLista lista = new OmaLista();
+        lista.lisaa(1);
+        lista.lisaa(3);
+        lista.lisaa(4);
+        assertEquals(true, lista.lisaa(2));
+        assertEquals(4, lista.koko());
+        assertEquals(1, lista.alkio(0));
+        assertEquals(2, lista.alkio(1));
+        assertEquals(3, lista.alkio(2));
+        assertEquals(4, lista.alkio(3));
+    }
+
+    @Test
+    public void lisataanStringejaListaan() {
+        OmaLista lista = new OmaLista();
+        lista.lisaa("ab");
+        lista.lisaa("aa");
+        lista.lisaa("pier");
+        lista.lisaa("ac");
+        assertEquals(true, lista.lisaa("lol"));
+        assertEquals(5, lista.koko());
+        assertEquals("aa", lista.alkio(0));
+        assertEquals("ab", lista.alkio(1));
+        assertEquals("ac", lista.alkio(2));
+        assertEquals("lol", lista.alkio(3));
+        assertEquals("pier", lista.alkio(4));
+    }
+
+    @Test
+    public void lisataanUusiObjectListaan() {
+        OmaLista lista = new OmaLista();
+        lista.lisaa("ab");
+        lista.lisaa("aa");
+        lista.lisaa("pier");
+        assertEquals(false, lista.lisaa(new Object()));
+        assertEquals(3, lista.koko());
+        assertEquals("aa", lista.alkio(0));
+        assertEquals("ab", lista.alkio(1));
+        assertEquals("pier", lista.alkio(2));
+    }
+
+    @Test
+    public void lisataanSekaisinEriTyyppisia() {
+        OmaLista lista = new OmaLista();
+        lista.lisaa("ab");
+        lista.lisaa(new Object());
+        lista.lisaa("pier");
+        assertEquals(false, lista.lisaa(1));
+        assertEquals(2, lista.koko());
+        assertEquals("ab", lista.alkio(0));
+        assertEquals("pier", lista.alkio(1));
+    }
+
+    @Test
+    public void lisataanLoppuun() {
+        OmaLista lista = new OmaLista();
+        lista.lisaa(1);
+        lista.lisaa(3);
+        lista.lisaa(4);
+        assertEquals(true, lista.lisaa(5));
+        assertEquals(4, lista.koko());
+        assertEquals(1, lista.alkio(0));
+        assertEquals(3, lista.alkio(1));
+        assertEquals(4, lista.alkio(2));
+        assertEquals(5, lista.alkio(3));
+    }
+
+    @Test
+    public void lisataanSama() {
+        OmaLista lista = new OmaLista();
+        Integer uusiKolme = new Integer(3);
+        lista.lisaa(1);
+        lista.lisaa(3);
+        lista.lisaa(4);
+        assertEquals(true, lista.lisaa(uusiKolme));
+        assertEquals(4, lista.koko());
+        assertEquals(1, lista.alkio(0));
+        assertEquals(3, lista.alkio(1));
+        assertEquals(3, lista.alkio(2));
+        assertEquals(4, lista.alkio(3));
+        assertEquals(true, uusiKolme == lista.alkio(2));
+    }
+
+    @Test
+    public void lisataanNull() {
+        OmaLista lista = new OmaLista();
+        lista.lisaa(1);
+        lista.lisaa(3);
+        lista.lisaa(4);
+        assertEquals(false, lista.lisaa(null));
+        assertEquals(3, lista.koko());
+        assertEquals(1, lista.alkio(0));
+        assertEquals(3, lista.alkio(1));
+        assertEquals(4, lista.alkio(2));
+    }
+
 }
