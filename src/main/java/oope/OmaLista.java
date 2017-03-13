@@ -21,16 +21,14 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva {
      * @see apulaiset.Ooperoiva#hae(java.lang.Object)
      */
     public Object hae(Object haettava) {
-        if (haettava == null) {
-            return null;
-        } else if (onkoTyhja()) {
-            return null;
-        } else {
+        if (haettava != null && !onkoTyhja()) {
             for (int i = 0; i < koko(); i++) {
                 if (haettava.equals(alkio(i))) {
                     return alkio(i);
                 }
             }
+            return null;
+        } else {
             return null;
         }
     }
