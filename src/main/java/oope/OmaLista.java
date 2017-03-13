@@ -17,11 +17,17 @@ import fi.uta.csjola.oope.lista.LinkitettyLista;
 public class OmaLista extends LinkitettyLista implements Ooperoiva {
 
     /*
+     * Hakee listalta parametri-oliota equals-mielessä vastaavan olion, johon antaa viitteen paluuarvona.
+     * Oletetaan, että listassa on korkeintaan yksi samanlainen olio. Paluuarvo on null,
+     * jos parametri on null, jos lista on tyhjä tai jos vastaava alkiota ei löydy.
      * (non-Javadoc)
      * @see apulaiset.Ooperoiva#hae(java.lang.Object)
      */
     public Object hae(Object haettava) {
+        // Tarkistetaan ettei parametri ole null-arvoinen ja ettei lista ole tyhjä.
         if (haettava != null && !onkoTyhja()) {
+            // Käydään lista läpi ja verrataan haettavaa jokaiseen listan alkioon.
+            // Jos haettava ja alkio vastaavat toisiaan palautetaan viite alkioon.
             for (int i = 0; i < koko(); i++) {
                 if (haettava.equals(alkio(i))) {
                     return alkio(i);
@@ -33,12 +39,31 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva {
         }
     }
 
+    /*
+     * Lisaa-metodi vertailee parametrina saamaansa oliota ja listassa olevaa olioita compareTo-metodilla
+     * ja sijoittaa parametri-olion kaikkien itseään pienempien tai yhtä suurien alkioiden
+     * jälkeen ja ennen kaikkia itseään suurempia alkioita. Metodilla saadaan siis tehtyä
+     * kasvavassa suuruusjärjestyksessä oleva lista. Paluuarvo on true, jos lisäys onnistui
+     * ja false, jos parametri on null, jos olioita ei voitu vertailla tai jos oliot eivät ole samantyyppisiä,
+     * jolloin niitä ei voi vertailla keskenään.
+     * (non-Javadoc)
+     * @see apulaiset.Ooperoiva#lisaa(java.lang.Object)
+     */
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public boolean lisaa(Object uusi) {
+        // Tarkistetaan, että olio toteuttaa Comparable-rajapinnan.
         if (uusi instanceof Comparable) {
+            // Jos lista on tyhjä, lisätään uusi-alkio listan alkuun ja palautetaan true.
             if (onkoTyhja()) {
                 lisaaAlkuun(uusi);
                 return true;
+            // Jos lista ei ole tyhjä, käydään se läpi ja tarkistetaan ensin, että vertailtavat
+            // oliot ovat samantyyppisiä. Jos ne ovat, verrataan uusi-alkiota listan paikassa i
+            // olevaan alkioon. Jos uusi on pienempi kuin alkio, lisätään uusi paikkaan i ja vanha
+            // alkio siirtyy yhden paikan eteenpäin. Palautetaan true lisäämisen onnistumisen merkiksi.
+            // Jos uusi-alkio ei ole pienempi kuin yksikään alkio listassa, lisätään se listan loppuun
+            // ja palautetaan true.
             } else {
                 for (int i = 0; i < koko(); i++) {
                     if (uusi.getClass().equals(alkio(i).getClass())) {
@@ -58,8 +83,18 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva {
         }
     }
 
+    /*
+     * Poistaa listalta parametri-oliota equals-mielessä vastaavan olion, johon antaa viitteen paluuarvona.
+     * Oletetaan, että listassa on korkeintaan yksi samanlainen olio. Paluuarvo on null,
+     * jos parametri on null, jos lista on tyhjä tai jos poistettavaa alkiota ei löydy.
+     * (non-Javadoc)
+     * @see apulaiset.Ooperoiva#hae(java.lang.Object)
+     */
     public Object poista(Object poistettava) {
-        if (poistettava != null) {
+        // Tarkistetaan, ettei poistettava ole null-arvoinen eikä taulukko ole tyhjä.
+        if (poistettava != null && !onkoTyhja()) {
+            // Käydään lista läpi ja jos paikassa i oleva alkio vastaa poistettavaa alkiota,
+            // palautetaan alkio paikasta i. Jos vastaavaa alkiota ei löydy palautetaan null.
             for (int i = 0; i < koko(); i++) {
                 if (poistettava.equals(alkio(i))) {
                     return poista(i);
