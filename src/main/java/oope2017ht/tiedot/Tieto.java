@@ -20,6 +20,10 @@ public abstract class Tieto implements Comparable<Tieto>{
         return nimi;
     }
 
+    /*
+     * Apumetodit nimen testaamiseen. Public static -määreet, jotta voi käyttää yksikkötestausta.
+     */
+
     // Tutkii, onko parametrina saatu merkkijono ok ja palauttaa tosi, jos merkkijono on ok
     // ja epätosi, jos merkkijono ei ole ok.
     public static boolean nimiOk(StringBuilder mjono) {
@@ -31,19 +35,20 @@ public abstract class Tieto implements Comparable<Tieto>{
     }
 
     // Tutkii onko merkkijonossa vain sallittuja merkkejä. Palauttaa tosi, jos kaikki merkit ovat ok
-    // false, jos löytyy vääriä merkkejä.
+    // false, jos löytyy yksikin väärä merkki.
     public static boolean vainSallittujaMerkkeja(StringBuilder mjono) {
-        boolean vainKirjaimiaOk = true;
+        boolean merkitOk = true;
         boolean loytyiVaaraMerkki = false;
         for (int i = 0; i < mjono.length() && !loytyiVaaraMerkki; i++) {
             if ((mjono.charAt(i) >= 'a' && mjono.charAt(i) <= 'z') ||
-               (mjono.charAt(i) >= 'A' && mjono.charAt(i) <= 'Z')) {
-                vainKirjaimiaOk = true;
+            (mjono.charAt(i) >= 'A' && mjono.charAt(i) <= 'Z') ||
+            (mjono.charAt(i) >= '0' && mjono.charAt(i) <= '9')){
+                merkitOk = true;
             } else {
-                vainKirjaimiaOk = false;
+                merkitOk = false;
                 loytyiVaaraMerkki = true;
             }
         }
-        return vainKirjaimiaOk;
+        return merkitOk;
     }
 }

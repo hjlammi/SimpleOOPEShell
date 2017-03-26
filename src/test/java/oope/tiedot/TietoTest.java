@@ -28,4 +28,11 @@ public class TietoTest {
         assertEquals(false, Tieto.vainSallittujaMerkkeja(s));
     }
 
+    @Test
+    public void numerotSallittuja() {
+        StringBuilder s = new StringBuilder();
+        s.append("j1ooo2");
+        assertEquals(true, Tieto.vainSallittujaMerkkeja(s));
+    }
+
 }
