@@ -4,11 +4,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import oope2017ht.tiedot.Tieto;
+
 public class TietoTest {
 
     @Test
-    public void test() {
-        fail("Not yet implemented");
+    public void tyhja() {
+        StringBuilder s = new StringBuilder();
+        assertEquals(false, Tieto.nimiOk(s));
     }
 
 }

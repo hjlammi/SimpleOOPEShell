@@ -22,7 +22,11 @@ public abstract class Tieto implements Comparable<Tieto>{
 
     // Tutkii, onko parametrina saatu merkkijono ok ja palauttaa tosi, jos merkkijono on ok
     // ja epätosi, jos merkkijono ei ole ok.
-    private boolean nimiOk(StringBuilder mjono) {
-        return true;
+    public static boolean nimiOk(StringBuilder mjono) {
+        if (mjono.length() == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
