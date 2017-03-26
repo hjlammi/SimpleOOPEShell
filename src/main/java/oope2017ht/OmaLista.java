@@ -1,4 +1,4 @@
-package oope;
+package oope2017ht;
 
 /*
  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.

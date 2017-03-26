@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import oope2017ht.OmaLista;
+
 public class OmaListaTest {
 
     @Test
