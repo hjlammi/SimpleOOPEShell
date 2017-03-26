@@ -42,7 +42,8 @@ public abstract class Tieto implements Comparable<Tieto>{
         for (int i = 0; i < mjono.length() && !loytyiVaaraMerkki; i++) {
             if ((mjono.charAt(i) >= 'a' && mjono.charAt(i) <= 'z') ||
             (mjono.charAt(i) >= 'A' && mjono.charAt(i) <= 'Z') ||
-            (mjono.charAt(i) >= '0' && mjono.charAt(i) <= '9')){
+            (mjono.charAt(i) >= '0' && mjono.charAt(i) <= '9') ||
+            mjono.charAt(i) == '_'){
                 merkitOk = true;
             } else {
                 merkitOk = false;

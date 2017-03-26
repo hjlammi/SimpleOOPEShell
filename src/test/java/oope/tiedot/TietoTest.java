@@ -35,4 +35,11 @@ public class TietoTest {
         assertEquals(true, Tieto.vainSallittujaMerkkeja(s));
     }
 
+    @Test
+    public void alaviivaSallittu() {
+        StringBuilder s = new StringBuilder();
+        s.append("j1oo_o");
+        assertEquals(true, Tieto.vainSallittujaMerkkeja(s));
+    }
+
 }
