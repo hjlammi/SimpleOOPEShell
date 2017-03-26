@@ -52,4 +52,19 @@ public abstract class Tieto implements Comparable<Tieto>{
         }
         return merkitOk;
     }
+
+    public static boolean pisteitaMaxYksi(StringBuilder mjono) {
+        int pisteidenLkm = 0;
+        for (int i = 0; i < mjono.length(); i++) {
+            if (mjono.charAt(i) == '.') {
+                pisteidenLkm++;
+            }
+        }
+
+        if (pisteidenLkm > 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

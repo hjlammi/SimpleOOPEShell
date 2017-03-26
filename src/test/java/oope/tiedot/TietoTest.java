@@ -42,4 +42,10 @@ public class TietoTest {
         assertEquals(true, Tieto.vainSallittujaMerkkeja(s));
     }
 
+    @Test
+    public void yksiPisteSallittu() {
+        StringBuilder s = new StringBuilder();
+        s.append("j1oo.o");
+        assertEquals(true, Tieto.pisteitaMaxYksi(s));
+    }
 }
