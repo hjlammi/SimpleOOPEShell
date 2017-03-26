@@ -62,4 +62,11 @@ public class TietoTest {
         s.append(".");
         assertEquals(false, Tieto.pisteitaMaxYksi(s));
     }
+
+    @Test
+    public void pelkkaPisteNimessa() {
+        StringBuilder s = new StringBuilder();
+        s.append(".");
+        assertEquals(false, Tieto.nimiOk(s));
+    }
 }
