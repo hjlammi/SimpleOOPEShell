@@ -53,6 +53,8 @@ public abstract class Tieto implements Comparable<Tieto>{
         return merkitOk;
     }
 
+    // Tutkii onko nimessä piste-merkkejä vain yksi ja ettei piste ole nimen ainut merkki.
+    // Paluu arvo on false, jos pisteitä on enemmän kuin yksi tai jos piste on nimen ainut merkki.
     public static boolean pisteitaMaxYksi(StringBuilder mjono) {
         int pisteidenLkm = 0;
         for (int i = 0; i < mjono.length(); i++) {
@@ -62,6 +64,8 @@ public abstract class Tieto implements Comparable<Tieto>{
         }
 
         if (pisteidenLkm > 1) {
+            return false;
+        } else if ((pisteidenLkm == 1) && (mjono.length() == 1)) {
             return false;
         } else {
             return true;
