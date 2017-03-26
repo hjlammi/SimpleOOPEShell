@@ -101,4 +101,11 @@ public abstract class Tieto implements Comparable<Tieto>{
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        String tama = this.nimi().toString();
+        String toinen = ((Tieto)obj).nimi().toString();
+        return tama.equals(toinen);
+    }
+
 }
