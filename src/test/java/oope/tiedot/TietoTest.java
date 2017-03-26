@@ -76,4 +76,11 @@ public class TietoTest {
         s.append("joku1_joku1.txt");
         assertEquals(true, Tieto.nimiOk(s));
     }
+
+    @Test
+    public void liikaaPisteita() {
+        StringBuilder s = new StringBuilder();
+        s.append("joku1.joku1.txt");
+        assertEquals(false, Tieto.nimiOk(s));
+    }
 }
