@@ -48,4 +48,11 @@ public class TietoTest {
         s.append("j1oo.o");
         assertEquals(true, Tieto.pisteitaMaxYksi(s));
     }
+
+    @Test
+    public void kaksiPistetta() {
+        StringBuilder s = new StringBuilder();
+        s.append("j1o.o.o");
+        assertEquals(false, Tieto.pisteitaMaxYksi(s));
+    }
 }
