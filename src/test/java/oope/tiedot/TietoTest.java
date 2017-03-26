@@ -69,4 +69,11 @@ public class TietoTest {
         s.append(".");
         assertEquals(false, Tieto.nimiOk(s));
     }
+
+    @Test
+    public void oikeantyyppinenNimi() {
+        StringBuilder s = new StringBuilder();
+        s.append("joku1_joku1.txt");
+        assertEquals(true, Tieto.nimiOk(s));
+    }
 }
