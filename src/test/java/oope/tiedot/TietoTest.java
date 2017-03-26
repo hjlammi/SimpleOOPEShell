@@ -14,4 +14,18 @@ public class TietoTest {
         assertEquals(false, Tieto.nimiOk(s));
     }
 
+    @Test
+    public void plusmerkkiNimessa() {
+        StringBuilder s = new StringBuilder();
+        s.append("jooo+");
+        assertEquals(false, Tieto.vainSallittujaMerkkeja(s));
+    }
+
+    @Test
+    public void kaksiVaaraaNimessa() {
+        StringBuilder s = new StringBuilder();
+        s.append("j&oo+o");
+        assertEquals(false, Tieto.vainSallittujaMerkkeja(s));
+    }
+
 }
