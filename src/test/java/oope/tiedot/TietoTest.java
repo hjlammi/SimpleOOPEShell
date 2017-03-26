@@ -8,6 +8,10 @@ import oope2017ht.tiedot.Tieto;
 
 public class TietoTest {
 
+    /*
+     * Testataan onko Stringbuilder nimi oikeanlainen.
+     */
+
     @Test
     public void tyhja() {
         StringBuilder s = new StringBuilder();

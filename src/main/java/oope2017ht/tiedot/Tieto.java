@@ -13,7 +13,12 @@ public abstract class Tieto implements Comparable<Tieto>{
 
     // Aksessorit.
 
-    public void nimi(StringBuilder nimi) {
+    public void nimi(StringBuilder nimi) throws IllegalArgumentException{
+        if (nimiOk(nimi)) {
+            this.nimi = nimi;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     public StringBuilder nimi() {
@@ -65,7 +70,6 @@ public abstract class Tieto implements Comparable<Tieto>{
                     pisteidenLkm++;
                 }
             }
-            System.out.println(pisteidenLkm);
 
             if (pisteidenLkm > 1) {
                 return false;
@@ -74,4 +78,14 @@ public abstract class Tieto implements Comparable<Tieto>{
             }
         }
     }
+
+    /*
+     * Korvatut metodit.
+     */
+
+    @Override
+    public String toString() {
+        return nimi.toString();
+    }
+
 }
