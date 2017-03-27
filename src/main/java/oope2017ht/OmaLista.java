@@ -19,7 +19,7 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva {
     /*
      * Hakee listalta parametri-oliota equals-mielessä vastaavan olion, johon antaa viitteen paluuarvona.
      * Oletetaan, että listassa on korkeintaan yksi samanlainen olio. Paluuarvo on null,
-     * jos parametri on null, jos lista on tyhjä tai jos vastaava alkiota ei löydy.
+     * jos parametri on null, jos lista on tyhjä tai jos vastaavaa alkiota ei löydy.
      * (non-Javadoc)
      * @see apulaiset.Ooperoiva#hae(java.lang.Object)
      */
