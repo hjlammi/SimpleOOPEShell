@@ -29,4 +29,13 @@ public class TiedostoTest {
         assertEquals(false, t1.equals(t2));
     }
 
+    @Test
+    public void compareToSuurempiTesti() {
+        Tiedosto t1 = new Tiedosto(new StringBuilder("cat"), 7);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("dog"), 8);
+        assertEquals(-1, t1.compareTo(t2));
+    }
+
+
+
 }
