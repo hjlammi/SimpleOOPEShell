@@ -36,6 +36,11 @@ public class TiedostoTest {
         assertEquals(-1, t1.compareTo(t2));
     }
 
-
+    @Test
+    public void compareToSamaTesti() {
+        Tiedosto t1 = new Tiedosto(new StringBuilder("cat"), 7);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("cat"), 8);
+        assertEquals(0, t1.compareTo(t2));
+    }
 
 }
