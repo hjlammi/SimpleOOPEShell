@@ -15,4 +15,11 @@ public class TiedostoTest {
         assertEquals(tuloste, t.toString());
     }
 
+    @Test
+    public void equalsSamaNimiTesti() {
+        Tiedosto t1 = new Tiedosto(new StringBuilder("cat"), 7);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("cat"), 8);
+        assertEquals(true, t1.equals(t2));
+    }
+
 }
