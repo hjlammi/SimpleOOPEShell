@@ -22,4 +22,11 @@ public class TiedostoTest {
         assertEquals(true, t1.equals(t2));
     }
 
+    @Test
+    public void equalsEriNimiTesti() {
+        Tiedosto t1 = new Tiedosto(new StringBuilder("cat"), 7);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("dog"), 8);
+        assertEquals(false, t1.equals(t2));
+    }
+
 }
