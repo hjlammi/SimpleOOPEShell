@@ -2,16 +2,28 @@ package oope2017ht.tiedot;
 
 public abstract class Tieto implements Comparable<Tieto>{
 
+    // Vakioitu erotin toString-metodin käytettäväksi.
+    protected final String EROTIN = " ";
+
     // Atribuutti nimelle.
     private StringBuilder nimi;
 
-    // Rakentajat.
+    /*
+     * Rakentajat.
+     */
 
     public Tieto(StringBuilder nimi) {
         this.nimi(nimi);
     }
 
-    // Aksessorit.
+    // Kopiorakentaja.
+    public Tieto(Tieto toinen) {
+        this.nimi = new StringBuilder(toinen.nimi.toString());
+    }
+
+    /*
+     * Aksessorit.
+     */
 
     public void nimi(StringBuilder nimi) throws IllegalArgumentException{
         if (nimiOk(nimi)) {

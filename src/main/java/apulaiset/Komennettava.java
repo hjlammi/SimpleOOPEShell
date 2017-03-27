@@ -20,7 +20,7 @@ public interface Komennettava<T> {
    /** Aksessori, joka antaa viitteen hakemiston sisällön säilövään listaan.
      *
      * @return viite hakemisto-olion osaolioon.
-     */   
+     */
    abstract public LinkitettyLista sisalto();
 
    /** Hakee hakemistosta tiedostoa tai alihakemistoa. Hyödyntää OmaLista-luokan
