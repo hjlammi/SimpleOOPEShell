@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import oope2017ht.tiedot.Hakemisto;
+import oope2017ht.tiedot.*;
 
 public class HakemistoTest {
 
@@ -16,6 +16,12 @@ public class HakemistoTest {
         assertEquals(tuloste, h.toString());
     }
 
-
+    @Test
+    public void lisaaTiedosto() {
+        Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto t = new Tiedosto(new StringBuilder("cat"), 9);
+        assertEquals(true, root.lisaa(t));
+        assertSame(t, root.tiedot().alkio(0));
+    }
 
 }

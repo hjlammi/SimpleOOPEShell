@@ -86,8 +86,7 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      */
     @Override
     public boolean lisaa(Tieto lisattava) {
-        // TODO Auto-generated method stub
-        return false;
+        return tiedot.lisaa(lisattava);
     }
 
     /* Poistaa hakemistosta tiedoston tai alihakemiston. Hyödyntää OmaLista-luokan
