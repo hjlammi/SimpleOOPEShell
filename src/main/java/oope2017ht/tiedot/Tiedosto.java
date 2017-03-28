@@ -1,5 +1,15 @@
 package oope2017ht.tiedot;
 
+/*
+ * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+ *
+ * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+ *
+ * Viimeksi muokattu 28.3.2017.
+ *
+ * Tiedosto-luokka periytyy Tieto-luokasta.
+ */
+
 public class Tiedosto extends Tieto {
 
     // Attribuutti tiedoston koolle tavuina.

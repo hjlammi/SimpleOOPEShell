@@ -1,5 +1,16 @@
 package oope2017ht.tiedot;
 
+/*
+ * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+ *
+ * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+ *
+ * Viimeksi muokattu 28.3.2017.
+ *
+ * Tieto-luokka, jonka ainoa attribuutti on nimi. Luokka toteuttaa Comparable-rajapinnan ja
+ * korvaa toString- ja equals-metodit.
+ */
+
 public abstract class Tieto implements Comparable<Tieto>{
 
     // Vakioitu erotin toString-metodin käytettäväksi.
@@ -38,11 +49,13 @@ public abstract class Tieto implements Comparable<Tieto>{
     }
 
     /*
-     * Apumetodit nimen testaamiseen. Public static -määreet, jotta voi käyttää yksikkötestausta.
+     * Apumetodit nimen oikeellisuuden tarkistamiseen. Public static -määreet, jotta voi käyttää yksikkötestausta.
      */
 
     // Tutkii, onko parametrina saatu merkkijono ok ja palauttaa tosi, jos merkkijono on ok
-    // ja epätosi, jos merkkijono ei ole ok.
+    // ja epätosi, jos merkkijono ei ole ok. Tarkistaa, että nimi on vähintään yhden mittainen ja
+    // kutsuu apumetodeja, jotka tarkistavat, että nimessä on vain sallittuja merkkejä ja että
+    // nimessä on maksimissaan yksi piste, mutta myös muita merkkejä.
     public static boolean nimiOk(StringBuilder nimi) {
         if ((nimi.length() > 0) && (vainSallittujaMerkkeja(nimi)) && (pisteitaMaxYksi(nimi))) {
             return true;
