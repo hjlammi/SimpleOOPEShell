@@ -71,11 +71,7 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
     public Tieto hae(String nimi) {
         Tieto haettava = new Tiedosto(new StringBuilder(nimi), 1);
         Object loydetty = tiedot.hae(haettava);
-        if (loydetty != null) {
-            return (Tieto)loydetty;
-        } else {
-            return null;
-        }
+        return (Tieto)loydetty;
     }
 
     /* Lisää hakemistoon tiedoston tai alihakemiston. Hyödyntää OmaLista-luokan
@@ -110,8 +106,13 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      */
     @Override
     public Tieto poista(String nimi) {
-        // TODO Auto-generated method stub
-        return null;
+        Tieto poistettava = new Tiedosto(new StringBuilder(nimi), 1);
+        Object loydetty = tiedot.poista(poistettava);
+        if (loydetty != null) {
+            return (Tieto)loydetty;
+        } else {
+            return null;
+        }
     }
 
 }
