@@ -86,7 +86,14 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      */
     @Override
     public boolean lisaa(Tieto lisattava) {
-        return tiedot.lisaa(lisattava);
+        for (int i = 0; i < tiedot.koko(); i++) {
+            Object alkio = tiedot.alkio(i);
+            if (lisattava.equals((Tieto)alkio)) {
+                return false;
+            }
+        }
+        tiedot.lisaa(lisattava);
+        return true;
     }
 
     /* Poistaa hakemistosta tiedoston tai alihakemiston. Hyödyntää OmaLista-luokan
