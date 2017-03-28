@@ -102,4 +102,20 @@ public class HakemistoTest {
         assertEquals(h, root.tiedot().alkio(1));
     }
 
+    @Test
+    public void poistettavaaeiLoydy() {
+        Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto t = new Tiedosto(new StringBuilder("cat"), 9);
+        root.lisaa(t);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("dog"), 8);
+        root.lisaa(t2);
+        Hakemisto h = new Hakemisto(new StringBuilder("kitten"), root);
+        root.lisaa(h);
+        assertSame(null, root.poista("doggo"));
+        assertEquals(3, root.tiedot().koko());
+        assertEquals(t, root.tiedot().alkio(0));
+        assertEquals(t2, root.tiedot().alkio(1));
+        assertEquals(h, root.tiedot().alkio(2));
+    }
+
 }
