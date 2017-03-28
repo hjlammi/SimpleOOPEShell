@@ -108,11 +108,7 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
     public Tieto poista(String nimi) {
         Tieto poistettava = new Tiedosto(new StringBuilder(nimi), 1);
         Object loydetty = tiedot.poista(poistettava);
-        if (loydetty != null) {
-            return (Tieto)loydetty;
-        } else {
-            return null;
-        }
+        return (Tieto)loydetty;
     }
 
 }
