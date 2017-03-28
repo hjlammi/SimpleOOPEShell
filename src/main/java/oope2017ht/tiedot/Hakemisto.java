@@ -12,7 +12,7 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
     private Hakemisto ylihakemisto;
 
     /*
-     * Rakentajat.
+     * Kaksiparametrillinen rakentaja.
      */
 
     public Hakemisto(StringBuilder nimi, Hakemisto ylihakemisto) {
@@ -24,6 +24,7 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
     /*
      * Aksessorit.
      */
+
     public void sisalto(OmaLista tiedot) {
         this.tiedot = tiedot;
     }

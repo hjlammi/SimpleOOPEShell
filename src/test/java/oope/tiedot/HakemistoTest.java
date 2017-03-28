@@ -44,4 +44,15 @@ public class HakemistoTest {
         assertEquals(1, root.tiedot().koko());
     }
 
+    @Test
+    public void haettavaLoytyyKunKaksiTiedostoa() {
+        Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto t = new Tiedosto(new StringBuilder("cat"), 9);
+        root.lisaa(t);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("dog"), 8);
+        root.lisaa(t2);
+        assertSame(t2, root.hae("dog"));
+        assertEquals(2, root.tiedot().koko());
+    }
+
 }
