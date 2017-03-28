@@ -194,18 +194,6 @@ public class OmaListaTest {
     }
 
     @Test
-    public void lisataanSekaisinEriTyyppisia() {
-        OmaLista lista = new OmaLista();
-        lista.lisaa("ab");
-        lista.lisaa(new Object());
-        lista.lisaa("pier");
-        assertEquals(false, lista.lisaa(1));
-        assertEquals(2, lista.koko());
-        assertEquals("ab", lista.alkio(0));
-        assertEquals("pier", lista.alkio(1));
-    }
-
-    @Test
     public void lisataanLoppuun() {
         OmaLista lista = new OmaLista();
         lista.lisaa(1);

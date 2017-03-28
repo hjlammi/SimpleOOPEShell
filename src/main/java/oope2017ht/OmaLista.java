@@ -58,21 +58,16 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva {
             if (onkoTyhja()) {
                 lisaaAlkuun(uusi);
                 return true;
-            // Jos lista ei ole tyhjä, käydään se läpi ja tarkistetaan ensin, että vertailtavat
-            // oliot ovat samantyyppisiä. Jos ne ovat, verrataan uusi-alkiota listan paikassa i
+            // Jos lista ei ole tyhjä, käydään se läpi ja verrataan uusi-alkiota listan paikassa i
             // olevaan alkioon. Jos uusi on pienempi kuin alkio, lisätään uusi paikkaan i ja vanha
             // alkio siirtyy yhden paikan eteenpäin. Palautetaan true lisäämisen onnistumisen merkiksi.
             // Jos uusi-alkio ei ole pienempi kuin yksikään alkio listassa, lisätään se listan loppuun
             // ja palautetaan true.
             } else {
                 for (int i = 0; i < koko(); i++) {
-                    if (uusi.getClass().equals(alkio(i).getClass())) {
-                        if (((Comparable)uusi).compareTo(alkio(i)) < 0) {
-                            lisaa(i, uusi);
-                            return true;
-                        }
-                    } else {
-                        return false;
+                    if (((Comparable)uusi).compareTo(alkio(i)) < 0) {
+                        lisaa(i, uusi);
+                        return true;
                     }
                 }
                 lisaaLoppuun(uusi);
