@@ -60,14 +60,24 @@ public class HakemistoTest {
         Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
         Tiedosto t = new Tiedosto(new StringBuilder("cat"), 9);
         root.lisaa(t);
-        System.out.println(root.tiedot().koko());
         Tiedosto t2 = new Tiedosto(new StringBuilder("dog"), 8);
         root.lisaa(t2);
-        System.out.println(root.tiedot().koko());
         Hakemisto h = new Hakemisto(new StringBuilder("kitten"), root);
-        System.out.println(root.lisaa(h));
-        System.out.println(root.tiedot().koko());
+        root.lisaa(h);
         assertSame(t2, root.hae("dog"));
+        assertEquals(3, root.tiedot().koko());
+    }
+
+    @Test
+    public void haettavanNimistaEiLoydy() {
+        Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto t = new Tiedosto(new StringBuilder("cat"), 9);
+        root.lisaa(t);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("dog"), 8);
+        root.lisaa(t2);
+        Hakemisto h = new Hakemisto(new StringBuilder("kitten"), root);
+        root.lisaa(h);
+        assertSame(null, root.hae("doggo"));
         assertEquals(3, root.tiedot().koko());
     }
 
