@@ -34,4 +34,14 @@ public class HakemistoTest {
         assertEquals(1, root.tiedot().koko());
     }
 
+    @Test
+    public void lisaaTiedostoonNull() {
+        Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto t = new Tiedosto(new StringBuilder("cat"), 9);
+        root.lisaa(t);
+        Tiedosto sama = null;
+        assertEquals(false, root.lisaa(sama));
+        assertEquals(1, root.tiedot().koko());
+    }
+
 }
