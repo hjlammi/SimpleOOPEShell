@@ -16,7 +16,7 @@ public class Tulkki {
 
         String syote;
         do {
-            syote = ui.lueSyote();
+            syote = ui.lueSyote(">");
             if (!syote.equals("exit")) {
                 ui.tulosta("Error!");
             }

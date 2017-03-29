@@ -10,7 +10,8 @@ public class KonsoliUI implements UI {
     }
 
     @Override
-    public String lueSyote() {
+    public String lueSyote(String kehote) {
+        System.out.print(kehote);
         return In.readString();
     }
 
