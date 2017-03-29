@@ -6,8 +6,10 @@ package oope2017ht;
  */
 public class Oope2017HT
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+    public static void main(String[] args) {
+        UI ui = new KonsoliUI();
+        Tulkki tulkki = new Tulkki(ui);
+
+        tulkki.suorita();
     }
 }
