@@ -4,4 +4,6 @@ public interface UI {
 
     void tulosta(String tuloste);
 
+    String lueSyote();
+
 }

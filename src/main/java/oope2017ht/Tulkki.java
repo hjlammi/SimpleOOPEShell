@@ -13,6 +13,14 @@ public class Tulkki {
 
     public void suorita() {
         ui.tulosta("Welcome to SOS.");
+
+        String syote;
+        do {
+            syote = ui.lueSyote();
+            if (!syote.equals("exit")) {
+                ui.tulosta("Error!");
+            }
+        } while (!syote.equals("exit"));
     }
 
 }
