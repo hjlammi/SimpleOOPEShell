@@ -1,4 +1,4 @@
-package oope.tiedot;
+package oope2017ht.tiedot;
 
 import static org.junit.Assert.*;
 

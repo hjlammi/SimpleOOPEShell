@@ -1,4 +1,4 @@
-package oope;
+package oope2017ht;
 
 import oope2017ht.OmaLista;
 import oope2017ht.UI;
