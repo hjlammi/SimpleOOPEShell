@@ -55,7 +55,7 @@ public abstract class Tieto implements Comparable<Tieto>{
     // Tutkii, onko parametrina saatu merkkijono ok ja palauttaa tosi, jos merkkijono on ok
     // ja epätosi, jos merkkijono ei ole ok. Tarkistaa, että nimi on vähintään yhden mittainen ja
     // kutsuu apumetodeja, jotka tarkistavat, että nimessä on vain sallittuja merkkejä ja että
-    // nimessä on maksimissaan yksi piste, mutta myös muita merkkejä.
+    // nimessä on maksimissaan yksi piste, mutta myös muita merkkejä kuin piste.
     public static boolean nimiOk(StringBuilder nimi) {
         if ((nimi.length() > 0) && (vainSallittujaMerkkeja(nimi)) && (pisteitaMaxYksi(nimi))) {
             return true;
@@ -84,7 +84,8 @@ public abstract class Tieto implements Comparable<Tieto>{
     }
 
     // Tutkii onko nimessä piste-merkkejä vain yksi ja ettei piste ole nimen ainut merkki.
-    // Paluu arvo on false, jos pisteitä on enemmän kuin yksi tai jos piste on nimen ainut merkki.
+    // Paluuarvo on false, jos pisteitä on enemmän kuin yksi tai jos piste on nimen ainut
+    // merkki.
     public static boolean pisteitaMaxYksi(StringBuilder nimi) {
         int pisteidenLkm = 0;
         if (nimi.length() == 1 && nimi.charAt(0) == '.') {
