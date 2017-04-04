@@ -87,4 +87,13 @@ public class TietoTest {
         s.append("joku1.joku1.txt");
         assertEquals(false, Tieto.nimiOk(s));
     }
+
+    @Test
+    public void verrataanTietoaStringBuilderiin() {
+        StringBuilder s = new StringBuilder();
+        s.append("joku1.txt");
+        Tiedosto t = new Tiedosto(s, 1);
+        assertEquals(false, t.equals(s));
+    }
+
 }

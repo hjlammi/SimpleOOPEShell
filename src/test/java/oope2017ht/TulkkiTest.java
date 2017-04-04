@@ -37,4 +37,7 @@ public class TulkkiTest {
         assertEquals("Error!", ui.tulosteet.alkio(2));
     }
 
+    // Tulkki käynnistyy juurihakemistoon.
+
+
 }
