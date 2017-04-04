@@ -120,13 +120,17 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      */
     @Override
     public Tieto poista(String nimi) {
-        // Luodaan apuolio, jolle annetaan nimeksi parametrina saatu nimi.
-        Tieto poistettava = new Tiedosto(new StringBuilder(nimi), 1);
-        // Käytetään apuna OmaLista-luokan poista-metodia, joka poistaa hakemistosta
-        // poistettavan nimisen tiedoston tai alihakemiston ja antaa viitteen siihen paluuarvona.
-        // Paluuarvo on null, jos nimeä vastaavaa tietoa ei löydy.
-        Object loydetty = tiedot.poista(poistettava);
-        // Muutetaan saatu tieto Tieto-tyyppiseksi ja annetaan se paluuarvona.
-        return (Tieto)loydetty;
+        if (nimi != null) {
+            // Luodaan apuolio, jolle annetaan nimeksi parametrina saatu nimi.
+            Tieto poistettava = new Tiedosto(new StringBuilder(nimi), 1);
+            // Käytetään apuna OmaLista-luokan poista-metodia, joka poistaa hakemistosta
+            // poistettavan nimisen tiedoston tai alihakemiston ja antaa viitteen siihen paluuarvona.
+            // Paluuarvo on null, jos nimeä vastaavaa tietoa ei löydy.
+            Object loydetty = tiedot.poista(poistettava);
+            // Muutetaan saatu tieto Tieto-tyyppiseksi ja annetaan se paluuarvona.
+            return (Tieto)loydetty;
+        } else {
+            return null;
+        }
     }
 }

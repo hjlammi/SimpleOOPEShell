@@ -83,6 +83,19 @@ public class HakemistoTest {
         assertEquals(3, root.tiedot().koko());
     }
 
+    @Test
+    public void haettavaOnNull() {
+        Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto t = new Tiedosto(new StringBuilder("cat"), 9);
+        root.lisaa(t);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("dog"), 8);
+        root.lisaa(t2);
+        Hakemisto h = new Hakemisto(new StringBuilder("kitten"), root);
+        root.lisaa(h);
+        assertSame(null, root.hae(null));
+        assertEquals(3, root.tiedot().koko());
+    }
+
     // poista method in Hakemisto
 
     @Test
@@ -134,15 +147,12 @@ public class HakemistoTest {
     }
 
     @Test
-    public void haettavaOnNull() {
+    public void poistettavaOnNull() {
         Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
         Tiedosto t = new Tiedosto(new StringBuilder("cat"), 9);
         root.lisaa(t);
-        Tiedosto t2 = new Tiedosto(new StringBuilder("dog"), 8);
-        root.lisaa(t2);
-        Hakemisto h = new Hakemisto(new StringBuilder("kitten"), root);
-        root.lisaa(h);
-        assertSame(null, root.hae(null));
-        assertEquals(3, root.tiedot().koko());
+        assertSame(null, root.poista(null));
+        assertEquals(1, root.tiedot().koko());
+        assertEquals(t, root.tiedot().alkio(0));
     }
 }
