@@ -1,5 +1,4 @@
-// OmaLista-luokan oletetaan olevan oope2017ht.omalista-pakkauksessa.
-import oope2017ht.omalista.OmaLista;
+import oope2017ht.OmaLista;
 
 // Otetaan käyttöön In-luokka.
 import apulaiset.*;
@@ -64,7 +63,7 @@ public class OmaListaTesti {
          tulosta((OmaLista)lista);
       }
    }
-   
+
    // Pitkän pitkä testirakenne.
    public static void main(String[] args) {
       // Vakiot testien pienimmälle ja suuremmalle testinumerolle.
@@ -82,7 +81,7 @@ public class OmaListaTesti {
        * Lisäystestit.
        *
        */
-      
+
       // Testi 1.
       if (testinumero == 1) {
          // Adding C.
@@ -132,7 +131,7 @@ public class OmaListaTesti {
          // [ A B C ]
          // Adding D.
          // true
-         // [ A B C D ]      
+         // [ A B C D ]
          testaaLisaamista(lista, "C");
          testaaLisaamista(lista, "A");
          testaaLisaamista(lista, "B");
@@ -149,7 +148,7 @@ public class OmaListaTesti {
          // [ 0 3 ]
          // Adding 2.
          // true
-         // [ 0 2 3 ]      
+         // [ 0 2 3 ]
          testaaLisaamista(lista, 3);
          testaaLisaamista(lista, 0);
          testaaLisaamista(lista, 2);
@@ -167,7 +166,7 @@ public class OmaListaTesti {
        * Hakutestit.
        *
        */
-      
+
       // Testi 7.
       else if (testinumero == 7) {
          lista.lisaa(3);
@@ -200,7 +199,7 @@ public class OmaListaTesti {
          // 3
          testaaHakua(lista, 3);
       }
-      
+
       // Testi 10.
       else if (testinumero == 10) {
          lista.lisaa(3);
@@ -252,7 +251,7 @@ public class OmaListaTesti {
          lista.lisaa("viipula");
          // Removing enten.
          // enten
-         // [ tenten viipula ]      
+         // [ tenten viipula ]
          testaaPoistoa(lista, "enten");
       }
 
@@ -263,7 +262,7 @@ public class OmaListaTesti {
          lista.lisaa("viipula");
          // Removing viipula.
          // viipula
-         // [ enten tenten ]         
+         // [ enten tenten ]
          testaaPoistoa(lista, "viipula");
       }
 
@@ -284,7 +283,7 @@ public class OmaListaTesti {
          lista.poista("enten");
          // Removing null.
          // null
-         // [ ]         
+         // [ ]
          testaaPoistoa(lista, null);
       }
 
@@ -294,10 +293,10 @@ public class OmaListaTesti {
          lista.poista("enten");
          // Removing enten.
          // null
-         // [ ]         
+         // [ ]
          testaaPoistoa(lista, "enten");
       }
-      
+
       // Tuntematon testi.
       else
          System.out.println("Erroneus test number.");
