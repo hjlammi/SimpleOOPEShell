@@ -77,13 +77,17 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      */
     @Override
     public Tieto hae(String nimi) {
-     // Luodaan apuolio, jolle annetaan nimeksi parametrina saatu nimi.
-        Tieto haettava = new Tiedosto(new StringBuilder(nimi), 1);
-        // Käytetään apuna OmaLista-luokan hae-metodia, joka hakee hakemistosta
-        // parametrina saatua nimeä vastaavaa tietoa.
-        // Paluuarvona saadaan viite haettavaa vastaavaan tietoon tai null, jos tietoa ei löydy.
-        Object loydetty = tiedot.hae(haettava);
-        return (Tieto)loydetty;
+        if (nimi != null) {
+            // Luodaan apuolio, jolle annetaan nimeksi parametrina saatu nimi.
+            Tieto haettava = new Tiedosto(new StringBuilder(nimi), 1);
+            // Käytetään apuna OmaLista-luokan hae-metodia, joka hakee hakemistosta
+            // parametrina saatua nimeä vastaavaa tietoa.
+            // Paluuarvona saadaan viite haettavaa vastaavaan tietoon tai null, jos tietoa ei löydy.
+            Object loydetty = tiedot.hae(haettava);
+            return (Tieto)loydetty;
+        } else {
+            return null;
+        }
     }
 
     /* Lisää hakemistoon parametrina annetun tiedoston tai alihakemiston. Hyödyntää OmaLista-luokan
