@@ -47,7 +47,7 @@ public class TiedostoTest {
     public void compareToPienempiTesti() {
         Tiedosto t1 = new Tiedosto(new StringBuilder("cat"), 7);
         Tiedosto t2 = new Tiedosto(new StringBuilder("caat"), 8);
-        assertEquals(1, t1.compareTo(t2));
+        assertEquals(19, t1.compareTo(t2));
     }
 
 }

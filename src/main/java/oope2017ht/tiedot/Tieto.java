@@ -118,13 +118,7 @@ public abstract class Tieto implements Comparable<Tieto>{
     public int compareTo(Tieto t) {
         String tama = this.nimi().toString();
         String toinen = t.nimi().toString();
-        if (tama.compareTo(toinen) > 1) {
-            return 1;
-        } else if (tama.compareTo(toinen) < 0) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return tama.compareTo(toinen);
     }
 
     @Override
