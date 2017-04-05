@@ -1,7 +1,6 @@
-import oope2017ht.OmaLista;
-
 // Otetaan käyttöön In-luokka.
 import apulaiset.*;
+import oope2017ht.omalista.OmaLista;
 
 /*
  * Harjoitustyö.

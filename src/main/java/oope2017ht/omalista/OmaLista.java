@@ -1,4 +1,4 @@
-package oope2017ht;
+package oope2017ht.omalista;
 
 /*
  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.

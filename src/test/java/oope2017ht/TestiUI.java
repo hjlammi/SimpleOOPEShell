@@ -1,17 +1,7 @@
 package oope2017ht;
 
-/*
-* Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
-*
-* Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
-*
-* Viimeksi muokattu 5.4.2017.
-*
-*
-*/
-
-import oope2017ht.OmaLista;
 import oope2017ht.UI;
+import oope2017ht.omalista.OmaLista;
 
 public class TestiUI implements UI {
     public OmaLista tulosteet = new OmaLista();

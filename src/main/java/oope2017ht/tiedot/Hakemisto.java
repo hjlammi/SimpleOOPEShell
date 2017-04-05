@@ -1,21 +1,8 @@
 package oope2017ht.tiedot;
 
-/*
- * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
- *
- * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
- *
- * Viimeksi muokattu 28.3.2017.
- *
- * Hakemisto-luokka periytyy Tieto-luokasta ja toteuttaa Komennettava-rajapinnan.
- * Luokassa on tulkin komentojen toteuttamiseen ja luokkahierarkian testaamiseen
- * soveltuvia metodeja.
- */
-
-import oope2017ht.OmaLista;
-
 import apulaiset.Komennettava;
 import fi.uta.csjola.oope.lista.LinkitettyLista;
+import oope2017ht.omalista.OmaLista;
 
 public class Hakemisto extends Tieto implements Komennettava<Tieto> {
 
