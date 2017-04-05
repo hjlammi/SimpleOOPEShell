@@ -1,5 +1,16 @@
 package oope2017ht.tiedot;
 
+/*
+ * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+ *
+ * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+ *
+ * Viimeksi muokattu 5.4.2017.
+ *
+ * Tieto-luokka, jonka attribuutit ovat OmaLista hakemiston tiedoille ja ylihakemisto.
+ * Luokka korvaa toString-metodin ja toteuttaa Komennettava-rajapinnan.
+ */
+
 import apulaiset.Komennettava;
 import fi.uta.csjola.oope.lista.LinkitettyLista;
 import oope2017ht.omalista.OmaLista;

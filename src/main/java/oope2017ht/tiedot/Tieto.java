@@ -5,7 +5,7 @@ package oope2017ht.tiedot;
  *
  * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
  *
- * Viimeksi muokattu 28.3.2017.
+ * Viimeksi muokattu 5.4.2017.
  *
  * Tieto-luokka, jonka ainoa attribuutti on nimi. Luokka toteuttaa Comparable-rajapinnan ja
  * korvaa toString- ja equals-metodit.

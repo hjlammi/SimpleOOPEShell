@@ -7,7 +7,7 @@ package oope2017ht.tiedot;
  *
  * Viimeksi muokattu 28.3.2017.
  *
- * Tiedosto-luokka periytyy Tieto-luokasta.
+ * Tiedosto-luokka periytyy Tieto-luokasta ja korvaa toString-metodin.
  */
 
 public class Tiedosto extends Tieto {
@@ -27,7 +27,7 @@ public class Tiedosto extends Tieto {
     // Kopiorakentaja.
     public Tiedosto(Tiedosto toinen) {
         super(toinen);
-        this.koko(koko);
+        this.koko(toinen.koko);
     }
 
     /*

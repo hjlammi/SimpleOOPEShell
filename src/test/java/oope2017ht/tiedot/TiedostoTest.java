@@ -50,4 +50,11 @@ public class TiedostoTest {
         assertEquals(19, t1.compareTo(t2));
     }
 
+    @Test
+    public void kopiorakentajaTesti() {
+        Tiedosto t1 = new Tiedosto(new StringBuilder("cat"), 7);
+        Tiedosto kopio = new Tiedosto(t1);
+        assertEquals("cat", kopio.nimi().toString());
+        assertEquals(7, kopio.koko());
+    }
 }
