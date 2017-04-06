@@ -17,7 +17,7 @@ public class TulkkiTest {
 
         tulkki.suorita();
 
-        assertEquals(1, ui.tulosteet.koko());
+        assertEquals(2, ui.tulosteet.koko());
         assertEquals("Welcome to SOS.", ui.tulosteet.alkio(0));
     }
 
@@ -32,10 +32,25 @@ public class TulkkiTest {
 
         tulkki.suorita();
 
-        assertEquals(3, ui.tulosteet.koko());
+        assertEquals(4, ui.tulosteet.koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
         assertEquals("Error!", ui.tulosteet.alkio(2));
     }
+
+    // Tulkki näyttää lopetusviestin.
+    @Test
+    public void testExit() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("exit");
+        Tulkki tulkki = new Tulkki(ui);
+
+        tulkki.suorita();
+
+        assertEquals(2, ui.tulosteet.koko());
+        assertEquals("Shell terminated.", ui.tulosteet.alkio(1));
+    }
+
+
 
     // Tulkki käynnistyy juurihakemistoon.
 

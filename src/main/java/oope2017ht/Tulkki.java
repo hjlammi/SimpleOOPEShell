@@ -29,6 +29,8 @@ public class Tulkki {
             syote = ui.lueSyote(">");
             if (!syote.equals("exit")) {
                 ui.tulosta("Error!");
+            } else {
+                ui.tulosta("Shell terminated.");
             }
         } while (!syote.equals("exit"));
     }
