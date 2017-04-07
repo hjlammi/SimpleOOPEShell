@@ -17,8 +17,14 @@ import oope2017ht.omalista.OmaLista;
 
 public class Hakemisto extends Tieto implements Komennettava<Tieto> {
 
+    /*
+     * Attribuutit.
+     */
+
+    // OmaLista-tyyppinen attribuutti säilöö listan sisällön eli listassa olevat tiedot.
     private OmaLista tiedot;
 
+    // Se hakemisto, joka sisältää tämän hakemiston.
     private Hakemisto ylihakemisto;
 
     /*
