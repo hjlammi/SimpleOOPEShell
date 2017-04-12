@@ -85,6 +85,12 @@ public class TietoTest {
     }
 
     @Test
+    public void kaksiKauttaviivaa() {
+        StringBuilder s = new StringBuilder("//");
+        assertEquals(false, Tieto.nimiOk(s));
+    }
+
+    @Test
     public void verrataanTietoaStringBuilderiin() {
         StringBuilder s = new StringBuilder();
         s.append("joku1.txt");

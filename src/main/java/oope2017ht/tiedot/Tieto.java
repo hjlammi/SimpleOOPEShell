@@ -57,7 +57,10 @@ public abstract class Tieto implements Comparable<Tieto>{
     // kutsuu apumetodeja, jotka tarkistavat, että nimessä on vain sallittuja merkkejä ja että
     // nimessä on maksimissaan yksi piste, mutta myös muita merkkejä kuin piste.
     public static boolean nimiOk(StringBuilder nimi) {
-        if ((nimi.length() > 0) && (vainSallittujaMerkkeja(nimi)) && (pisteitaMaxYksi(nimi))) {
+        if (nimi.toString().equals("/")) {
+            return true;
+        } else if ((nimi.length() > 0) && (vainSallittujaMerkkeja(nimi)) &&
+           (pisteitaMaxYksi(nimi))) {
             return true;
         } else {
             return false;
@@ -73,8 +76,7 @@ public abstract class Tieto implements Comparable<Tieto>{
             if ((nimi.charAt(i) >= 'a' && nimi.charAt(i) <= 'z') ||
             (nimi.charAt(i) >= 'A' && nimi.charAt(i) <= 'Z') ||
             (nimi.charAt(i) >= '0' && nimi.charAt(i) <= '9') ||
-            (nimi.charAt(i) == '_') || (nimi.charAt(i) == '.') ||
-            (nimi.charAt(i) == '/')){
+            (nimi.charAt(i) == '_') || (nimi.charAt(i) == '.')){
                 merkitOk = true;
             } else {
                 merkitOk = false;
