@@ -27,14 +27,19 @@ public class Tulkki {
         String syote;
         do {
             syote = ui.lueSyote(">");
+            // Jos käyttäjän syöte on jotain muuta kuin exit...
             if (!syote.equals("exit")) {
+                // Jos käyttäjän syöte on ls
                 if (syote.equals("ls")) {
+                // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan virheilmoitus.
                 } else {
                     ui.tulosta("Error!");
                 }
+            // Jos käyttäjän syöte on exit, tulostetaan lopetusviesti.
             } else {
                 ui.tulosta("Shell terminated.");
             }
+        // Suoritetaan silmukkaa kunnes syöte on exit.
         } while (!syote.equals("exit"));
     }
 
