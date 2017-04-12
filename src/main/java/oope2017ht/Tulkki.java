@@ -39,8 +39,10 @@ public class Tulkki {
         do {
             syote = ui.lueSyote(">");
             String osat[] = syote.split(" ");
+            if (syote.endsWith(" ")) {
+                error();
             // Jos käyttäjän syöte on exit, tulostetaan lopetusviesti.
-            if (osat[0].equals("exit") && osat.length == 1) {
+            } else if (osat[0].equals("exit") && osat.length == 1) {
                 ui.tulosta("Shell terminated.");
             // Jos käyttäjän syöte on ls
             } else if (osat[0].equals("ls") && osat.length == 1) {
@@ -58,10 +60,14 @@ public class Tulkki {
             // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
             // virheilmoitus.
             } else {
-                ui.tulosta("Error!");
+                error();
             }
         // Suoritetaan silmukkaa kunnes syöte on exit.
         } while (!syote.equals("exit"));
+    }
+
+    private void error() {
+        ui.tulosta("Error!");
     }
 
 }
