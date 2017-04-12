@@ -9,9 +9,14 @@ public class HakemistoTest {
     @Test
     public void toStringTesti() {
         Hakemisto root = new Hakemisto(new StringBuilder("root"), null);
-        Hakemisto h = new Hakemisto(new StringBuilder("cat"), root);
-        String tuloste = "cat/ 0";
-        assertEquals(tuloste, h.toString());
+        Hakemisto h1 = new Hakemisto(new StringBuilder("cat"), root);
+        root.lisaa(h1);
+        Hakemisto h2 = new Hakemisto(new StringBuilder("dog"), root);
+        root.lisaa(h2);
+        Tiedosto t = new Tiedosto(new StringBuilder("kitten"), 123);
+        root.lisaa(t);
+        String tuloste = "root/ 3";
+        assertEquals(tuloste, root.toString());
     }
 
     // lisaa() method in Hakemisto
