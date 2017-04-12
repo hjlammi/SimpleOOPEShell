@@ -28,18 +28,20 @@ public class TulkkiTest {
     public void testError() {
         TestiUI ui = new TestiUI();
         ui.syotteet.lisaaLoppuun("hjkl");
-        ui.syotteet.lisaaLoppuun("md  pics");
+        ui.syotteet.lisaaLoppuun("md   pics");
         ui.syotteet.lisaaLoppuun("exit ");
+        ui.syotteet.lisaaLoppuun(" exit");
         ui.syotteet.lisaaLoppuun("exit");
         Tulkki tulkki = new Tulkki(ui);
 
         tulkki.suorita();
 
-        assertEquals(5, ui.tulosteet.koko());
+        assertEquals(6, ui.tulosteet.koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
         assertEquals("Error!", ui.tulosteet.alkio(2));
         assertEquals("Error!", ui.tulosteet.alkio(3));
-        assertEquals("Shell terminated.", ui.tulosteet.alkio(4));
+        assertEquals("Error!", ui.tulosteet.alkio(4));
+        assertEquals("Shell terminated.", ui.tulosteet.alkio(5));
     }
 
     // Tulkki näyttää lopetusviestin.
