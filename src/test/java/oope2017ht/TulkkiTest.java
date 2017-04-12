@@ -65,6 +65,7 @@ public class TulkkiTest {
         assertEquals(2, ui.tulosteet.koko());
     }
 
+    // Ls listaa alihakemistot ja tiedostot.
     @Test
     public void testLsDirsAndFiles() {
         TestiUI ui = new TestiUI();
@@ -82,6 +83,22 @@ public class TulkkiTest {
         assertEquals(4, ui.tulosteet.koko());
         assertEquals("foo/ 0", ui.tulosteet.alkio(1));
         assertEquals("jee.txt 11", ui.tulosteet.alkio(2));
+    }
+
+    @Test
+    public void testMdNewDir() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("md foo");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(1, juurihakemisto.tiedot().koko());
+        Hakemisto alihakemisto = (Hakemisto)juurihakemisto.tiedot().alkio(0);
+        assertEquals("foo", alihakemisto.nimi().toString());
+        assertEquals(juurihakemisto, alihakemisto.ylihakemisto());
     }
 
     // Tulkki käynnistyy juurihakemistoon.

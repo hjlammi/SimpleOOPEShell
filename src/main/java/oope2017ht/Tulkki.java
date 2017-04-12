@@ -38,11 +38,12 @@ public class Tulkki {
         String syote;
         do {
             syote = ui.lueSyote(">");
+            String osat[] = syote.split(" ");
             // Jos käyttäjän syöte on exit, tulostetaan lopetusviesti.
-            if (syote.equals("exit")) {
+            if (osat[0].equals("exit") && osat.length == 1) {
                 ui.tulosta("Shell terminated.");
             // Jos käyttäjän syöte on ls
-            } else if (syote.equals("ls")) {
+            } else if (osat[0].equals("ls") && osat.length == 1) {
                 // Viite juurihakemiston tietoihin.
                 OmaLista tiedot = juurihakemisto.tiedot();
 
@@ -50,6 +51,10 @@ public class Tulkki {
                 for (int i = 0; i < tiedot.koko(); i++) {
                     ui.tulosta(tiedot.alkio(i).toString());
                 }
+            } else if (osat[0].equals("md")) {
+                String nimi = osat[1];
+                Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), juurihakemisto);
+                juurihakemisto.lisaa(lisattava);
             // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
             // virheilmoitus.
             } else {
