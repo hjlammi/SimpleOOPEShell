@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import oope2017ht.Tulkki;
+import oope2017ht.tiedot.Hakemisto;
+import oope2017ht.tiedot.Tiedosto;
 
 public class TulkkiTest {
 
@@ -52,7 +54,7 @@ public class TulkkiTest {
 
     // Juurihakemisto on tyhjä.
     @Test
-    public void testEmptyRoot() {
+    public void testLsEmptyRoot() {
         TestiUI ui = new TestiUI();
         ui.syotteet.lisaaLoppuun("ls");
         ui.syotteet.lisaaLoppuun("exit");
@@ -61,6 +63,25 @@ public class TulkkiTest {
         tulkki.suorita();
 
         assertEquals(2, ui.tulosteet.koko());
+    }
+
+    @Test
+    public void testLsDirsAndFiles() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("ls");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
+        juurihakemisto.lisaa(foo);
+        Tiedosto jee = new Tiedosto(new StringBuilder("jee.txt"), 11);
+        juurihakemisto.lisaa(jee);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(4, ui.tulosteet.koko());
+        assertEquals("foo/ 0", ui.tulosteet.alkio(1));
+        assertEquals("jee.txt 11", ui.tulosteet.alkio(2));
     }
 
     // Tulkki käynnistyy juurihakemistoon.
