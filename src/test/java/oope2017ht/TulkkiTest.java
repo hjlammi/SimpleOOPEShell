@@ -50,7 +50,18 @@ public class TulkkiTest {
         assertEquals("Shell terminated.", ui.tulosteet.alkio(1));
     }
 
+    // Juurihakemisto on tyhjä.
+    @Test
+    public void testEmptyRoot() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("ls");
+        ui.syotteet.lisaaLoppuun("exit");
+        Tulkki tulkki = new Tulkki(ui);
 
+        tulkki.suorita();
+
+        assertEquals(2, ui.tulosteet.koko());
+    }
 
     // Tulkki käynnistyy juurihakemistoon.
 
