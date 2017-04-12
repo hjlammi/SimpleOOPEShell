@@ -53,7 +53,7 @@ public class Tulkki {
                 for (int i = 0; i < tiedot.koko(); i++) {
                     ui.tulosta(tiedot.alkio(i).toString());
                 }
-            } else if (osat[0].equals("md")) {
+            } else if (osat[0].equals("md") && osat.length == 2) {
                 String nimi = osat[1];
                 Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), juurihakemisto);
                 juurihakemisto.lisaa(lisattava);

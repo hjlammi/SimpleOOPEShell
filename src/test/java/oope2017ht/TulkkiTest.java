@@ -28,7 +28,7 @@ public class TulkkiTest {
     public void testError() {
         TestiUI ui = new TestiUI();
         ui.syotteet.lisaaLoppuun("hjkl");
-        ui.syotteet.lisaaLoppuun("ghfdhfsx");
+        ui.syotteet.lisaaLoppuun("md  pics");
         ui.syotteet.lisaaLoppuun("exit ");
         ui.syotteet.lisaaLoppuun("exit");
         Tulkki tulkki = new Tulkki(ui);
