@@ -73,7 +73,8 @@ public abstract class Tieto implements Comparable<Tieto>{
             if ((nimi.charAt(i) >= 'a' && nimi.charAt(i) <= 'z') ||
             (nimi.charAt(i) >= 'A' && nimi.charAt(i) <= 'Z') ||
             (nimi.charAt(i) >= '0' && nimi.charAt(i) <= '9') ||
-            (nimi.charAt(i) == '_') || (nimi.charAt(i) == '.')){
+            (nimi.charAt(i) == '_') || (nimi.charAt(i) == '.') ||
+            (nimi.charAt(i) == '/')){
                 merkitOk = true;
             } else {
                 merkitOk = false;

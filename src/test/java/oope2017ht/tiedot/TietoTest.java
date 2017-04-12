@@ -89,6 +89,12 @@ public class TietoTest {
     }
 
     @Test
+    public void yksiKauttaviiva() {
+        StringBuilder s = new StringBuilder("/");
+        assertEquals(true, Tieto.nimiOk(s));
+    }
+
+    @Test
     public void verrataanTietoaStringBuilderiin() {
         StringBuilder s = new StringBuilder();
         s.append("joku1.txt");
