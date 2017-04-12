@@ -2,6 +2,7 @@ package oope2017ht;
 
 import oope2017ht.omalista.OmaLista;
 import oope2017ht.tiedot.Hakemisto;
+import oope2017ht.tiedot.Tieto;
 
 /*
 * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
@@ -52,6 +53,15 @@ public class Tulkki {
                 // Tulostetaan juurihakemiston tiedot alkio kerrallaan.
                 for (int i = 0; i < tiedot.koko(); i++) {
                     ui.tulosta(tiedot.alkio(i).toString());
+                }
+            } else if (osat[0].equals("ls") && osat.length == 2) {
+                String nimi = osat[1];
+                for (int i = 0; i < juurihakemisto.tiedot().koko(); i++) {
+                    Object tieto = juurihakemisto.tiedot().alkio(i);
+                    String tiedonNimi = ((Tieto)tieto).nimi().toString();
+                    if (nimi.equals(tiedonNimi)) {
+                        ui.tulosta(juurihakemisto.tiedot().alkio(i).toString());
+                    }
                 }
             } else if (osat[0].equals("md") && osat.length == 2) {
                 String nimi = osat[1];
