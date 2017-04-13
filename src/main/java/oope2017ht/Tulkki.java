@@ -95,7 +95,6 @@ public class Tulkki {
                     String vaihdettavaNimi = osat[1];
                     String uusiNimi = osat[2];
                     if (nimiVarattu(uusiNimi)) {
-                        System.out.println(nimiVarattu(uusiNimi));
                         error();
                     } else {
                         for (int i = 0; i < juurihakemisto.tiedot().koko(); i++) {
@@ -106,6 +105,17 @@ public class Tulkki {
                                 alkio.nimi(new StringBuilder(uusiNimi));
                             }
                         }
+                    }
+                } else if (osat[0].equals("cp") && osat.length == 3) {
+                    String nimi = osat[1];
+                    String kopioNimi = osat[2];
+                    Tieto kopioitava = juurihakemisto.hae(nimi);
+                    if (kopioitava instanceof Tiedosto) {
+                        Tiedosto kopio = new Tiedosto((Tiedosto)kopioitava);
+                        kopio.nimi(new StringBuilder(kopioNimi));
+                        juurihakemisto.lisaa(kopio);
+                    } else {
+                        error();
                     }
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.

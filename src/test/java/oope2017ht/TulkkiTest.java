@@ -247,4 +247,24 @@ public class TulkkiTest {
         Tiedosto vaihdettava = (Tiedosto)juurihakemisto.tiedot().alkio(1);
         assertEquals("fool.txt", vaihdettava.nimi().toString());
     }
+
+    // Kopioidaan tiedosto.
+    @Test
+    public void testCpCopyFile() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cp fool.txt foo.txt");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto fool = new Tiedosto(new StringBuilder("fool.txt"), 123);
+        juurihakemisto.lisaa(fool);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(2, juurihakemisto.tiedot().koko());
+        Tiedosto kopio = (Tiedosto)juurihakemisto.tiedot().alkio(0);
+        assertEquals("foo.txt", kopio.nimi().toString());
+    }
+
+    // Hakemistoa ei voi kopioida.
 }
