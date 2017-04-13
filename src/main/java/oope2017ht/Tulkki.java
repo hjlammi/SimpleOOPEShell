@@ -112,7 +112,7 @@ public class Tulkki {
                     Tieto kopioitava = juurihakemisto.hae(nimi);
                     // Vain Tiedoston voi kopioida, joten tarkistetaan että ollaan kopioimassa
                     // tiedostoa.
-                    if (kopioitava != null && kopioitava instanceof Tiedosto) {
+                    if (kopioitava != null && kopioitava instanceof Tiedosto && !nimiVarattu(kopioNimi)) {
                         // Syväkopioidaan tiedosto.
                         Tiedosto kopio = new Tiedosto((Tiedosto)kopioitava);
                         // Annetaan kopiolle nimeksi komentoriviparametrina saatu uusi nimi.
@@ -134,7 +134,7 @@ public class Tulkki {
         } while (!syote.equals("exit"));
     }
 
-    // Apumetodi mv-komennon käytettäväksi. Tutkii onko hakemistossa jo parametrina
+    // Apumetodi mv- ja cp-komentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina
     // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
     // true, jos samannimistä ei löydy, palautetaan false.
     private boolean nimiVarattu(String uusiNimi) {

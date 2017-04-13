@@ -299,4 +299,23 @@ public class TulkkiTest {
         assertEquals(1, juurihakemisto.tiedot().koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
     }
+
+    // Kopion nimi varattu.
+    @Test
+    public void testCpCopyNameTaken() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cp cat.txt kitten.txt");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto cat = new Tiedosto(new StringBuilder("cat.txt"), 123);
+        juurihakemisto.lisaa(cat);
+        Tiedosto kitten = new Tiedosto(new StringBuilder("kitten.txt"), 123);
+        juurihakemisto.lisaa(kitten);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(2, juurihakemisto.tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+    }
 }
