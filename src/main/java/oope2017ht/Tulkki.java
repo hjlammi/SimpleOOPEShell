@@ -41,57 +41,61 @@ public class Tulkki {
         do {
             syote = ui.lueSyote(">");
             String osat[] = syote.split(" ");
-            if (syote.endsWith(" ") || syote.startsWith(" ")) {
-                error();
-            // Jos käyttäjän syöte on exit, tulostetaan lopetusviesti.
-            } else if (osat[0].equals("exit") && osat.length == 1) {
-                ui.tulosta("Shell terminated.");
-            // Jos käyttäjän syöte on ls
-            } else if (osat[0].equals("ls") && osat.length == 1) {
-                // Viite juurihakemiston tietoihin.
-                OmaLista tiedot = juurihakemisto.tiedot();
+            try {
+                if (syote.endsWith(" ") || syote.startsWith(" ")) {
+                    error();
+                // Jos käyttäjän syöte on exit, tulostetaan lopetusviesti.
+                } else if (osat[0].equals("exit") && osat.length == 1) {
+                    ui.tulosta("Shell terminated.");
+                // Jos käyttäjän syöte on ls
+                } else if (osat[0].equals("ls") && osat.length == 1) {
+                    // Viite juurihakemiston tietoihin.
+                    OmaLista tiedot = juurihakemisto.tiedot();
 
-                // Tulostetaan juurihakemiston tiedot alkio kerrallaan.
-                for (int i = 0; i < tiedot.koko(); i++) {
-                    ui.tulosta(tiedot.alkio(i).toString());
-                }
-            } else if (osat[0].equals("ls") && osat.length == 2) {
-                // Viite listattavan tiedon nimeen.
-                String nimi = osat[1];
-                // Tietoa ei ole vielä löytynyt.
-                boolean loytyi = false;
-                // Käydään hakemistoa läpi, kunnes nimeä vastaava tieto löytyy.
-                for (int i = 0; i < juurihakemisto.tiedot().koko() && !loytyi; i++) {
-                    Object tieto = juurihakemisto.tiedot().alkio(i);
-                    String tiedonNimi = ((Tieto)tieto).nimi().toString();
-                    if (nimi.equals(tiedonNimi)) {
-                        ui.tulosta(juurihakemisto.tiedot().alkio(i).toString());
-                        loytyi = true;
+                    // Tulostetaan juurihakemiston tiedot alkio kerrallaan.
+                    for (int i = 0; i < tiedot.koko(); i++) {
+                        ui.tulosta(tiedot.alkio(i).toString());
                     }
-                }
-                // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta tulostetaan virheilmoitus.
-                if (!loytyi) {
+                } else if (osat[0].equals("ls") && osat.length == 2) {
+                    // Viite listattavan tiedon nimeen.
+                    String nimi = osat[1];
+                    // Tietoa ei ole vielä löytynyt.
+                    boolean loytyi = false;
+                    // Käydään hakemistoa läpi, kunnes nimeä vastaava tieto löytyy.
+                    for (int i = 0; i < juurihakemisto.tiedot().koko() && !loytyi; i++) {
+                        Object tieto = juurihakemisto.tiedot().alkio(i);
+                        String tiedonNimi = ((Tieto)tieto).nimi().toString();
+                        if (nimi.equals(tiedonNimi)) {
+                            ui.tulosta(juurihakemisto.tiedot().alkio(i).toString());
+                            loytyi = true;
+                        }
+                    }
+                    // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta tulostetaan virheilmoitus.
+                    if (!loytyi) {
+                        error();
+                    }
+                } else if (osat[0].equals("md") && osat.length == 2) {
+                    String nimi = osat[1];
+                    Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), juurihakemisto);
+                    boolean onnistui = juurihakemisto.lisaa(lisattava);
+                    if (!onnistui) {
+                        error();
+                    }
+                // Jos käyttäjän syöte on mf...
+                } else if (osat[0].equals("mf") && osat.length == 3) {
+                    String nimi = osat[1];
+                    int koko = Integer.parseInt(osat[2]);
+                    Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
+                    boolean onnistui = juurihakemisto.lisaa(lisattava);
+                    if (!onnistui) {
+                        error();
+                    }
+                // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
+                // virheilmoitus.
+                } else {
                     error();
                 }
-            } else if (osat[0].equals("md") && osat.length == 2) {
-                String nimi = osat[1];
-                Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), juurihakemisto);
-                boolean onnistui = juurihakemisto.lisaa(lisattava);
-                if (!onnistui) {
-                    error();
-                }
-            // Jos käyttäjän syöte on mf...
-            } else if (osat[0].equals("mf") && osat.length == 3) {
-                String nimi = osat[1];
-                int koko = Integer.parseInt(osat[2]);
-                Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
-                boolean onnistui = juurihakemisto.lisaa(lisattava);
-                if (!onnistui) {
-                    error();
-                }
-            // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
-            // virheilmoitus.
-            } else {
+            } catch(IllegalArgumentException e) {
                 error();
             }
         // Suoritetaan silmukkaa kunnes syöte on exit.

@@ -194,4 +194,18 @@ public class TulkkiTest {
         assertEquals("Error!", ui.tulosteet.alkio(3));
     }
 
+    // Koon täytyy olla <= 0.
+    @Test
+    public void testMfNegativeSize() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("mf foo.txt -123");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(0, juurihakemisto.tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+    }
 }
