@@ -124,7 +124,10 @@ public class Tulkki {
                     }
                 } else if (osat[0].equals("rm") && osat.length == 2) {
                     String poistettava = osat[1];
-                    juurihakemisto.poista(poistettava);
+                    Tieto poistettavaTieto = juurihakemisto.poista(poistettava);
+                    if (poistettavaTieto == null) {
+                        error();
+                    }
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
                 } else {

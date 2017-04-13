@@ -350,4 +350,25 @@ public class TulkkiTest {
 
         assertEquals(0, juurihakemisto.tiedot().koko());
     }
+
+    // Poisto ei onnistu, jos hakemistoa tai tiedostoa ei ole.
+    @Test
+    public void testRmNothingToRemove() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("rm cat");
+        ui.syotteet.lisaaLoppuun("rm cat");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
+        juurihakemisto.lisaa(kitten);
+        Tiedosto cat = new Tiedosto(new StringBuilder("cat.jpg"), 234);
+        juurihakemisto.lisaa(cat);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(2, juurihakemisto.tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+        assertEquals("Error!", ui.tulosteet.alkio(2));
+    }
 }
