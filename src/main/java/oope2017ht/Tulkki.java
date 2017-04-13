@@ -112,7 +112,7 @@ public class Tulkki {
                     Tieto kopioitava = juurihakemisto.hae(nimi);
                     // Vain Tiedoston voi kopioida, joten tarkistetaan että ollaan kopioimassa
                     // tiedostoa.
-                    if (kopioitava instanceof Tiedosto) {
+                    if (kopioitava != null && kopioitava instanceof Tiedosto) {
                         // Syväkopioidaan tiedosto.
                         Tiedosto kopio = new Tiedosto((Tiedosto)kopioitava);
                         // Annetaan kopiolle nimeksi komentoriviparametrina saatu uusi nimi.

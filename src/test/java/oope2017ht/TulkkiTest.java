@@ -282,4 +282,21 @@ public class TulkkiTest {
         assertEquals(1, juurihakemisto.tiedot().koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
     }
+
+    // Kopioitavan nimistä ei ole hakemistossa.
+    @Test
+    public void testCpFileNotFound() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cp fool.txt foo.txt");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto cat = new Tiedosto(new StringBuilder("cat.txt"), 123);
+        juurihakemisto.lisaa(cat);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(1, juurihakemisto.tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+    }
 }
