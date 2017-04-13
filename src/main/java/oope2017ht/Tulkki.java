@@ -40,7 +40,7 @@ public class Tulkki {
         do {
             syote = ui.lueSyote(">");
             String osat[] = syote.split(" ");
-            if (syote.endsWith(" ")) {
+            if (syote.endsWith(" ") || syote.startsWith(" ")) {
                 error();
             // Jos käyttäjän syöte on exit, tulostetaan lopetusviesti.
             } else if (osat[0].equals("exit") && osat.length == 1) {
