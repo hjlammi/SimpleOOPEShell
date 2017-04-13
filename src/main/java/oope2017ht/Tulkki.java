@@ -55,13 +55,22 @@ public class Tulkki {
                     ui.tulosta(tiedot.alkio(i).toString());
                 }
             } else if (osat[0].equals("ls") && osat.length == 2) {
+                // Viite listattavan tiedon nimeen.
                 String nimi = osat[1];
-                for (int i = 0; i < juurihakemisto.tiedot().koko(); i++) {
+                // Tietoa ei ole vielä löytynyt.
+                boolean loytyi = false;
+                // Käydään hakemistoa läpi, kunnes nimeä vastaava tieto löytyy.
+                for (int i = 0; i < juurihakemisto.tiedot().koko() && !loytyi; i++) {
                     Object tieto = juurihakemisto.tiedot().alkio(i);
                     String tiedonNimi = ((Tieto)tieto).nimi().toString();
                     if (nimi.equals(tiedonNimi)) {
                         ui.tulosta(juurihakemisto.tiedot().alkio(i).toString());
+                        loytyi = true;
                     }
+                }
+                // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta tulostetaan virheilmoitus.
+                if (!loytyi) {
+                    error();
                 }
             } else if (osat[0].equals("md") && osat.length == 2) {
                 String nimi = osat[1];

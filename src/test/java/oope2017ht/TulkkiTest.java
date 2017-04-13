@@ -109,6 +109,24 @@ public class TulkkiTest {
     }
 
     @Test
+    public void testLsWithNonexistentName() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("ls joo.txt");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
+        juurihakemisto.lisaa(foo);
+        Tiedosto jee = new Tiedosto(new StringBuilder("jee.txt"), 11);
+        juurihakemisto.lisaa(jee);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(3, ui.tulosteet.koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+    }
+
+    @Test
     public void testMdNewDir() {
         TestiUI ui = new TestiUI();
         ui.syotteet.lisaaLoppuun("md foo");
