@@ -226,4 +226,25 @@ public class TulkkiTest {
         Tiedosto uusiNimi = (Tiedosto)juurihakemisto.tiedot().alkio(0);
         assertEquals("foo.txt", uusiNimi.nimi().toString());
     }
+
+    // Uusi nimi ei saa olla jo käytössä hakemistossa.
+    @Test
+    public void testMvRenameWithExistingName() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("mv fool.txt foo.txt");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto fool = new Tiedosto(new StringBuilder("fool.txt"), 123);
+        juurihakemisto.lisaa(fool);
+        Tiedosto foo = new Tiedosto(new StringBuilder("foo.txt"), 243);
+        juurihakemisto.lisaa(foo);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(2, juurihakemisto.tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+        Tiedosto vaihdettava = (Tiedosto)juurihakemisto.tiedot().alkio(1);
+        assertEquals("fool.txt", vaihdettava.nimi().toString());
+    }
 }

@@ -94,12 +94,17 @@ public class Tulkki {
                 } else if (osat[0].equals("mv") && osat.length == 3) {
                     String vaihdettavaNimi = osat[1];
                     String uusiNimi = osat[2];
-                    for (int i = 0; i < juurihakemisto.tiedot().koko(); i++) {
-                        Tieto alkio = (Tieto)juurihakemisto.tiedot().alkio(i);
-                        // Jos hakemistosta löytyy tieto annetulla parametrilla,
-                        // asetetaan alkiolle uusi nimi.
-                        if (vaihdettavaNimi.equals(alkio.nimi().toString())) {
-                            alkio.nimi(new StringBuilder(uusiNimi));
+                    if (nimiVarattu(uusiNimi)) {
+                        System.out.println(nimiVarattu(uusiNimi));
+                        error();
+                    } else {
+                        for (int i = 0; i < juurihakemisto.tiedot().koko(); i++) {
+                            Tieto alkio = (Tieto)juurihakemisto.tiedot().alkio(i);
+                            // Jos hakemistosta löytyy tieto annetulla parametrilla,
+                            // asetetaan alkiolle uusi nimi.
+                            if (vaihdettavaNimi.equals(alkio.nimi().toString())) {
+                                alkio.nimi(new StringBuilder(uusiNimi));
+                            }
                         }
                     }
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
@@ -112,6 +117,19 @@ public class Tulkki {
             }
         // Suoritetaan silmukkaa kunnes syöte on exit.
         } while (!syote.equals("exit"));
+    }
+
+    // Apumetodi mv-komennon käytettäväksi. Tutkii onko hakemistossa jo parametrina
+    // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
+    // true, jos samannimistä ei löydy, palautetaan false.
+    private boolean nimiVarattu(String uusiNimi) {
+        for (int i = 0; i < juurihakemisto.tiedot().koko(); i++) {
+            Tieto alkio = (Tieto)juurihakemisto.tiedot().alkio(i);
+            if (uusiNimi.equals(alkio.nimi().toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void error() {
