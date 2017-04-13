@@ -175,13 +175,14 @@ public class TulkkiTest {
         assertEquals("foo.txt", lisatty.nimi().toString());
     }
 
-    // Liikaa välilyöntejä.
+    // Liikaa välilyöntejä ja samanniminen tiedosto on jo olemassa.
     @Test
     public void testMfWithSpaces() {
         TestiUI ui = new TestiUI();
         ui.syotteet.lisaaLoppuun("mf foo.txt 123");
         ui.syotteet.lisaaLoppuun("mf jee.txt  123");
         ui.syotteet.lisaaLoppuun("mf  jee.txt 123");
+        ui.syotteet.lisaaLoppuun("mf foo.txt 123");
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
@@ -190,6 +191,7 @@ public class TulkkiTest {
 
         assertEquals(1, juurihakemisto.tiedot().koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
-        assertEquals("Error!", ui.tulosteet.alkio(2));
+        assertEquals("Error!", ui.tulosteet.alkio(3));
     }
+
 }

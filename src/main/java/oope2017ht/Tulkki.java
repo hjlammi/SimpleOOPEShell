@@ -85,7 +85,10 @@ public class Tulkki {
                 String nimi = osat[1];
                 int koko = Integer.parseInt(osat[2]);
                 Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
-                juurihakemisto.lisaa(lisattava);
+                boolean onnistui = juurihakemisto.lisaa(lisattava);
+                if (!onnistui) {
+                    error();
+                }
             // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
             // virheilmoitus.
             } else {
