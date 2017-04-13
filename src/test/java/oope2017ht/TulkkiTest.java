@@ -267,4 +267,19 @@ public class TulkkiTest {
     }
 
     // Hakemistoa ei voi kopioida.
+    @Test
+    public void testCpCopyDir() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cp fool foo");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto fool = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
+        juurihakemisto.lisaa(fool);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(1, juurihakemisto.tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+    }
 }
