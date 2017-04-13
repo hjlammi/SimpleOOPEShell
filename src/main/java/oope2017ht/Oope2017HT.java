@@ -5,7 +5,7 @@ package oope2017ht;
 *
 * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
 *
-* Viimeksi muokattu 13.4.2017.
+* Viimeksi muokattu 12.4.2017.
 *
 *
 */

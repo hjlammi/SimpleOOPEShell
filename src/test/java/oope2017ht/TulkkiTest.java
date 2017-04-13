@@ -334,4 +334,20 @@ public class TulkkiTest {
 
         assertEquals(0, juurihakemisto.tiedot().koko());
     }
+
+    // Hakemiston poistaminen.
+    @Test
+    public void testRmRemoveDir() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("rm cat");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto cat = new Hakemisto(new StringBuilder("cat"), juurihakemisto);
+        juurihakemisto.lisaa(cat);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(0, juurihakemisto.tiedot().koko());
+    }
 }
