@@ -21,17 +21,27 @@ public class Tulkki {
 
     private Hakemisto juurihakemisto;
 
+    private Hakemisto tyohakemisto;
+
     /*
      * Rakentaja.
      */
     public Tulkki(UI ui) {
         this.ui = ui;
         this.juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        this.tyohakemisto = juurihakemisto;
     }
 
     public Tulkki(UI ui, Hakemisto juurihakemisto) {
         this.ui = ui;
         this.juurihakemisto = juurihakemisto;
+        this.tyohakemisto = juurihakemisto;
+    }
+
+    // Aksessorit.
+
+    public Hakemisto tyohakemisto() {
+        return tyohakemisto;
     }
 
     public void suorita() {
@@ -127,6 +137,12 @@ public class Tulkki {
                     Tieto poistettavaTieto = juurihakemisto.poista(poistettava);
                     if (poistettavaTieto == null) {
                         error();
+                    }
+                } else if (osat[0].equals("cd") && osat.length == 2) {
+                    String nimi = osat[1];
+                    Tieto alkio = tyohakemisto.hae(nimi);
+                    if (alkio instanceof Hakemisto) {
+                        tyohakemisto = (Hakemisto)alkio;
                     }
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.

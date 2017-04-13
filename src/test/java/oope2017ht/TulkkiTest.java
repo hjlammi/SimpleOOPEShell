@@ -371,4 +371,21 @@ public class TulkkiTest {
         assertEquals("Error!", ui.tulosteet.alkio(1));
         assertEquals("Error!", ui.tulosteet.alkio(2));
     }
+
+    // Siirrytään juurihakemiston alihakemistoon.
+    @Test
+    public void testCdChangeToSubdir() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cd kitten");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
+        juurihakemisto.lisaa(kitten);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(0, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("kitten", tulkki.tyohakemisto().nimi().toString());
+    }
 }
