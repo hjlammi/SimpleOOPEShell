@@ -318,4 +318,20 @@ public class TulkkiTest {
         assertEquals(2, juurihakemisto.tiedot().koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
     }
+
+    // Tiedoston poistaminen.
+    @Test
+    public void testRmRemoveFile() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("rm cat.txt");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto cat = new Tiedosto(new StringBuilder("cat.txt"), 123);
+        juurihakemisto.lisaa(cat);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(0, juurihakemisto.tiedot().koko());
+    }
 }
