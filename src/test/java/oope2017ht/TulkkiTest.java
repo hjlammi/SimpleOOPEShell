@@ -142,7 +142,20 @@ public class TulkkiTest {
         assertEquals(juurihakemisto, alihakemisto.ylihakemisto());
     }
 
-    // Tulkki käynnistyy juurihakemistoon.
+    // Samanniminen hakemisto on jo.
+    @Test
+    public void testMdWithSameName() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("md foo");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
+        juurihakemisto.lisaa(foo);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
 
+        tulkki.suorita();
 
+        assertEquals(1, juurihakemisto.tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+    }
 }
