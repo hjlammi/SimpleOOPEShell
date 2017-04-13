@@ -158,4 +158,20 @@ public class TulkkiTest {
         assertEquals(1, juurihakemisto.tiedot().koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
     }
+
+    // Luodaan uusi tiedosto.
+    @Test
+    public void testMfNewFile() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("mf foo.txt 123");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(1, juurihakemisto.tiedot().koko());
+        Tiedosto lisatty = (Tiedosto)juurihakemisto.tiedot().alkio(0);
+        assertEquals("foo.txt", lisatty.nimi().toString());
+    }
 }

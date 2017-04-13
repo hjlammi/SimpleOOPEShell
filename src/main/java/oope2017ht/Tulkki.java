@@ -2,6 +2,7 @@ package oope2017ht;
 
 import oope2017ht.omalista.OmaLista;
 import oope2017ht.tiedot.Hakemisto;
+import oope2017ht.tiedot.Tiedosto;
 import oope2017ht.tiedot.Tieto;
 
 /*
@@ -79,6 +80,12 @@ public class Tulkki {
                 if (!onnistui) {
                     error();
                 }
+            // Jos käyttäjän syöte on mf...
+            } else if (osat[0].equals("mf") && osat.length == 3) {
+                String nimi = osat[1];
+                int koko = Integer.parseInt(osat[2]);
+                Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
+                juurihakemisto.lisaa(lisattava);
             // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
             // virheilmoitus.
             } else {
