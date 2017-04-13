@@ -208,4 +208,22 @@ public class TulkkiTest {
         assertEquals(0, juurihakemisto.tiedot().koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
     }
+
+    // Nimetään tieto uudelleen.
+    @Test
+    public void testMvRename() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("mv fool.txt foo.txt");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto fool = new Tiedosto(new StringBuilder("fool.txt"), 123);
+        juurihakemisto.lisaa(fool);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(1, juurihakemisto.tiedot().koko());
+        Tiedosto uusiNimi = (Tiedosto)juurihakemisto.tiedot().alkio(0);
+        assertEquals("foo.txt", uusiNimi.nimi().toString());
+    }
 }
