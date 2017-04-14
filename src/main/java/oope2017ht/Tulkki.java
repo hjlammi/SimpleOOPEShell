@@ -44,6 +44,12 @@ public class Tulkki {
         return tyohakemisto;
     }
 
+    public void tyohakemisto(Hakemisto tyohakemisto) {
+        if (tyohakemisto != null) {
+            this.tyohakemisto = tyohakemisto;
+        }
+    }
+
     public void suorita() {
         ui.tulosta("Welcome to SOS.");
 
@@ -60,7 +66,7 @@ public class Tulkki {
                 // Jos käyttäjän syöte on ls
                 } else if (osat[0].equals("ls") && osat.length == 1) {
                     // Viite juurihakemiston tietoihin.
-                    OmaLista tiedot = juurihakemisto.tiedot();
+                    OmaLista tiedot = tyohakemisto.tiedot();
 
                     // Tulostetaan juurihakemiston tiedot alkio kerrallaan.
                     for (int i = 0; i < tiedot.koko(); i++) {
@@ -72,11 +78,11 @@ public class Tulkki {
                     // Tietoa ei ole vielä löytynyt.
                     boolean loytyi = false;
                     // Käydään hakemistoa läpi, kunnes nimeä vastaava tieto löytyy.
-                    for (int i = 0; i < juurihakemisto.tiedot().koko() && !loytyi; i++) {
-                        Object tieto = juurihakemisto.tiedot().alkio(i);
+                    for (int i = 0; i < tyohakemisto.tiedot().koko() && !loytyi; i++) {
+                        Object tieto = tyohakemisto.tiedot().alkio(i);
                         String tiedonNimi = ((Tieto)tieto).nimi().toString();
                         if (nimi.equals(tiedonNimi)) {
-                            ui.tulosta(juurihakemisto.tiedot().alkio(i).toString());
+                            ui.tulosta(tyohakemisto.tiedot().alkio(i).toString());
                             loytyi = true;
                         }
                     }
@@ -172,5 +178,6 @@ public class Tulkki {
     private void error() {
         ui.tulosta("Error!");
     }
+
 
 }

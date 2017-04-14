@@ -81,13 +81,16 @@ public class TulkkiTest {
         juurihakemisto.lisaa(jee);
         Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
         juurihakemisto.lisaa(foo);
+        Tiedosto t = new Tiedosto(new StringBuilder("foo.txt"), 123);
+        foo.lisaa(t);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+        tulkki.tyohakemisto(foo);
 
         tulkki.suorita();
 
-        assertEquals(4, ui.tulosteet.koko());
-        assertEquals("foo/ 0", ui.tulosteet.alkio(1));
-        assertEquals("jee.txt 11", ui.tulosteet.alkio(2));
+        assertEquals(3, ui.tulosteet.koko());
+        assertEquals("foo.txt 123", ui.tulosteet.alkio(1));
+        assertEquals("foo", tulkki.tyohakemisto().nimi().toString());
     }
 
     @Test
