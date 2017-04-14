@@ -341,13 +341,17 @@ public class TulkkiTest {
         ui.syotteet.lisaaLoppuun("rm cat.txt");
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
+        juurihakemisto.lisaa(foo);
         Tiedosto cat = new Tiedosto(new StringBuilder("cat.txt"), 123);
-        juurihakemisto.lisaa(cat);
+        foo.lisaa(cat);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+        tulkki.tyohakemisto(foo);
 
         tulkki.suorita();
 
-        assertEquals(0, juurihakemisto.tiedot().koko());
+        assertEquals(0, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("foo", tulkki.tyohakemisto().nimi().toString());
     }
 
     // Hakemiston poistaminen.

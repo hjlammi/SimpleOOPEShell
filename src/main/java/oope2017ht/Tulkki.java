@@ -140,7 +140,7 @@ public class Tulkki {
                     }
                 } else if (osat[0].equals("rm") && osat.length == 2) {
                     String poistettava = osat[1];
-                    Tieto poistettavaTieto = juurihakemisto.poista(poistettava);
+                    Tieto poistettavaTieto = tyohakemisto.poista(poistettava);
                     if (poistettavaTieto == null) {
                         error();
                     }
