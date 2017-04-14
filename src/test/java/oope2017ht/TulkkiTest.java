@@ -162,7 +162,7 @@ public class TulkkiTest {
 
         tulkki.suorita();
 
-        assertEquals(1, juurihakemisto.tiedot().koko());
+        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
         assertEquals("Error!", ui.tulosteet.alkio(1));
     }
 
