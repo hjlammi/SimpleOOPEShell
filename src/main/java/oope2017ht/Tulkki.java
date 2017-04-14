@@ -144,12 +144,15 @@ public class Tulkki {
                     if (poistettavaTieto == null) {
                         error();
                     }
-                } else if (osat[0].equals("cd") && osat.length == 2) {
+                } else if (osat[0].equals("cd") && !osat[1].equals("..") && osat.length == 2) {
                     String nimi = osat[1];
                     Tieto alkio = tyohakemisto.hae(nimi);
                     if (alkio instanceof Hakemisto) {
                         tyohakemisto = (Hakemisto)alkio;
                     }
+                } else if (osat[0].equals("cd") && osat[1].equals("..") && osat.length == 2) {
+                    Hakemisto nykyinenHakemisto = tyohakemisto();
+                    tyohakemisto(nykyinenHakemisto.ylihakemisto());
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
                 } else {
