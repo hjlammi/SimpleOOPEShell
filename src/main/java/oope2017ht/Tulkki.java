@@ -125,7 +125,7 @@ public class Tulkki {
                 } else if (osat[0].equals("cp") && osat.length == 3) {
                     String nimi = osat[1];
                     String kopioNimi = osat[2];
-                    Tieto kopioitava = juurihakemisto.hae(nimi);
+                    Tieto kopioitava = tyohakemisto.hae(nimi);
                     // Vain Tiedoston voi kopioida, joten tarkistetaan että ollaan kopioimassa
                     // tiedostoa.
                     if (kopioitava != null && kopioitava instanceof Tiedosto && !nimiVarattu(kopioNimi)) {
@@ -134,7 +134,7 @@ public class Tulkki {
                         // Annetaan kopiolle nimeksi komentoriviparametrina saatu uusi nimi.
                         kopio.nimi(new StringBuilder(kopioNimi));
                         // Lisätään kopio hakemistoon.
-                        juurihakemisto.lisaa(kopio);
+                        tyohakemisto.lisaa(kopio);
                     } else {
                         error();
                     }
