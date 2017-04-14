@@ -102,7 +102,7 @@ public class Tulkki {
                     String nimi = osat[1];
                     int koko = Integer.parseInt(osat[2]);
                     Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
-                    boolean onnistui = juurihakemisto.lisaa(lisattava);
+                    boolean onnistui = tyohakemisto.lisaa(lisattava);
                     if (!onnistui) {
                         error();
                     }

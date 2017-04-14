@@ -173,12 +173,15 @@ public class TulkkiTest {
         ui.syotteet.lisaaLoppuun("mf foo.txt 123");
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
+        juurihakemisto.lisaa(foo);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+        tulkki.tyohakemisto(foo);
 
         tulkki.suorita();
 
-        assertEquals(1, juurihakemisto.tiedot().koko());
-        Tiedosto lisatty = (Tiedosto)juurihakemisto.tiedot().alkio(0);
+        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
+        Tiedosto lisatty = (Tiedosto)tulkki.tyohakemisto().tiedot().alkio(0);
         assertEquals("foo.txt", lisatty.nimi().toString());
     }
 
