@@ -133,16 +133,19 @@ public class TulkkiTest {
     @Test
     public void testMdNewDir() {
         TestiUI ui = new TestiUI();
-        ui.syotteet.lisaaLoppuun("md foo");
+        ui.syotteet.lisaaLoppuun("md bar");
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
+        juurihakemisto.lisaa(foo);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+        tulkki.tyohakemisto(foo);
 
         tulkki.suorita();
 
-        assertEquals(1, juurihakemisto.tiedot().koko());
-        Hakemisto alihakemisto = (Hakemisto)juurihakemisto.tiedot().alkio(0);
-        assertEquals("foo", alihakemisto.nimi().toString());
+        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
+        Hakemisto alihakemisto = (Hakemisto)tulkki.tyohakemisto().tiedot().alkio(0);
+        assertEquals("bar", alihakemisto.nimi().toString());
         assertEquals(juurihakemisto, alihakemisto.ylihakemisto());
     }
 
