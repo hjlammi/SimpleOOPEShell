@@ -102,8 +102,9 @@ public class TulkkiTest {
         Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
         juurihakemisto.lisaa(foo);
         Tiedosto jee = new Tiedosto(new StringBuilder("jee.txt"), 11);
-        juurihakemisto.lisaa(jee);
+        foo.lisaa(jee);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+        tulkki.tyohakemisto(foo);
 
         tulkki.suorita();
 
