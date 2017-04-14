@@ -113,8 +113,8 @@ public class Tulkki {
                     if (nimiVarattu(uusiNimi)) {
                         error();
                     } else {
-                        for (int i = 0; i < juurihakemisto.tiedot().koko(); i++) {
-                            Tieto alkio = (Tieto)juurihakemisto.tiedot().alkio(i);
+                        for (int i = 0; i < tyohakemisto.tiedot().koko(); i++) {
+                            Tieto alkio = (Tieto)tyohakemisto.tiedot().alkio(i);
                             // Jos hakemistosta löytyy tieto annetulla parametrilla,
                             // asetetaan alkiolle uusi nimi.
                             if (vaihdettavaNimi.equals(alkio.nimi().toString())) {
