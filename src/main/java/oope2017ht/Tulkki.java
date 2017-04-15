@@ -153,8 +153,12 @@ public class Tulkki {
                         tyohakemisto = (Hakemisto)alkio;
                     }
                 } else if (osat[0].equals("cd") && osat[1].equals("..") && osat.length == 2) {
-                    Hakemisto nykyinenHakemisto = tyohakemisto();
-                    tyohakemisto(nykyinenHakemisto.ylihakemisto());
+                    if (tyohakemisto == juurihakemisto) {
+                        error();
+                    } else {
+                        Hakemisto nykyinenHakemisto = tyohakemisto();
+                        tyohakemisto(nykyinenHakemisto.ylihakemisto());
+                    }
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
                 } else {

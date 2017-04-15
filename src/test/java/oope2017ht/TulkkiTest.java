@@ -446,4 +446,18 @@ public class TulkkiTest {
         assertEquals("root", tulkki.tyohakemisto().nimi().toString());
     }
 
+ // Tulostetaan virheilmoitus jos yritetään siirtyä juurihakemiston ylihakemistoon.
+    @Test
+    public void testCdErrorWhenChangingToParentOfRoot() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cd ..");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+    }
+
 }
