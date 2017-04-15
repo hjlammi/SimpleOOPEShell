@@ -395,16 +395,24 @@ public class TulkkiTest {
     @Test
     public void testCdChangeToSubdir() {
         TestiUI ui = new TestiUI();
+        // Tiedostoon ei voi siirtyä.
+        ui.syotteet.lisaaLoppuun("cd kitten123.jpg");
         ui.syotteet.lisaaLoppuun("cd kitten");
+        // Virheellinen alihakemiston nimi.
+        ui.syotteet.lisaaLoppuun("cd kiten");
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
         juurihakemisto.lisaa(kitten);
+        Tiedosto t = new Tiedosto(new StringBuilder("kitten123.jpg"), 123);
+        kitten.lisaa(t);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
 
         tulkki.suorita();
 
-        assertEquals(0, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+        assertEquals("Error!", ui.tulosteet.alkio(2));
         assertEquals("kitten", tulkki.tyohakemisto().nimi().toString());
     }
 

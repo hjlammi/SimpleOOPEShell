@@ -149,8 +149,11 @@ public class Tulkki {
                 } else if (osat[0].equals("cd") && !osat[1].equals("..") && osat.length == 2) {
                     String nimi = osat[1];
                     Tieto alkio = tyohakemisto.hae(nimi);
-                    if (alkio instanceof Hakemisto) {
+                    // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä.
+                    if (alkio != null && alkio instanceof Hakemisto) {
                         tyohakemisto = (Hakemisto)alkio;
+                    } else {
+                        error();
                     }
                 } else if (osat[0].equals("cd") && osat[1].equals("..") && osat.length == 2) {
                     if (tyohakemisto == juurihakemisto) {
