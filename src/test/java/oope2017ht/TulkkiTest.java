@@ -454,7 +454,7 @@ public class TulkkiTest {
         assertEquals("root", tulkki.tyohakemisto().nimi().toString());
     }
 
- // Tulostetaan virheilmoitus jos yritetään siirtyä juurihakemiston ylihakemistoon.
+    // Tulostetaan virheilmoitus jos yritetään siirtyä juurihakemiston ylihakemistoon.
     @Test
     public void testCdErrorWhenChangingToParentOfRoot() {
         TestiUI ui = new TestiUI();
@@ -468,4 +468,48 @@ public class TulkkiTest {
         assertEquals("Error!", ui.tulosteet.alkio(1));
     }
 
+    // Tulostetaan sijainti ennen kehotetta.
+    @Test
+    public void testPromptInRoot() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("exit");
+        Tulkki tulkki = new Tulkki(ui);
+
+        tulkki.suorita();
+
+        assertEquals("/>", ui.kehotteet.alkio(0));
+    }
+
+    @Test
+    public void testPromptWithPath() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cd kitten");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
+        juurihakemisto.lisaa(kitten);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals("/kitten/>", ui.kehotteet.alkio(1));
+    }
+
+    @Test
+    public void testUpdatePromptToRoot() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cd");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
+        juurihakemisto.lisaa(kitten);
+        Hakemisto kitten2 = new Hakemisto(new StringBuilder("kitten2"), kitten);
+        kitten.lisaa(kitten2);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+        tulkki.tyohakemisto(kitten2);
+
+        tulkki.suorita();
+
+        assertEquals("/>", ui.kehotteet.alkio(1));
+    }
 }
