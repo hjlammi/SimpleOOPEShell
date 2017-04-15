@@ -425,4 +425,25 @@ public class TulkkiTest {
         assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
         assertEquals("root", tulkki.tyohakemisto().nimi().toString());
     }
+
+    // Siirrytään juurihakemistoon.
+    @Test
+    public void testCdChangeToTopDir() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cd");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Hakemisto cat = new Hakemisto(new StringBuilder("cat"), juurihakemisto);
+        juurihakemisto.lisaa(cat);
+        Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), cat);
+        cat.lisaa(kitten);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+        tulkki.tyohakemisto(kitten);
+
+        tulkki.suorita();
+
+        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("root", tulkki.tyohakemisto().nimi().toString());
+    }
+
 }
