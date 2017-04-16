@@ -483,16 +483,20 @@ public class TulkkiTest {
     @Test
     public void testPromptWithPath() {
         TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cd cat");
         ui.syotteet.lisaaLoppuun("cd kitten");
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
-        Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
-        juurihakemisto.lisaa(kitten);
+        Hakemisto cat = new Hakemisto(new StringBuilder("cat"), juurihakemisto);
+        juurihakemisto.lisaa(cat);
+        Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), cat);
+        cat.lisaa(kitten);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+        tulkki.tyohakemisto(kitten);
 
         tulkki.suorita();
 
-        assertEquals("/kitten/>", ui.kehotteet.alkio(1));
+        assertEquals("/cat/kitten/>", ui.kehotteet.alkio(1));
     }
 
     @Test
