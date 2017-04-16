@@ -92,7 +92,7 @@ public class Tulkki {
                     }
                 } else if (osat[0].equals("md") && osat.length == 2) {
                     String nimi = osat[1];
-                    Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), juurihakemisto);
+                    Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tyohakemisto);
                     boolean onnistui = tyohakemisto.lisaa(lisattava);
                     if (!onnistui) {
                         error();

@@ -146,7 +146,7 @@ public class TulkkiTest {
         assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
         Hakemisto alihakemisto = (Hakemisto)tulkki.tyohakemisto().tiedot().alkio(0);
         assertEquals("bar", alihakemisto.nimi().toString());
-        assertEquals(juurihakemisto, alihakemisto.ylihakemisto());
+        assertEquals(foo, alihakemisto.ylihakemisto());
     }
 
     // Samanniminen hakemisto on jo.
@@ -483,8 +483,6 @@ public class TulkkiTest {
     @Test
     public void testPromptWithPath() {
         TestiUI ui = new TestiUI();
-        ui.syotteet.lisaaLoppuun("cd cat");
-        ui.syotteet.lisaaLoppuun("cd kitten");
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
         Hakemisto cat = new Hakemisto(new StringBuilder("cat"), juurihakemisto);
@@ -496,7 +494,7 @@ public class TulkkiTest {
 
         tulkki.suorita();
 
-        assertEquals("/cat/kitten/>", ui.kehotteet.alkio(1));
+        assertEquals("/cat/kitten/>", ui.kehotteet.alkio(0));
     }
 
     @Test
@@ -538,5 +536,20 @@ public class TulkkiTest {
         assertEquals("/kitten2/kitten3/ 0", ui.tulosteet.alkio(3));
     }
 
+    @Test
+    public void testMdAndCd() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("md cat");
+        ui.syotteet.lisaaLoppuun("cd cat");
+        ui.syotteet.lisaaLoppuun("md kitten");
+        ui.syotteet.lisaaLoppuun("cd kitten");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals("/cat/kitten/>", ui.kehotteet.alkio(4));
+    }
 
 }
