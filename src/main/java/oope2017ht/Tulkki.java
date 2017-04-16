@@ -54,9 +54,8 @@ public class Tulkki {
         ui.tulosta("Welcome to SOS.");
 
         String syote;
-        String polku = tyohakemisto.nimi().toString();
         do {
-            syote = ui.lueSyote(polku + ">");
+            syote = ui.lueSyote(tyohakemisto.hakemistopolku() + ">");
             String osat[] = syote.split(" ");
             try {
                 if (syote.endsWith(" ") || syote.startsWith(" ")) {
@@ -147,14 +146,12 @@ public class Tulkki {
                     }
                 } else if (osat[0].equals("cd") && osat.length == 1) {
                     tyohakemisto(juurihakemisto);
-                    polku = juurihakemisto.nimi().toString();
                 } else if (osat[0].equals("cd") && !osat[1].equals("..") && osat.length == 2) {
                     String nimi = osat[1];
                     Tieto alkio = tyohakemisto.hae(nimi);
                     // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä.
                     if (alkio != null && alkio instanceof Hakemisto) {
                         tyohakemisto = (Hakemisto)alkio;
-                        polku = polku + tyohakemisto.nimi().toString() + "/";
                     } else {
                         error();
                     }
