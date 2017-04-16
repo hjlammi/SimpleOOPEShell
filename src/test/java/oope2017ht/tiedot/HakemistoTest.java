@@ -160,4 +160,22 @@ public class HakemistoTest {
         assertEquals(1, root.tiedot().koko());
         assertEquals(t, root.tiedot().alkio(0));
     }
+
+    // Testataan hakemistopolkua.
+
+    @Test
+    public void juurihakemisto() {
+        Hakemisto root = new Hakemisto(new StringBuilder("/"), null);
+
+        assertEquals("/", root.hakemistopolku());
+    }
+
+    @Test
+    public void juurihakemistonAlihakemisto() {
+        Hakemisto root = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto cat = new Hakemisto(new StringBuilder("cat"), root);
+        root.lisaa(cat);
+
+        assertEquals("/cat/", cat.hakemistopolku());
+    }
 }

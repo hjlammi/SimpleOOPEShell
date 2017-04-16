@@ -137,4 +137,12 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
             return null;
         }
     }
+
+    public String hakemistopolku() {
+        if (ylihakemisto == null) {
+            return nimi().toString();
+        } else {
+            return ylihakemisto.hakemistopolku() + nimi().toString() + "/";
+        }
+    }
 }
