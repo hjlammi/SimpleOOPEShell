@@ -162,6 +162,8 @@ public class Tulkki {
                         Hakemisto nykyinenHakemisto = tyohakemisto();
                         tyohakemisto(nykyinenHakemisto.ylihakemisto());
                     }
+                } else if (osat[0].equals("find") && osat.length == 1) {
+                    puunTulostus(tyohakemisto);
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
                 } else {
@@ -172,6 +174,19 @@ public class Tulkki {
             }
         // Suoritetaan silmukkaa kunnes syöte on exit.
         } while (!syote.equals("exit"));
+    }
+
+    private void puunTulostus(Hakemisto tyohakemisto) {
+        OmaLista sisalto = tyohakemisto.tiedot();
+        int i = 0;
+        while (i < sisalto.koko()) {
+            Tieto tieto = (Tieto)sisalto.alkio(i);
+            ui.tulosta(tyohakemisto.hakemistopolku() + tieto.toString());
+            if (tieto instanceof Hakemisto) {
+                puunTulostus((Hakemisto)tieto);
+            }
+            i++;
+        }
     }
 
     // Apumetodi mv- ja cp-komentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina

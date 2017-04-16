@@ -516,4 +516,27 @@ public class TulkkiTest {
 
         assertEquals("/>", ui.kehotteet.alkio(1));
     }
+
+    @Test
+    public void testFindWithDirs() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("find");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto kitten1 = new Hakemisto(new StringBuilder("kitten1"), juurihakemisto);
+        juurihakemisto.lisaa(kitten1);
+        Hakemisto kitten2 = new Hakemisto(new StringBuilder("kitten2"), juurihakemisto);
+        juurihakemisto.lisaa(kitten2);
+        Hakemisto kitten3 = new Hakemisto(new StringBuilder("kitten3"), kitten2);
+        kitten2.lisaa(kitten3);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals("/kitten1/ 0", ui.tulosteet.alkio(1));
+        assertEquals("/kitten2/ 1", ui.tulosteet.alkio(2));
+        assertEquals("/kitten2/kitten3/ 0", ui.tulosteet.alkio(3));
+    }
+
+
 }
