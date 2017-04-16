@@ -483,6 +483,8 @@ public class TulkkiTest {
     @Test
     public void testPromptWithPath() {
         TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("cd cat");
+        ui.syotteet.lisaaLoppuun("cd kitten");
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
         Hakemisto cat = new Hakemisto(new StringBuilder("cat"), juurihakemisto);
@@ -494,7 +496,7 @@ public class TulkkiTest {
 
         tulkki.suorita();
 
-        assertEquals("/cat/kitten/>", ui.kehotteet.alkio(0));
+        assertEquals("/cat/kitten/>", ui.kehotteet.alkio(1));
     }
 
     @Test
@@ -534,6 +536,33 @@ public class TulkkiTest {
         assertEquals("/kitten1/ 0", ui.tulosteet.alkio(1));
         assertEquals("/kitten2/ 1", ui.tulosteet.alkio(2));
         assertEquals("/kitten2/kitten3/ 0", ui.tulosteet.alkio(3));
+    }
+
+    @Test
+    public void testFindWithFilesAndDirs() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("find");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto kitten1 = new Hakemisto(new StringBuilder("kitten1"), juurihakemisto);
+        juurihakemisto.lisaa(kitten1);
+        Hakemisto kitten2 = new Hakemisto(new StringBuilder("kitten2"), juurihakemisto);
+        juurihakemisto.lisaa(kitten2);
+        Hakemisto kitten3 = new Hakemisto(new StringBuilder("kitten3"), kitten2);
+        kitten2.lisaa(kitten3);
+        Tiedosto t1 = new Tiedosto(new StringBuilder("party_kitten.jpg"), 256);
+        kitten2.lisaa(t1);
+        Tiedosto t2 = new Tiedosto(new StringBuilder("farty_kitten.jpg"), 123);
+        kitten2.lisaa(t2);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals("/kitten1/ 0", ui.tulosteet.alkio(1));
+        assertEquals("/kitten2/ 3", ui.tulosteet.alkio(2));
+        assertEquals("/kitten2/farty_kitten.jpg 123", ui.tulosteet.alkio(3));
+        assertEquals("/kitten2/kitten3/ 0", ui.tulosteet.alkio(4));
+        assertEquals("/kitten2/party_kitten.jpg 256", ui.tulosteet.alkio(5));
     }
 
     @Test
