@@ -17,6 +17,18 @@ import oope2017ht.tiedot.Tieto;
 
 public class Tulkki {
 
+    /*
+     *  Vakiot.
+     */
+
+    private static final String LOPETUSVIESTI = "Shell terminated.";
+
+    private static final String TERVEHDYS = "Welcome to SOS.";
+
+    /*
+     * Attribuutit.
+     */
+
     private UI ui;
 
     private Hakemisto juurihakemisto;
@@ -51,7 +63,7 @@ public class Tulkki {
     }
 
     public void suorita() {
-        ui.tulosta("Welcome to SOS.");
+        ui.tulosta(TERVEHDYS);
 
         String syote;
         do {
@@ -62,7 +74,7 @@ public class Tulkki {
                     error();
                 // Jos käyttäjän syöte on exit, tulostetaan lopetusviesti.
                 } else if (osat[0].equals("exit") && osat.length == 1) {
-                    ui.tulosta("Shell terminated.");
+                    ui.tulosta(LOPETUSVIESTI);
                 // Jos käyttäjän syöte on ls
                 } else if (osat[0].equals("ls") && osat.length == 1) {
                     // Viite juurihakemiston tietoihin.
