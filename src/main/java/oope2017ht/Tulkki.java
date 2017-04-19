@@ -10,7 +10,7 @@ import oope2017ht.tiedot.Tieto;
 *
 * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
 *
-* Viimeksi muokattu 13.4.2017.
+* Viimeksi muokattu 19.4.2017.
 *
 *
 */
@@ -21,9 +21,10 @@ public class Tulkki {
      *  Vakiot.
      */
 
+    private static final String TERVEHDYS = "Welcome to SOS.";
+
     private static final String LOPETUSVIESTI = "Shell terminated.";
 
-    private static final String TERVEHDYS = "Welcome to SOS.";
 
     /*
      * Attribuutit.
@@ -67,20 +68,24 @@ public class Tulkki {
 
         String syote;
         do {
+            // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen ja
+            // asettaa viitten käyttäjän antamaan syötteeseen.
             syote = ui.lueSyote(tyohakemisto.hakemistopolku() + ">");
+            // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
             try {
+                // Jos syöte alkaa tai loppuu välilyöntiin, kutsutaan error-metodia, joka tulostaa virheilmoituksen.
                 if (syote.endsWith(" ") || syote.startsWith(" ")) {
                     error();
-                // Jos käyttäjän syöte on exit, tulostetaan lopetusviesti.
+                // Jos käyttäjän syöte on exit eikä syötteessä ollut muita osia, tulostetaan lopetusviesti.
                 } else if (osat[0].equals("exit") && osat.length == 1) {
                     ui.tulosta(LOPETUSVIESTI);
                 // Jos käyttäjän syöte on ls
                 } else if (osat[0].equals("ls") && osat.length == 1) {
-                    // Viite juurihakemiston tietoihin.
+                    // Viite työhakemiston tietoihin.
                     OmaLista tiedot = tyohakemisto.tiedot();
 
-                    // Tulostetaan juurihakemiston tiedot alkio kerrallaan.
+                    // Tulostetaan työhakemiston tiedot alkio kerrallaan.
                     for (int i = 0; i < tiedot.koko(); i++) {
                         ui.tulosta(tiedot.alkio(i).toString());
                     }
