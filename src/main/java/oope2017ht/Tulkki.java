@@ -10,49 +10,42 @@ import oope2017ht.tiedot.Tieto;
 *
 * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
 *
-* Viimeksi muokattu 19.4.2017.
+* Viimeksi muokattu 20.4.2017.
 *
 *
 */
 
 public class Tulkki {
 
-    private static final String REKURSIIVINEN_LISTAAMINEN = "find";
+    /*
+     *  Vakiot.
+     */
 
+    private static final String REKURSIIVINEN_LISTAAMINEN = "find";
 
 
     private static final String HAKEMISTON_VAIHTAMINEN = "cd";
 
 
-
     private static final String POISTAMINEN = "rm";
-
 
 
     private static final String KOPIOIMINEN = "cp";
 
 
-
     private static final String UUDELLEEN_NIMEAMINEN = "mv";
-
 
 
     private static final String TIEDOSTON_LUOMINEN = "mf";
 
 
-
     private static final String HAKEMISTON_LUOMINEN = "md";
-
 
 
     private static final String LISTAAMINEN = "ls";
 
 
     private static final String LOPETUS = "exit";
-
-    /*
-     *  Vakiot.
-     */
 
 
 
@@ -75,7 +68,7 @@ public class Tulkki {
     private Hakemisto tyohakemisto;
 
     /*
-     * Rakentaja.
+     * Rakentajat.
      */
     public Tulkki(UI ui) {
         this.ui = ui;
@@ -248,8 +241,8 @@ public class Tulkki {
     // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
     // true, jos samannimistä ei löydy, palautetaan false.
     private boolean nimiVarattu(String uusiNimi) {
-        for (int i = 0; i < juurihakemisto.tiedot().koko(); i++) {
-            Tieto alkio = (Tieto)juurihakemisto.tiedot().alkio(i);
+        for (int i = 0; i < tyohakemisto.tiedot().koko(); i++) {
+            Tieto alkio = (Tieto)tyohakemisto.tiedot().alkio(i);
             if (uusiNimi.equals(alkio.nimi().toString())) {
                 return true;
             }

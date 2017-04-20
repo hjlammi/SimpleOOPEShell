@@ -227,10 +227,14 @@ public class TulkkiTest {
         ui.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
+        Tiedosto foo2 = new Tiedosto(new StringBuilder("foo.txt"), 234);
+        juurihakemisto.lisaa(foo2);
+        Hakemisto bar = new Hakemisto(new StringBuilder("bar"), foo);
+        foo.lisaa(bar);
         Tiedosto fool = new Tiedosto(new StringBuilder("fool.txt"), 123);
-        foo.lisaa(fool);
+        bar.lisaa(fool);
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
-        tulkki.tyohakemisto(foo);
+        tulkki.tyohakemisto(bar);
 
         tulkki.suorita();
 
