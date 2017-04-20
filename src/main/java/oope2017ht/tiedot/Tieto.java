@@ -29,6 +29,9 @@ public abstract class Tieto implements Comparable<Tieto>{
 
     // Kopiorakentaja.
     public Tieto(Tieto toinen) {
+        if (toinen == null) {
+            throw new IllegalArgumentException();
+        }
         this.nimi = new StringBuilder(toinen.nimi.toString());
     }
 
@@ -37,7 +40,7 @@ public abstract class Tieto implements Comparable<Tieto>{
      */
 
     public void nimi(StringBuilder nimi) throws IllegalArgumentException{
-        if (nimiOk(nimi)) {
+        if (nimi != null && nimiOk(nimi)) {
             this.nimi = nimi;
         } else {
             throw new IllegalArgumentException();

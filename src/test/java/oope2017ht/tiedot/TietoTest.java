@@ -90,6 +90,12 @@ public class TietoTest {
         assertEquals(false, Tieto.nimiOk(s));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void nullNimi() {
+        Tiedosto t = new Tiedosto(new StringBuilder("lol"), 123);
+        t.nimi(null);
+    }
+
     @Test
     public void verrataanTietoaStringBuilderiin() {
         StringBuilder s = new StringBuilder();
