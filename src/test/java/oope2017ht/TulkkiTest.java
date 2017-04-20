@@ -264,6 +264,25 @@ public class TulkkiTest {
         assertEquals("fool.txt", vaihdettava.nimi().toString());
     }
 
+    // Vaihdettavan nimistä ei ole.
+    @Test
+    public void testMvRenameWithWrongName() {
+        TestiUI ui = new TestiUI();
+        ui.syotteet.lisaaLoppuun("mv fool.txt foo.txt");
+        ui.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto cats = new Tiedosto(new StringBuilder("cats.txt"), 123);
+        juurihakemisto.lisaa(cats);
+        Tulkki tulkki = new Tulkki(ui, juurihakemisto);
+
+        tulkki.suorita();
+
+        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("Error!", ui.tulosteet.alkio(1));
+        Tiedosto vaihdettava = (Tiedosto)tulkki.tyohakemisto().tiedot().alkio(0);
+        assertEquals("cats.txt", vaihdettava.nimi().toString());
+    }
+
     // Kopioidaan tiedosto.
     @Test
     public void testCpCopyFile() {

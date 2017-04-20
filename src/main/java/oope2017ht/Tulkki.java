@@ -161,14 +161,14 @@ public class Tulkki {
                     if (nimiVarattu(uusiNimi)) {
                         error();
                     } else {
-                        for (int i = 0; i < tyohakemisto.tiedot().koko(); i++) {
-                            Tieto alkio = (Tieto)tyohakemisto.tiedot().alkio(i);
-                            // Jos hakemistosta löytyy tieto annetulla parametrilla,
-                            // asetetaan alkiolle uusi nimi.
-                            if (vaihdettavaNimi.equals(alkio.nimi().toString())) {
-                                alkio.nimi(new StringBuilder(uusiNimi));
-                            }
-                        }
+                        // Jos hakemistosta löytyy tieto annetulla parametrilla,
+                        // asetetaan alkiolle uusi nimi.
+                        Tieto alkio = (Tieto)tyohakemisto.hae(vaihdettavaNimi);
+                           if (alkio == null) {
+                               error();
+                           } else {
+                               alkio.nimi(new StringBuilder(uusiNimi));
+                           }
                     }
                 } else if (osat[0].equals(KOPIOIMINEN) && osat.length == 3) {
                     String nimi = osat[1];
