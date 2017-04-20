@@ -123,20 +123,12 @@ public class Tulkki {
                 } else if (osat[0].equals(LISTAAMINEN) && osat.length == 2) {
                     // Viite listattavan tiedon nimeen.
                     String nimi = osat[1];
-                    // Tietoa ei ole vielä löytynyt.
-                    boolean loytyi = false;
-                    // Käydään hakemistoa läpi, kunnes nimeä vastaava tieto löytyy.
-                    for (int i = 0; i < tyohakemisto.tiedot().koko() && !loytyi; i++) {
-                        Object tieto = tyohakemisto.tiedot().alkio(i);
-                        String tiedonNimi = ((Tieto)tieto).nimi().toString();
-                        if (nimi.equals(tiedonNimi)) {
-                            ui.tulosta(tyohakemisto.tiedot().alkio(i).toString());
-                            loytyi = true;
-                        }
-                    }
+                    Tieto alkio = tyohakemisto.hae(nimi);
                     // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta tulostetaan virheilmoitus.
-                    if (!loytyi) {
+                    if (alkio == null) {
                         error();
+                    } else {
+                        ui.tulosta(alkio.toString());
                     }
                 } else if (osat[0].equals(HAKEMISTON_LUOMINEN) && osat.length == 2) {
                     String nimi = osat[1];
