@@ -119,9 +119,9 @@ public class Tulkki {
                     for (int i = 0; i < tiedot.koko(); i++) {
                         ui.tulosta(tiedot.alkio(i).toString());
                     }
-                // Jos käyttäjä haluaa tulostaa näytölle parametrina antamansa tiedon merkkijonoesityksen:
+                // Jos käyttäjä haluaa tulostaa näytölle tiedon merkkijonoesityksen:
                 } else if (osat[0].equals(LISTAAMINEN) && osat.length == 2) {
-                    // Viite tulostettavan tiedon nimeen.
+                    // Tulostettavan tiedon nimi saadaan parametrina.
                     String nimi = osat[1];
                     // Haetaan hakemistosta tietoa nimellä hyödyntäen Hakemiston metodia hae.
                     Tieto alkio = tyohakemisto.hae(nimi);
@@ -134,7 +134,7 @@ public class Tulkki {
                     }
                 // Jos käyttäjä haluaa luoda hakemiston parametrina antamallansa nimellä:
                 } else if (osat[0].equals(HAKEMISTON_LUOMINEN) && osat.length == 2) {
-                    // Viite parametrina annettuun nimeen.
+                    // Hakemiston nimi saadaan parametrina.
                     String nimi = osat[1];
                     // Luodaan uusi hakemisto-olio parametrina annetulla nimellä.
                     Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tyohakemisto);
@@ -147,9 +147,9 @@ public class Tulkki {
                     }
                 // Jos käyttäjä haluaa luoda tiedoston antamallaan nimellä ja koolla:
                 } else if (osat[0].equals(TIEDOSTON_LUOMINEN) && osat.length == 3) {
-                    // Viite parametrina annettuun nimeen.
+                    // Nimi on komennon ensimmäinen parametri.
                     String nimi = osat[1];
-                    // Viite parametrina annettuun kokoon, joka muutetaan merkkijonosta int:ksi.
+                    // Koko on komennon toinen parametri.
                     int koko = Integer.parseInt(osat[2]);
                     // Luodaan uusi tiedosto-olio ja annetaan rakentajalle parametreina käyttäjän antamat nimi ja koko.
                     Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
@@ -160,11 +160,11 @@ public class Tulkki {
                     if (!onnistui) {
                         error();
                     }
-                // Jos käyttäjä haluaa uudelleennimetä olemassa olevan tiedon parametrina antamansa nimiseksi:
+                // Jos käyttäjä haluaa uudelleennimetä olemassa olevan tiedon:
                 } else if (osat[0].equals(UUDELLEEN_NIMEAMINEN) && osat.length == 3) {
-                    // Viite parametrina annettuun vaihdettavaan nimeen.
+                    // Vaihdettava nimi on komennon ensimmäinen parametri.
                     String vaihdettavaNimi = osat[1];
-                    // Viite parametrina annettuun uuteen nimeen.
+                    // Uusi nimi on komennon toinen parametri.
                     String uusiNimi = osat[2];
                     // Kutsutaan metodia, joka tutkii onko parametrina saamansa uusi nimi jo varattu. Jos nimi on varattu,
                     // paluuarvo on true ja tulostetaan virheilmoitus.
@@ -180,12 +180,16 @@ public class Tulkki {
                                 alkio.nimi(new StringBuilder(uusiNimi));
                             }
                     }
+                // Jos käyttäjä haluaa kopioida tiedoston:
                 } else if (osat[0].equals(KOPIOIMINEN) && osat.length == 3) {
+                    // Kopioitavan tiedoston nimi on ensimmäinen parametri.
                     String nimi = osat[1];
+                    // Kopion nimi on toinen parametri.
                     String kopioNimi = osat[2];
+                    // Haetaan hakemistosta kopioitava tiedosto nimen perusteella.
                     Tieto kopioitava = tyohakemisto.hae(nimi);
-                    // Vain Tiedoston voi kopioida, joten tarkistetaan että ollaan kopioimassa
-                    // tiedostoa.
+                    // Tarkistetaan, että tieto löyty, että se on Tiedosto-tyyppinen
+                    // ja ettei kopion nimi ole jo käytössä hakemistossa.
                     if (kopioitava != null && kopioitava instanceof Tiedosto && !nimiVarattu(kopioNimi)) {
                         // Syväkopioidaan tiedosto.
                         Tiedosto kopio = new Tiedosto((Tiedosto)kopioitava);
@@ -196,28 +200,41 @@ public class Tulkki {
                     } else {
                         error();
                     }
+                // Jos käyttäjä haluaa poistaa tiedon:
                 } else if (osat[0].equals(POISTAMINEN) && osat.length == 2) {
+                    // Poistettavan nimi on saadaan parametrina käyttäjältä.
                     String poistettava = osat[1];
+                    // Kutsutaan Hakemiston metodia, joka poistaa nimeä vastaavan olion.
                     Tieto poistettavaTieto = tyohakemisto.poista(poistettava);
+                    // Jos poisto ei onnistunut, palautetaan null ja tulostetaan virheilmoitus.
                     if (poistettavaTieto == null) {
                         error();
                     }
+                // Jos käyttäjä haluaa siirtyä takaisin juurihakemistoon, asetetaan työhakemistoksi juurihakemisto.
                 } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && osat.length == 1) {
                     tyohakemisto(juurihakemisto);
+                // Jos käyttäjä haluaa siirtyä johonkin alihakemistoistaan:
                 } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..") && osat.length == 2) {
+                    // Alihakemiston nimi saadaan parametrina.
                     String nimi = osat[1];
+                    // Haetaan hakemistosta nimellä.
                     Tieto alkio = tyohakemisto.hae(nimi);
-                    // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä.
+                    // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä
+                    // ja että tieto on tyyppiä Hakemisto.
                     if (alkio != null && alkio instanceof Hakemisto) {
-                        tyohakemisto = (Hakemisto)alkio;
+                        tyohakemisto((Hakemisto)alkio);
                     } else {
                         error();
                     }
+                // Jos käyttäjä haluaa siirtyä nykyisen hakemiston ylihakemistoon:
                 } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..") && osat.length == 2) {
+                    // Juurihakemistosta ei voi siirtyä ylihakemistoon.
                     if (tyohakemisto == juurihakemisto) {
                         error();
                     } else {
+                        // Asetetaan viite nykyiseen hakemistoon.
                         Hakemisto nykyinenHakemisto = tyohakemisto();
+                        // Asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
                         tyohakemisto(nykyinenHakemisto.ylihakemisto());
                     }
                 } else if (osat[0].equals(REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
