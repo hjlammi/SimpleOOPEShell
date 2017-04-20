@@ -17,9 +17,47 @@ import oope2017ht.tiedot.Tieto;
 
 public class Tulkki {
 
+    private static final String REKURSIIVINEN_LISTAAMINEN = "find";
+
+
+
+    private static final String HAKEMISTON_VAIHTAMINEN = "cd";
+
+
+
+    private static final String POISTAMINEN = "rm";
+
+
+
+    private static final String KOPIOIMINEN = "cp";
+
+
+
+    private static final String UUDELLEEN_NIMEAMINEN = "mv";
+
+
+
+    private static final String TIEDOSTON_LUOMINEN = "mf";
+
+
+
+    private static final String HAKEMISTON_LUOMINEN = "md";
+
+
+
+    private static final String LISTAAMINEN = "ls";
+
+
+    private static final String LOPETUS = "exit";
+
     /*
      *  Vakiot.
      */
+
+
+
+
+    private static final String KEHOTE = ">";
 
     private static final String TERVEHDYS = "Welcome to SOS.";
 
@@ -70,7 +108,7 @@ public class Tulkki {
         do {
             // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen ja
             // asettaa viitten käyttäjän antamaan syötteeseen.
-            syote = ui.lueSyote(tyohakemisto.hakemistopolku() + ">");
+            syote = ui.lueSyote(tyohakemisto.hakemistopolku() + KEHOTE);
             // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
             try {
@@ -78,10 +116,10 @@ public class Tulkki {
                 if (syote.endsWith(" ") || syote.startsWith(" ")) {
                     error();
                 // Jos käyttäjän syöte on exit eikä syötteessä ollut muita osia, tulostetaan lopetusviesti.
-                } else if (osat[0].equals("exit") && osat.length == 1) {
+                } else if (osat[0].equals(LOPETUS) && osat.length == 1) {
                     ui.tulosta(LOPETUSVIESTI);
                 // Jos käyttäjän syöte on ls
-                } else if (osat[0].equals("ls") && osat.length == 1) {
+                } else if (osat[0].equals(LISTAAMINEN) && osat.length == 1) {
                     // Viite työhakemiston tietoihin.
                     OmaLista tiedot = tyohakemisto.tiedot();
 
@@ -89,7 +127,7 @@ public class Tulkki {
                     for (int i = 0; i < tiedot.koko(); i++) {
                         ui.tulosta(tiedot.alkio(i).toString());
                     }
-                } else if (osat[0].equals("ls") && osat.length == 2) {
+                } else if (osat[0].equals(LISTAAMINEN) && osat.length == 2) {
                     // Viite listattavan tiedon nimeen.
                     String nimi = osat[1];
                     // Tietoa ei ole vielä löytynyt.
@@ -107,7 +145,7 @@ public class Tulkki {
                     if (!loytyi) {
                         error();
                     }
-                } else if (osat[0].equals("md") && osat.length == 2) {
+                } else if (osat[0].equals(HAKEMISTON_LUOMINEN) && osat.length == 2) {
                     String nimi = osat[1];
                     Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tyohakemisto);
                     boolean onnistui = tyohakemisto.lisaa(lisattava);
@@ -115,7 +153,7 @@ public class Tulkki {
                         error();
                     }
                 // Jos käyttäjän syöte on mf...
-                } else if (osat[0].equals("mf") && osat.length == 3) {
+                } else if (osat[0].equals(TIEDOSTON_LUOMINEN) && osat.length == 3) {
                     String nimi = osat[1];
                     int koko = Integer.parseInt(osat[2]);
                     Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
@@ -124,7 +162,7 @@ public class Tulkki {
                         error();
                     }
                 // Jos käyttäjän syöte on mv...
-                } else if (osat[0].equals("mv") && osat.length == 3) {
+                } else if (osat[0].equals(UUDELLEEN_NIMEAMINEN) && osat.length == 3) {
                     String vaihdettavaNimi = osat[1];
                     String uusiNimi = osat[2];
                     if (nimiVarattu(uusiNimi)) {
@@ -139,7 +177,7 @@ public class Tulkki {
                             }
                         }
                     }
-                } else if (osat[0].equals("cp") && osat.length == 3) {
+                } else if (osat[0].equals(KOPIOIMINEN) && osat.length == 3) {
                     String nimi = osat[1];
                     String kopioNimi = osat[2];
                     Tieto kopioitava = tyohakemisto.hae(nimi);
@@ -155,15 +193,15 @@ public class Tulkki {
                     } else {
                         error();
                     }
-                } else if (osat[0].equals("rm") && osat.length == 2) {
+                } else if (osat[0].equals(POISTAMINEN) && osat.length == 2) {
                     String poistettava = osat[1];
                     Tieto poistettavaTieto = tyohakemisto.poista(poistettava);
                     if (poistettavaTieto == null) {
                         error();
                     }
-                } else if (osat[0].equals("cd") && osat.length == 1) {
+                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && osat.length == 1) {
                     tyohakemisto(juurihakemisto);
-                } else if (osat[0].equals("cd") && !osat[1].equals("..") && osat.length == 2) {
+                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..") && osat.length == 2) {
                     String nimi = osat[1];
                     Tieto alkio = tyohakemisto.hae(nimi);
                     // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä.
@@ -172,14 +210,14 @@ public class Tulkki {
                     } else {
                         error();
                     }
-                } else if (osat[0].equals("cd") && osat[1].equals("..") && osat.length == 2) {
+                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..") && osat.length == 2) {
                     if (tyohakemisto == juurihakemisto) {
                         error();
                     } else {
                         Hakemisto nykyinenHakemisto = tyohakemisto();
                         tyohakemisto(nykyinenHakemisto.ylihakemisto());
                     }
-                } else if (osat[0].equals("find") && osat.length == 1) {
+                } else if (osat[0].equals(REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
                     puunTulostus(tyohakemisto);
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
@@ -190,7 +228,7 @@ public class Tulkki {
                 error();
             }
         // Suoritetaan silmukkaa kunnes syöte on exit.
-        } while (!syote.equals("exit"));
+        } while (!syote.equals(LOPETUS));
     }
 
     private void puunTulostus(Hakemisto tyohakemisto) {
