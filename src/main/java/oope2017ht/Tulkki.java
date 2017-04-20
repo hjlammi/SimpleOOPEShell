@@ -241,13 +241,12 @@ public class Tulkki {
     // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
     // true, jos samannimistä ei löydy, palautetaan false.
     private boolean nimiVarattu(String uusiNimi) {
-        for (int i = 0; i < tyohakemisto.tiedot().koko(); i++) {
-            Tieto alkio = (Tieto)tyohakemisto.tiedot().alkio(i);
-            if (uusiNimi.equals(alkio.nimi().toString())) {
-                return true;
-            }
+        Tieto alkio = (Tieto)tyohakemisto.hae(uusiNimi);
+        if (alkio == null) {
+            return false;
+        } else {
+            return true;
         }
-        return false;
     }
 
     private void error() {
