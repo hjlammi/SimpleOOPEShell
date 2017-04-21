@@ -5,7 +5,7 @@ package oope2017ht.tiedot;
  *
  * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
  *
- * Viimeksi muokattu 5.4.2017.
+ * Viimeksi muokattu 21.4.2017.
  *
  * Tieto-luokka, jonka attribuutit ovat OmaLista hakemiston tiedoille ja ylihakemisto.
  * Luokka korvaa toString-metodin ja toteuttaa Komennettava-rajapinnan.
@@ -145,9 +145,13 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
         }
     }
 
+    // Metodi palauttaa merkkijonona hakemiston hakemistopolun.
     public String hakemistopolku() {
+        // Jos ylihakemisto on null (eli kyseessä on juurihakemisto), palautetaan hakemiston nimi merkkijonona.
         if (ylihakemisto == null) {
             return nimi().toString();
+        // Jos kyseessä ei ole juurihakemisto, kutsutaan ylihakemistolle hakemistopolku-metodia
+        // ja tulokseen lisätään nykyisen hakemiston nimi merkkijonona sekä kauttaviiva.
         } else {
             return ylihakemisto.hakemistopolku() + nimi().toString() + "/";
         }

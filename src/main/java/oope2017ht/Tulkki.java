@@ -21,6 +21,8 @@ public class Tulkki {
      *  Vakiot.
      */
 
+
+
     private static final String REKURSIIVINEN_LISTAAMINEN = "find";
 
 
@@ -56,6 +58,7 @@ public class Tulkki {
 
     private static final String LOPETUSVIESTI = "Shell terminated.";
 
+    private static final String VIRHEILMOITUS = "Error!";
 
     /*
      * Attribuutit.
@@ -251,24 +254,31 @@ public class Tulkki {
         } while (!syote.equals(LOPETUS));
     }
 
-    private void puunTulostus(Hakemisto tyohakemisto) {
-        OmaLista sisalto = tyohakemisto.tiedot();
-        int i = 0;
-        while (i < sisalto.koko()) {
+    // Metodi tulostaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti.
+    private void puunTulostus(Hakemisto hakemisto) {
+        // Asetetaan viite parametrina saadun hakemiston tietoihin.
+        OmaLista sisalto = hakemisto.tiedot();
+        // Käydään hakemiston sisältö läpi.
+        for (int i = 0; i < sisalto.koko(); i++) {
+            // Asetetaan viite tietoalkioon.
             Tieto tieto = (Tieto)sisalto.alkio(i);
-            ui.tulosta(tyohakemisto.hakemistopolku() + tieto.toString());
+            // Kutsutaan käyttöliittymän tulostusmetodia, joka ottaa parametrina merkkijonon.
+            // Merkkijono koostuu nykyisen hakemiston hakemistopolusta sekä tiedon merkkijonoesityksestä.
+            ui.tulosta(hakemisto.hakemistopolku() + tieto.toString());
+            // Jos tieto on Hakemisto-tyyppinen, metodi kutsuu itseään ja antaa tiedon parametrina.
             if (tieto instanceof Hakemisto) {
                 puunTulostus((Hakemisto)tieto);
             }
-            i++;
         }
     }
 
-    // Apumetodi mv- ja cp-komentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina
+    // Apumetodi uudelleennimeämis- ja kopioimiskomentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina
     // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
     // true, jos samannimistä ei löydy, palautetaan false.
-    private boolean nimiVarattu(String uusiNimi) {
-        Tieto alkio = (Tieto)tyohakemisto.hae(uusiNimi);
+    private boolean nimiVarattu(String nimi) {
+        // Kutsutaan Hakemiston hae-metodia, joka palauttaa nullin, jos haettavalla nimellä ei löydy Tietoa.
+        Tieto alkio = tyohakemisto.hae(nimi);
+        // Samannimistä ei löytynyt.
         if (alkio == null) {
             return false;
         } else {
@@ -276,8 +286,9 @@ public class Tulkki {
         }
     }
 
+    // Metodi kutsuu käyttöliittymän tulosta-metodia, joka tulostaa virheilmoituksen.
     private void error() {
-        ui.tulosta("Error!");
+        ui.tulosta(VIRHEILMOITUS);
     }
 
 
