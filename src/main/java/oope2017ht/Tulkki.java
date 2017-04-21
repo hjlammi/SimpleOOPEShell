@@ -72,7 +72,7 @@ public class Tulkki {
      */
     public Tulkki(UI ui) {
         this.ui = ui;
-        this.juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        this.juurihakemisto = new Hakemisto();
         this.tyohakemisto = juurihakemisto;
     }
 

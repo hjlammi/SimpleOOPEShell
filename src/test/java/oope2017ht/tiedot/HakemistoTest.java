@@ -165,14 +165,14 @@ public class HakemistoTest {
 
     @Test
     public void juurihakemisto() {
-        Hakemisto root = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto root = new Hakemisto();
 
         assertEquals("/", root.hakemistopolku());
     }
 
     @Test
     public void juurihakemistonAlihakemisto() {
-        Hakemisto root = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto root = new Hakemisto();
         Hakemisto cat = new Hakemisto(new StringBuilder("cat"), root);
         root.lisaa(cat);
 

@@ -23,6 +23,11 @@ public abstract class Tieto implements Comparable<Tieto>{
      * Rakentajat.
      */
 
+    // Oletusrakentaja juurihakemiston nimen asettamista varten.
+    public Tieto() {
+        this.nimi = new StringBuilder("/");
+    }
+
     public Tieto(StringBuilder nimi) {
         this.nimi(nimi);
     }
@@ -60,9 +65,7 @@ public abstract class Tieto implements Comparable<Tieto>{
     // kutsuu apumetodeja, jotka tarkistavat, että nimessä on vain sallittuja merkkejä ja että
     // nimessä on maksimissaan yksi piste, mutta myös muita merkkejä kuin piste.
     public static boolean nimiOk(StringBuilder nimi) {
-        if (nimi.toString().equals("/")) {
-            return true;
-        } else if ((nimi.length() > 0) && (vainSallittujaMerkkeja(nimi)) &&
+        if ((nimi.length() > 0) && (vainSallittujaMerkkeja(nimi)) &&
            (pisteitaMaxYksi(nimi))) {
             return true;
         } else {

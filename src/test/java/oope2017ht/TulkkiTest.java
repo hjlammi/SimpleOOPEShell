@@ -509,7 +509,7 @@ public class TulkkiTest {
         ui.syotteet.lisaaLoppuun("cd cat");
         ui.syotteet.lisaaLoppuun("cd kitten");
         ui.syotteet.lisaaLoppuun("exit");
-        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto juurihakemisto = new Hakemisto();
         Hakemisto cat = new Hakemisto(new StringBuilder("cat"), juurihakemisto);
         juurihakemisto.lisaa(cat);
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), cat);
@@ -527,7 +527,7 @@ public class TulkkiTest {
         TestiUI ui = new TestiUI();
         ui.syotteet.lisaaLoppuun("cd");
         ui.syotteet.lisaaLoppuun("exit");
-        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto juurihakemisto = new Hakemisto();
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
         juurihakemisto.lisaa(kitten);
         Hakemisto kitten2 = new Hakemisto(new StringBuilder("kitten2"), kitten);
@@ -545,7 +545,7 @@ public class TulkkiTest {
         TestiUI ui = new TestiUI();
         ui.syotteet.lisaaLoppuun("find");
         ui.syotteet.lisaaLoppuun("exit");
-        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto juurihakemisto = new Hakemisto();
         Hakemisto kitten1 = new Hakemisto(new StringBuilder("kitten1"), juurihakemisto);
         juurihakemisto.lisaa(kitten1);
         Hakemisto kitten2 = new Hakemisto(new StringBuilder("kitten2"), juurihakemisto);
@@ -566,7 +566,7 @@ public class TulkkiTest {
         TestiUI ui = new TestiUI();
         ui.syotteet.lisaaLoppuun("find");
         ui.syotteet.lisaaLoppuun("exit");
-        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto juurihakemisto = new Hakemisto();
         Hakemisto kitten1 = new Hakemisto(new StringBuilder("kitten1"), juurihakemisto);
         juurihakemisto.lisaa(kitten1);
         Hakemisto kitten2 = new Hakemisto(new StringBuilder("kitten2"), juurihakemisto);
@@ -596,7 +596,7 @@ public class TulkkiTest {
         ui.syotteet.lisaaLoppuun("md kitten");
         ui.syotteet.lisaaLoppuun("cd kitten");
         ui.syotteet.lisaaLoppuun("exit");
-        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("/"), null);
+        Hakemisto juurihakemisto = new Hakemisto();
         Tulkki tulkki = new Tulkki(ui, juurihakemisto);
 
         tulkki.suorita();

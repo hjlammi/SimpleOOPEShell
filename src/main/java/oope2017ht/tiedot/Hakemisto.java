@@ -28,9 +28,16 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
     private Hakemisto ylihakemisto;
 
     /*
-     * Kaksiparametrillinen rakentaja.
+     * Rakentaja.
      */
+    // Oletusrakentaja juurihakemiston luomista varten.
+    public Hakemisto() {
+        super();
+        tiedot = new OmaLista();
+        this.ylihakemisto(null);
+    }
 
+    // Kaksiparametrillinen rakentaja.
     public Hakemisto(StringBuilder nimi, Hakemisto ylihakemisto) {
         super(nimi);
         tiedot = new OmaLista();

@@ -80,8 +80,8 @@ public class TietoTest {
 
     @Test
     public void yksiKauttaviiva() {
-        StringBuilder s = new StringBuilder("/");
-        assertEquals(true, Tieto.nimiOk(s));
+        Hakemisto h = new Hakemisto();
+        assertEquals("/", h.nimi().toString());
     }
 
     @Test
