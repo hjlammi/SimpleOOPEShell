@@ -10,7 +10,7 @@ import oope2017ht.tiedot.Tieto;
 *
 * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
 *
-* Viimeksi muokattu 20.4.2017.
+* Viimeksi muokattu 21.4.2017.
 *
 *
 */
@@ -98,12 +98,13 @@ public class Tulkki {
     }
 
     public void suorita() {
+        // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
         ui.tulosta(TERVEHDYS);
 
         String syote;
         do {
             // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen ja
-            // asettaa viitten käyttäjän antamaan syötteeseen.
+            // lukee käyttäjän antaman syötteen.
             syote = ui.lueSyote(tyohakemisto.hakemistopolku() + KEHOTE);
             // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
@@ -131,7 +132,7 @@ public class Tulkki {
                     nimeaUudelleen(osat);
                 // Jos käyttäjä haluaa kopioida tiedoston:
                 } else if (osat[0].equals(KOPIOIMINEN) && osat.length == 3) {
-                    kopioTiedosto(osat);
+                    kopioiTiedosto(osat);
                 // Jos käyttäjä haluaa poistaa tiedon:
                 } else if (osat[0].equals(POISTAMINEN) && osat.length == 2) {
                     poista(osat);
@@ -156,14 +157,21 @@ public class Tulkki {
             } catch(IllegalArgumentException e) {
                 error();
             }
-        // Suoritetaan silmukkaa kunnes käyttäjä syötteen lopetuskomennon.
+        // Suoritetaan silmukkaa kunnes käyttäjä syöttää lopetuskomennon.
         } while (!syote.equals(LOPETUS));
     }
 
+
+    /*
+     * Apumetodit.
+     */
+
+    // Metodilla asetetaan työhakemistoksi juurihakemisto.
     private void siirryJuurihakemistoon() {
         tyohakemisto(juurihakemisto);
     }
 
+    // Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
     private void siirryYlihakemistoon() {
         // Juurihakemistosta ei voi siirtyä ylihakemistoon.
         if (tyohakemisto == juurihakemisto) {
@@ -176,8 +184,9 @@ public class Tulkki {
         }
     }
 
+    // Metodilla asetetaan työhakemistoksi alihakemisto, jonka nimi on parametrina saadun taulukon toinen alkio.
     private void siirryAlihakemistoon(String[] osat) {
-        // Alihakemiston nimi saadaan parametrina.
+        // Sen alihakemiston nimi, johon halutaan siirtyä.
         String nimi = osat[1];
         // Haetaan hakemistosta nimellä.
         Tieto alkio = tyohakemisto.hae(nimi);
@@ -190,25 +199,27 @@ public class Tulkki {
         }
     }
 
+    // Metodi poistaa hakemistosta tiedon, jonka nimi on parametrina saadun taulukon toinen alkio.
     private void poista(String[] osat) {
-        // Poistettavan nimi on saadaan parametrina käyttäjältä.
+        // Poistettavan tiedon nimi.
         String poistettava = osat[1];
         // Kutsutaan Hakemiston metodia, joka poistaa nimeä vastaavan olion.
         Tieto poistettavaTieto = tyohakemisto.poista(poistettava);
-        // Jos poisto ei onnistunut, palautetaan null ja tulostetaan virheilmoitus.
+        // Jos poisto ei onnistunut on paluuarvo null ja tulostetaan virheilmoitus.
         if (poistettavaTieto == null) {
             error();
         }
     }
 
-    private void kopioTiedosto(String[] osat) {
-        // Kopioitavan tiedoston nimi on ensimmäinen parametri.
+    // Metodi kopioi tiedoston, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
+    private void kopioiTiedosto(String[] osat) {
+        // Kopioitavan tiedoston nimi.
         String nimi = osat[1];
-        // Kopion nimi on toinen parametri.
+        // Kopion nimi on taulukon kolmas alkio.
         String kopioNimi = osat[2];
         // Haetaan hakemistosta kopioitava tiedosto nimen perusteella.
         Tieto kopioitava = tyohakemisto.hae(nimi);
-        // Tarkistetaan, että tieto löyty, että se on Tiedosto-tyyppinen
+        // Tarkistetaan, että tieto löytyi, että se on Tiedosto-tyyppinen
         // ja ettei kopion nimi ole jo käytössä hakemistossa.
         if (kopioitava != null && kopioitava instanceof Tiedosto && !nimiVarattu(kopioNimi)) {
             // Syväkopioidaan tiedosto.
@@ -222,10 +233,11 @@ public class Tulkki {
         }
     }
 
+    // Metodi nimeää uudelleen tiedon, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
     private void nimeaUudelleen(String[] osat) {
-        // Vaihdettava nimi on komennon ensimmäinen parametri.
+        // Vaihdettava nimi.
         String vaihdettavaNimi = osat[1];
-        // Uusi nimi on komennon toinen parametri.
+        // Uusi nimi on komennon toinen parametri eli taulukon kolmas alkio.
         String uusiNimi = osat[2];
         // Kutsutaan metodia, joka tutkii onko parametrina saamansa uusi nimi jo varattu. Jos nimi on varattu,
         // paluuarvo on true ja tulostetaan virheilmoitus.
@@ -243,15 +255,16 @@ public class Tulkki {
         }
     }
 
+    // Metodi luo tiedoston, jonka nimi on parametrina saadun taulukon toinen alkio.
     private void luoTiedosto(String[] osat) {
-        // Nimi on komennon ensimmäinen parametri.
+        // Tiedoston nimi.
         String nimi = osat[1];
-        // Koko on komennon toinen parametri.
+        // Tiedoston koko on taulukon kolmas alkio.
         int koko = Integer.parseInt(osat[2]);
         // Luodaan uusi tiedosto-olio ja annetaan rakentajalle parametreina käyttäjän antamat nimi ja koko.
         Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
         // Kutsutaan Hakemiston lisaa-metodia, joka lisää tiedoston työhakemistoon.
-        // Paluuarvo on true, jos lisääminen onnistuu.
+        // Paluuarvo on true, jos lisääminen onnistui.
         boolean onnistui = tyohakemisto.lisaa(lisattava);
              // Jos paluuarvo oli false, lisääminen ei onnistunut ja tulostetaan virheilmoitus.
         if (!onnistui) {
@@ -259,8 +272,9 @@ public class Tulkki {
         }
     }
 
+    // Metodi luo hakemiston, jonka nimi on parametrina saadun taulukon toinen alkio.
     private void luoHakemisto(String[] osat) {
-        // Hakemiston nimi saadaan parametrina.
+        // Hakemiston nimi.
         String nimi = osat[1];
         // Luodaan uusi hakemisto-olio parametrina annetulla nimellä.
         Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tyohakemisto);
@@ -273,12 +287,14 @@ public class Tulkki {
         }
     }
 
+    // Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot,
+    // jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
     private void tulostaTietoMjonona(String[] osat) {
-        // Tulostettavan tiedon nimi saadaan parametrina.
+        // Tulostettavan tiedon nimi.
         String nimi = osat[1];
         // Haetaan hakemistosta tietoa nimellä hyödyntäen Hakemiston hae-metodia.
         Tieto alkio = tyohakemisto.hae(nimi);
-        // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta tulostetaan virheilmoitus.
+        // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta, tulostetaan virheilmoitus.
         // Muussa tapauksessa tulostetaan tiedon merkkijonoesitys.
         if (alkio == null) {
             error();
@@ -287,6 +303,7 @@ public class Tulkki {
         }
     }
 
+    // Metodi listaa nykyisen hakemiston sisällön.
     private void listaaHakemistonSisalto() {
         // Viite nykyisen hakemiston tietoihin.
         OmaLista tiedot = tyohakemisto.tiedot();
@@ -314,6 +331,11 @@ public class Tulkki {
         }
     }
 
+    // Metodi kutsuu käyttöliittymän tulosta-metodia, joka tulostaa virheilmoituksen.
+    private void error() {
+        ui.tulosta(VIRHEILMOITUS);
+    }
+
     // Apumetodi uudelleennimeämis- ja kopioimiskomentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina
     // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
     // true, jos samannimistä ei löydy, palautetaan false.
@@ -327,11 +349,5 @@ public class Tulkki {
             return true;
         }
     }
-
-    // Metodi kutsuu käyttöliittymän tulosta-metodia, joka tulostaa virheilmoituksen.
-    private void error() {
-        ui.tulosta(VIRHEILMOITUS);
-    }
-
 
 }
