@@ -61,4 +61,18 @@ public class Tulkki {
     public void siirryJuurihakemistoon() {
         tyohakemisto(juurihakemisto);
     }
+
+    // Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
+    public boolean siirryYlihakemistoon() {
+        // Juurihakemistosta ei voi siirtyä ylihakemistoon.
+        if (tyohakemisto == juurihakemisto) {
+            return false;
+        } else {
+            // Asetetaan viite nykyiseen hakemistoon.
+            Hakemisto nykyinenHakemisto = tyohakemisto();
+            // Asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
+            tyohakemisto(nykyinenHakemisto.ylihakemisto());
+            return true;
+        }
+    }
 }

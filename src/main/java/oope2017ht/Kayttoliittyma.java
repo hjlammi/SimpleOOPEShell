@@ -89,7 +89,9 @@ public class Kayttoliittyma {
                     siirryAlihakemistoon(osat);
                 // Jos käyttäjä haluaa siirtyä nykyisen hakemiston ylihakemistoon:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..") && osat.length == 2) {
-                    siirryYlihakemistoon();
+                    if (!tulkki.siirryYlihakemistoon()) {
+                        error();
+                    }
                 } else if (osat[0].equals(Tulkki.REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
                     puunTulostus(tulkki.tyohakemisto);
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
@@ -110,19 +112,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
-    private void siirryYlihakemistoon() {
-        // Juurihakemistosta ei voi siirtyä ylihakemistoon.
-        if (tulkki.tyohakemisto == tulkki.juurihakemisto) {
-            error();
-        } else {
-            // Asetetaan viite nykyiseen hakemistoon.
-            Hakemisto nykyinenHakemisto = tulkki.tyohakemisto();
-            // Asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
-            tulkki.tyohakemisto(nykyinenHakemisto.ylihakemisto());
-        }
-    }
 
     // Metodilla asetetaan työhakemistoksi alihakemisto, jonka nimi on parametrina saadun taulukon toinen alkio.
     private void siirryAlihakemistoon(String[] osat) {
