@@ -46,10 +46,6 @@ public class Kayttoliittyma {
 
     // Aksessorit.
 
-    public Hakemisto tyohakemisto() {
-        return tulkki.tyohakemisto;
-    }
-
     public void suorita() {
         // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
         terminaali.tulosta(Tulkki.TERVEHDYS);
@@ -131,7 +127,7 @@ public class Kayttoliittyma {
             error();
         } else {
             // Asetetaan viite nykyiseen hakemistoon.
-            Hakemisto nykyinenHakemisto = tyohakemisto();
+            Hakemisto nykyinenHakemisto = tulkki.tyohakemisto();
             // Asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
             tulkki.tyohakemisto(nykyinenHakemisto.ylihakemisto());
         }

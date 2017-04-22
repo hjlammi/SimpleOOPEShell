@@ -90,7 +90,7 @@ public class KayttoliittymaTest {
 
         assertEquals(3, terminaali.tulosteet.koko());
         assertEquals("foo.txt 123", terminaali.tulosteet.alkio(1));
-        assertEquals("foo", kayttoliittyma.tyohakemisto().nimi().toString());
+        assertEquals("foo", kayttoliittyma.tulkki.tyohakemisto().nimi().toString());
     }
 
     @Test
@@ -143,8 +143,8 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
-        Hakemisto alihakemisto = (Hakemisto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
+        assertEquals(1, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
+        Hakemisto alihakemisto = (Hakemisto)kayttoliittyma.tulkki.tyohakemisto().tiedot().alkio(0);
         assertEquals("bar", alihakemisto.nimi().toString());
         assertEquals(foo, alihakemisto.ylihakemisto());
     }
@@ -162,7 +162,7 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
+        assertEquals(1, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
     }
 
@@ -180,8 +180,8 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
-        Tiedosto lisatty = (Tiedosto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
+        assertEquals(1, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
+        Tiedosto lisatty = (Tiedosto)kayttoliittyma.tulkki.tyohakemisto().tiedot().alkio(0);
         assertEquals("foo.txt", lisatty.nimi().toString());
     }
 
@@ -238,8 +238,8 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
-        Tiedosto uusiNimi = (Tiedosto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
+        assertEquals(1, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
+        Tiedosto uusiNimi = (Tiedosto)kayttoliittyma.tulkki.tyohakemisto().tiedot().alkio(0);
         assertEquals("foo.txt", uusiNimi.nimi().toString());
     }
 
@@ -277,9 +277,9 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
+        assertEquals(1, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
-        Tiedosto vaihdettava = (Tiedosto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
+        Tiedosto vaihdettava = (Tiedosto)kayttoliittyma.tulkki.tyohakemisto().tiedot().alkio(0);
         assertEquals("cats.txt", vaihdettava.nimi().toString());
     }
 
@@ -299,8 +299,8 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(2, kayttoliittyma.tyohakemisto().tiedot().koko());
-        Tiedosto kopio = (Tiedosto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
+        assertEquals(2, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
+        Tiedosto kopio = (Tiedosto)kayttoliittyma.tulkki.tyohakemisto().tiedot().alkio(0);
         assertEquals("foo.txt", kopio.nimi().toString());
     }
 
@@ -373,8 +373,8 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(0, kayttoliittyma.tyohakemisto().tiedot().koko());
-        assertEquals("foo", kayttoliittyma.tyohakemisto().nimi().toString());
+        assertEquals(0, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("foo", kayttoliittyma.tulkki.tyohakemisto().nimi().toString());
     }
 
     // Hakemiston poistaminen.
@@ -433,10 +433,10 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
+        assertEquals(1, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
         assertEquals("Error!", terminaali.tulosteet.alkio(2));
-        assertEquals("kitten", kayttoliittyma.tyohakemisto().nimi().toString());
+        assertEquals("kitten", kayttoliittyma.tulkki.tyohakemisto().nimi().toString());
     }
 
     // Siirrytään ylihakemistoon.
@@ -453,8 +453,8 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
-        assertEquals("root", kayttoliittyma.tyohakemisto().nimi().toString());
+        assertEquals(1, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("root", kayttoliittyma.tulkki.tyohakemisto().nimi().toString());
     }
 
     // Siirrytään juurihakemistoon.
@@ -473,8 +473,8 @@ public class KayttoliittymaTest {
 
         kayttoliittyma.suorita();
 
-        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
-        assertEquals("root", kayttoliittyma.tyohakemisto().nimi().toString());
+        assertEquals(1, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("root", kayttoliittyma.tulkki.tyohakemisto().nimi().toString());
     }
 
     // Tulostetaan virheilmoitus jos yritetään siirtyä juurihakemiston ylihakemistoon.

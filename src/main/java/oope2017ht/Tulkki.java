@@ -32,4 +32,8 @@ public class Tulkki {
             this.tyohakemisto = hakemisto;
         }
     }
+
+    public Hakemisto tyohakemisto() {
+        return tyohakemisto;
+    }
 }
