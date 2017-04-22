@@ -23,6 +23,7 @@ public class Tulkki {
     static final String VIRHEILMOITUS = "Error!";
 
     Hakemisto tyohakemisto;
+    Hakemisto juurihakemisto;
 
     /*
      * Aksessorit.

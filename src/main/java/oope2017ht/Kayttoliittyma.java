@@ -23,8 +23,6 @@ public class Kayttoliittyma {
 
     private Terminaali terminaali;
 
-    private Hakemisto juurihakemisto;
-
     Tulkki tulkki;
 
     /*
@@ -33,18 +31,16 @@ public class Kayttoliittyma {
     public Kayttoliittyma(Terminaali terminaali) {
         this.tulkki = new Tulkki();
         this.terminaali = terminaali;
-        this.juurihakemisto = new Hakemisto();
-        tulkki.tyohakemisto = juurihakemisto;
+        tulkki.juurihakemisto = new Hakemisto();
+        tulkki.tyohakemisto = tulkki.juurihakemisto;
     }
 
     public Kayttoliittyma(Terminaali terminaali, Hakemisto juurihakemisto) {
         this.tulkki = new Tulkki();
         this.terminaali = terminaali;
-        this.juurihakemisto = juurihakemisto;
+        tulkki.juurihakemisto = juurihakemisto;
         tulkki.tyohakemisto = juurihakemisto;
     }
-
-    // Aksessorit.
 
     public void suorita() {
         // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
@@ -117,13 +113,13 @@ public class Kayttoliittyma {
 
     // Metodilla asetetaan työhakemistoksi juurihakemisto.
     private void siirryJuurihakemistoon() {
-        tulkki.tyohakemisto(juurihakemisto);
+        tulkki.tyohakemisto(tulkki.juurihakemisto);
     }
 
     // Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
     private void siirryYlihakemistoon() {
         // Juurihakemistosta ei voi siirtyä ylihakemistoon.
-        if (tulkki.tyohakemisto == juurihakemisto) {
+        if (tulkki.tyohakemisto == tulkki.juurihakemisto) {
             error();
         } else {
             // Asetetaan viite nykyiseen hakemistoon.
