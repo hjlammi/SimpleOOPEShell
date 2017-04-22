@@ -37,4 +37,13 @@ public class Tulkki {
     public Hakemisto tyohakemisto() {
         return tyohakemisto;
     }
+
+    /*
+     * Apumetodit.
+     */
+
+    // Metodilla asetetaan työhakemistoksi juurihakemisto.
+    public void siirryJuurihakemistoon() {
+        tyohakemisto(juurihakemisto);
+    }
 }

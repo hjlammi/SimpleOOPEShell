@@ -83,7 +83,7 @@ public class Kayttoliittyma {
                     poista(osat);
                 // Jos käyttäjä haluaa siirtyä takaisin juurihakemistoon, asetetaan työhakemistoksi juurihakemisto.
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat.length == 1) {
-                    siirryJuurihakemistoon();
+                    tulkki.siirryJuurihakemistoon();
                 // Jos käyttäjä haluaa siirtyä johonkin alihakemistoistaan:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..") && osat.length == 2) {
                     siirryAlihakemistoon(osat);
@@ -110,11 +110,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodilla asetetaan työhakemistoksi juurihakemisto.
-    private void siirryJuurihakemistoon() {
-        tulkki.tyohakemisto(tulkki.juurihakemisto);
-    }
 
     // Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
     private void siirryYlihakemistoon() {
