@@ -1,6 +1,7 @@
 package oope2017ht;
 
 import oope2017ht.tiedot.Hakemisto;
+import oope2017ht.tiedot.Tieto;
 
 public class Tulkki {
 
@@ -41,6 +42,20 @@ public class Tulkki {
     /*
      * Apumetodit.
      */
+
+    // Apumetodi uudelleennimeämis- ja kopioimiskomentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina
+    // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
+    // true, jos samannimistä ei löydy, palautetaan false.
+    boolean nimiVarattu(String nimi) {
+        // Kutsutaan Hakemiston hae-metodia, joka palauttaa nullin, jos haettavalla nimellä ei löydy Tietoa.
+        Tieto alkio = tyohakemisto.hae(nimi);
+        // Samannimistä ei löytynyt.
+        if (alkio == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     // Metodilla asetetaan työhakemistoksi juurihakemisto.
     public void siirryJuurihakemistoon() {

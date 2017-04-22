@@ -161,7 +161,7 @@ public class Kayttoliittyma {
         Tieto kopioitava = tulkki.tyohakemisto.hae(nimi);
         // Tarkistetaan, että tieto löytyi, että se on Tiedosto-tyyppinen
         // ja ettei kopion nimi ole jo käytössä hakemistossa.
-        if (kopioitava != null && kopioitava instanceof Tiedosto && !nimiVarattu(kopioNimi)) {
+        if (kopioitava != null && kopioitava instanceof Tiedosto && !tulkki.nimiVarattu(kopioNimi)) {
             // Syväkopioidaan tiedosto.
             Tiedosto kopio = new Tiedosto((Tiedosto)kopioitava);
             // Annetaan kopiolle nimeksi komentoriviparametrina saatu uusi nimi.
@@ -181,7 +181,7 @@ public class Kayttoliittyma {
         String uusiNimi = osat[2];
         // Kutsutaan metodia, joka tutkii onko parametrina saamansa uusi nimi jo varattu. Jos nimi on varattu,
         // paluuarvo on true ja tulostetaan virheilmoitus.
-        if (nimiVarattu(uusiNimi)) {
+        if (tulkki.nimiVarattu(uusiNimi)) {
             error();
         } else {
             // Jos hakemistosta löytyy vaihdettavan nimen mukainen tieto, asetetaan alkiolle uusi nimi.
@@ -274,20 +274,6 @@ public class Kayttoliittyma {
     // Metodi kutsuu terminaalin tulosta-metodia, joka tulostaa virheilmoituksen.
     private void error() {
         terminaali.tulosta(Tulkki.VIRHEILMOITUS);
-    }
-
-    // Apumetodi uudelleennimeämis- ja kopioimiskomentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina
-    // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
-    // true, jos samannimistä ei löydy, palautetaan false.
-    private boolean nimiVarattu(String nimi) {
-        // Kutsutaan Hakemiston hae-metodia, joka palauttaa nullin, jos haettavalla nimellä ei löydy Tietoa.
-        Tieto alkio = tulkki.tyohakemisto.hae(nimi);
-        // Samannimistä ei löytynyt.
-        if (alkio == null) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
 }
