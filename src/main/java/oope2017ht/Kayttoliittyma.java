@@ -74,7 +74,9 @@ public class Kayttoliittyma {
                     luoTiedosto(osat);
                 // Jos käyttäjä haluaa uudelleennimetä olemassa olevan tiedon:
                 } else if (osat[0].equals(Tulkki.UUDELLEEN_NIMEAMINEN) && osat.length == 3) {
-                    nimeaUudelleen(osat);
+                    if (!tulkki.nimeaUudelleen(osat)) {
+                        error();
+                    }
                 // Jos käyttäjä haluaa kopioida tiedoston:
                 } else if (osat[0].equals(Tulkki.KOPIOIMINEN) && osat.length == 3) {
                     if (!tulkki.kopioiTiedosto(osat)) {
@@ -118,28 +120,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodi nimeää uudelleen tiedon, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
-    private void nimeaUudelleen(String[] osat) {
-        // Vaihdettava nimi.
-        String vaihdettavaNimi = osat[1];
-        // Uusi nimi on komennon toinen parametri eli taulukon kolmas alkio.
-        String uusiNimi = osat[2];
-        // Kutsutaan metodia, joka tutkii onko parametrina saamansa uusi nimi jo varattu. Jos nimi on varattu,
-        // paluuarvo on true ja tulostetaan virheilmoitus.
-        if (tulkki.nimiVarattu(uusiNimi)) {
-            error();
-        } else {
-            // Jos hakemistosta löytyy vaihdettavan nimen mukainen tieto, asetetaan alkiolle uusi nimi.
-            Tieto alkio = (Tieto)tulkki.tyohakemisto.hae(vaihdettavaNimi);
-                // Jos haetun nimistä tietoa ei löytynyt tulostetaan virheilmoitus.
-                if (alkio == null) {
-                    error();
-                } else {
-                    alkio.nimi(new StringBuilder(uusiNimi));
-                }
-        }
-    }
 
     // Metodi luo tiedoston, jonka nimi on parametrina saadun taulukon toinen alkio.
     private void luoTiedosto(String[] osat) {

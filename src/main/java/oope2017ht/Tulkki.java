@@ -107,7 +107,7 @@ public class Tulkki {
         }
     }
 
- // Metodi kopioi tiedoston, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
+    // Metodi kopioi tiedoston, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
     public boolean kopioiTiedosto(String[] osat) {
         // Kopioitavan tiedoston nimi.
         String nimi = osat[1];
@@ -127,6 +127,29 @@ public class Tulkki {
             return true;
         } else {
             return false;
+        }
+    }
+
+    // Metodi nimeää uudelleen tiedon, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
+    public boolean nimeaUudelleen(String[] osat) {
+        // Vaihdettava nimi.
+        String vaihdettavaNimi = osat[1];
+        // Uusi nimi on komennon toinen parametri eli taulukon kolmas alkio.
+        String uusiNimi = osat[2];
+        // Kutsutaan metodia, joka tutkii onko parametrina saamansa uusi nimi jo varattu. Jos nimi on varattu,
+        // paluuarvo on true ja tulostetaan virheilmoitus.
+        if (nimiVarattu(uusiNimi)) {
+            return false;
+        } else {
+            // Jos hakemistosta löytyy vaihdettavan nimen mukainen tieto, asetetaan alkiolle uusi nimi.
+            Tieto alkio = (Tieto)tyohakemisto.hae(vaihdettavaNimi);
+                // Jos haetun nimistä tietoa ei löytynyt tulostetaan virheilmoitus.
+                if (alkio == null) {
+                    return false;
+                } else {
+                    alkio.nimi(new StringBuilder(uusiNimi));
+                    return true;
+                }
         }
     }
 }
