@@ -68,7 +68,9 @@ public class Kayttoliittyma {
                     tulostaTietoMjonona(osat);
                 // Jos käyttäjä haluaa luoda hakemiston parametrina antamallansa nimellä:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_LUOMINEN) && osat.length == 2) {
-                    luoHakemisto(osat);
+                    if (!tulkki.luoHakemisto(osat)) {
+                        error();
+                    }
                 // Jos käyttäjä haluaa luoda tiedoston antamallaan nimellä ja koolla:
                 } else if (osat[0].equals(Tulkki.TIEDOSTON_LUOMINEN) && osat.length == 3) {
                     if (!tulkki.luoTiedosto(osat)) {
@@ -122,21 +124,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodi luo hakemiston, jonka nimi on parametrina saadun taulukon toinen alkio.
-    private void luoHakemisto(String[] osat) {
-        // Hakemiston nimi.
-        String nimi = osat[1];
-        // Luodaan uusi hakemisto-olio parametrina annetulla nimellä.
-        Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tulkki.tyohakemisto);
-        // Kutsutaan Hakemiston lisaa-metodia, joka lisää hakemiston työhakemistoon.
-        // Paluuarvo on true, jos lisääminen onnistuu.
-        boolean onnistui = tulkki.tyohakemisto.lisaa(lisattava);
-        // Jos paluuarvo oli false, lisääminen ei onnistunut ja tulostetaan virheilmoitus.
-        if (!onnistui) {
-            error();
-        }
-    }
 
     // Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot,
     // jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
