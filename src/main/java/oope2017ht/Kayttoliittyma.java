@@ -62,7 +62,10 @@ public class Kayttoliittyma {
                     terminaali.tulosta(Tulkki.LOPETUSVIESTI);
                 // Jos käyttäjä haluaa listata hakemiston sisällön:
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 1) {
-                    listaaHakemistonSisalto();
+                    OmaLista sisalto = tulkki.hakemistonSisalto();
+                    for (int i = 0; i < sisalto.koko(); i++) {
+                        terminaali.tulosta(sisalto.alkio(i).toString());
+                    }
                 // Jos käyttäjä haluaa tulostaa näytölle tiedon merkkijonoesityksen:
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 2) {
                     String mjono = tulkki.tietoMjonona(osat);
@@ -129,16 +132,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodi listaa nykyisen hakemiston sisällön.
-    private void listaaHakemistonSisalto() {
-        // Viite nykyisen hakemiston tietoihin.
-        OmaLista tiedot = tulkki.tyohakemisto.tiedot();
-        // Tulostetaan työhakemiston tiedot alkio kerrallaan.
-        for (int i = 0; i < tiedot.koko(); i++) {
-            terminaali.tulosta(tiedot.alkio(i).toString());
-        }
-    }
 
     // Metodi tulostaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti.
     private void puunTulostus(Hakemisto hakemisto) {

@@ -1,5 +1,6 @@
 package oope2017ht;
 
+import oope2017ht.omalista.OmaLista;
 import oope2017ht.tiedot.Hakemisto;
 import oope2017ht.tiedot.Tiedosto;
 import oope2017ht.tiedot.Tieto;
@@ -203,5 +204,17 @@ public class Tulkki {
         } else {
             return alkio.toString();
         }
+    }
+
+    // Metodi listaa nykyisen hakemiston sisällön.
+    public OmaLista hakemistonSisalto() {
+        // Viite nykyisen hakemiston tietoihin.
+        OmaLista tiedot = tyohakemisto.tiedot();
+        OmaLista tulos = new OmaLista();
+        // Tulostetaan työhakemiston tiedot alkio kerrallaan.
+        for (int i = 0; i < tiedot.koko(); i++) {
+            tulos.lisaaLoppuun(tiedot.alkio(i).toString());
+        }
+        return tulos;
     }
 }
