@@ -14,8 +14,8 @@ public class Oope2017HT
 {
     public static void main(String[] args) {
         Terminaali terminaali = new StdTerminaali();
-        Tulkki tulkki = new Tulkki(terminaali);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
     }
 }

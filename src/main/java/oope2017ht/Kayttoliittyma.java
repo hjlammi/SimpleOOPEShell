@@ -15,7 +15,7 @@ import oope2017ht.tiedot.Tieto;
 *
 */
 
-public class Tulkki {
+public class Kayttoliittyma {
 
     /*
      *  Vakiot.
@@ -73,13 +73,13 @@ public class Tulkki {
     /*
      * Rakentajat.
      */
-    public Tulkki(Terminaali terminaali) {
+    public Kayttoliittyma(Terminaali terminaali) {
         this.terminaali = terminaali;
         this.juurihakemisto = new Hakemisto();
         this.tyohakemisto = juurihakemisto;
     }
 
-    public Tulkki(Terminaali terminaali, Hakemisto juurihakemisto) {
+    public Kayttoliittyma(Terminaali terminaali, Hakemisto juurihakemisto) {
         this.terminaali = terminaali;
         this.juurihakemisto = juurihakemisto;
         this.tyohakemisto = juurihakemisto;

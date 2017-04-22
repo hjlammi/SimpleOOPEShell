@@ -4,26 +4,26 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import oope2017ht.Tulkki;
+import oope2017ht.Kayttoliittyma;
 import oope2017ht.tiedot.Hakemisto;
 import oope2017ht.tiedot.Tiedosto;
 
-public class TulkkiTest {
+public class KayttoliittymaTest {
 
-    // Tulkki näyttää käynnistyessään welcome-viestin.
+    // Käyttöliittymä näyttää käynnistyessään welcome-viestin.
     @Test
     public void testWelcome() {
         TestiTerminaali terminaali = new TestiTerminaali();
         terminaali.syotteet.lisaaLoppuun("exit");
-        Tulkki tulkki = new Tulkki(terminaali);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(2, terminaali.tulosteet.koko());
         assertEquals("Welcome to SOS.", terminaali.tulosteet.alkio(0));
     }
 
-    // Tulkki näyttää virheviestin väärästä komennosta.
+    // Käyttöliittymä näyttää virheviestin väärästä komennosta.
     @Test
     public void testError() {
         TestiTerminaali terminaali = new TestiTerminaali();
@@ -32,9 +32,9 @@ public class TulkkiTest {
         terminaali.syotteet.lisaaLoppuun("exit ");
         terminaali.syotteet.lisaaLoppuun(" exit");
         terminaali.syotteet.lisaaLoppuun("exit");
-        Tulkki tulkki = new Tulkki(terminaali);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(6, terminaali.tulosteet.koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -44,14 +44,14 @@ public class TulkkiTest {
         assertEquals("Shell terminated.", terminaali.tulosteet.alkio(5));
     }
 
-    // Tulkki näyttää lopetusviestin.
+    // Käyttöliittymä näyttää lopetusviestin.
     @Test
     public void testExit() {
         TestiTerminaali terminaali = new TestiTerminaali();
         terminaali.syotteet.lisaaLoppuun("exit");
-        Tulkki tulkki = new Tulkki(terminaali);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(2, terminaali.tulosteet.koko());
         assertEquals("Shell terminated.", terminaali.tulosteet.alkio(1));
@@ -63,9 +63,9 @@ public class TulkkiTest {
         TestiTerminaali terminaali = new TestiTerminaali();
         terminaali.syotteet.lisaaLoppuun("ls");
         terminaali.syotteet.lisaaLoppuun("exit");
-        Tulkki tulkki = new Tulkki(terminaali);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(2, terminaali.tulosteet.koko());
     }
@@ -83,14 +83,14 @@ public class TulkkiTest {
         juurihakemisto.lisaa(foo);
         Tiedosto t = new Tiedosto(new StringBuilder("foo.txt"), 123);
         foo.lisaa(t);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(foo);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(foo);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(3, terminaali.tulosteet.koko());
         assertEquals("foo.txt 123", terminaali.tulosteet.alkio(1));
-        assertEquals("foo", tulkki.tyohakemisto().nimi().toString());
+        assertEquals("foo", kayttoliittyma.tyohakemisto().nimi().toString());
     }
 
     @Test
@@ -103,10 +103,10 @@ public class TulkkiTest {
         juurihakemisto.lisaa(foo);
         Tiedosto jee = new Tiedosto(new StringBuilder("jee.txt"), 11);
         foo.lisaa(jee);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(foo);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(foo);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(3, terminaali.tulosteet.koko());
         assertEquals("jee.txt 11", terminaali.tulosteet.alkio(1));
@@ -122,9 +122,9 @@ public class TulkkiTest {
         juurihakemisto.lisaa(foo);
         Tiedosto jee = new Tiedosto(new StringBuilder("jee.txt"), 11);
         juurihakemisto.lisaa(jee);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(3, terminaali.tulosteet.koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -138,13 +138,13 @@ public class TulkkiTest {
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
         juurihakemisto.lisaa(foo);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(foo);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(foo);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
-        Hakemisto alihakemisto = (Hakemisto)tulkki.tyohakemisto().tiedot().alkio(0);
+        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
+        Hakemisto alihakemisto = (Hakemisto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
         assertEquals("bar", alihakemisto.nimi().toString());
         assertEquals(foo, alihakemisto.ylihakemisto());
     }
@@ -158,11 +158,11 @@ public class TulkkiTest {
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
         juurihakemisto.lisaa(foo);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
     }
 
@@ -175,13 +175,13 @@ public class TulkkiTest {
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
         juurihakemisto.lisaa(foo);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(foo);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(foo);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
-        Tiedosto lisatty = (Tiedosto)tulkki.tyohakemisto().tiedot().alkio(0);
+        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
+        Tiedosto lisatty = (Tiedosto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
         assertEquals("foo.txt", lisatty.nimi().toString());
     }
 
@@ -195,9 +195,9 @@ public class TulkkiTest {
         terminaali.syotteet.lisaaLoppuun("mf foo.txt 123");
         terminaali.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(1, juurihakemisto.tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -211,9 +211,9 @@ public class TulkkiTest {
         terminaali.syotteet.lisaaLoppuun("mf foo.txt -123");
         terminaali.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(0, juurihakemisto.tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -233,13 +233,13 @@ public class TulkkiTest {
         foo.lisaa(bar);
         Tiedosto fool = new Tiedosto(new StringBuilder("fool.txt"), 123);
         bar.lisaa(fool);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(bar);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(bar);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
-        Tiedosto uusiNimi = (Tiedosto)tulkki.tyohakemisto().tiedot().alkio(0);
+        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
+        Tiedosto uusiNimi = (Tiedosto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
         assertEquals("foo.txt", uusiNimi.nimi().toString());
     }
 
@@ -254,9 +254,9 @@ public class TulkkiTest {
         juurihakemisto.lisaa(fool);
         Tiedosto foo = new Tiedosto(new StringBuilder("foo.txt"), 243);
         juurihakemisto.lisaa(foo);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(2, juurihakemisto.tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -273,13 +273,13 @@ public class TulkkiTest {
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Tiedosto cats = new Tiedosto(new StringBuilder("cats.txt"), 123);
         juurihakemisto.lisaa(cats);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
-        Tiedosto vaihdettava = (Tiedosto)tulkki.tyohakemisto().tiedot().alkio(0);
+        Tiedosto vaihdettava = (Tiedosto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
         assertEquals("cats.txt", vaihdettava.nimi().toString());
     }
 
@@ -294,13 +294,13 @@ public class TulkkiTest {
         juurihakemisto.lisaa(foo);
         Tiedosto fool = new Tiedosto(new StringBuilder("fool.txt"), 123);
         foo.lisaa(fool);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(foo);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(foo);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(2, tulkki.tyohakemisto().tiedot().koko());
-        Tiedosto kopio = (Tiedosto)tulkki.tyohakemisto().tiedot().alkio(0);
+        assertEquals(2, kayttoliittyma.tyohakemisto().tiedot().koko());
+        Tiedosto kopio = (Tiedosto)kayttoliittyma.tyohakemisto().tiedot().alkio(0);
         assertEquals("foo.txt", kopio.nimi().toString());
     }
 
@@ -313,9 +313,9 @@ public class TulkkiTest {
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Hakemisto fool = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
         juurihakemisto.lisaa(fool);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(1, juurihakemisto.tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -330,9 +330,9 @@ public class TulkkiTest {
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Tiedosto cat = new Tiedosto(new StringBuilder("cat.txt"), 123);
         juurihakemisto.lisaa(cat);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(1, juurihakemisto.tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -349,9 +349,9 @@ public class TulkkiTest {
         juurihakemisto.lisaa(cat);
         Tiedosto kitten = new Tiedosto(new StringBuilder("kitten.txt"), 123);
         juurihakemisto.lisaa(kitten);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(2, juurihakemisto.tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -368,13 +368,13 @@ public class TulkkiTest {
         juurihakemisto.lisaa(foo);
         Tiedosto cat = new Tiedosto(new StringBuilder("cat.txt"), 123);
         foo.lisaa(cat);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(foo);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(foo);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(0, tulkki.tyohakemisto().tiedot().koko());
-        assertEquals("foo", tulkki.tyohakemisto().nimi().toString());
+        assertEquals(0, kayttoliittyma.tyohakemisto().tiedot().koko());
+        assertEquals("foo", kayttoliittyma.tyohakemisto().nimi().toString());
     }
 
     // Hakemiston poistaminen.
@@ -386,9 +386,9 @@ public class TulkkiTest {
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Hakemisto cat = new Hakemisto(new StringBuilder("cat"), juurihakemisto);
         juurihakemisto.lisaa(cat);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(0, juurihakemisto.tiedot().koko());
     }
@@ -405,9 +405,9 @@ public class TulkkiTest {
         juurihakemisto.lisaa(kitten);
         Tiedosto cat = new Tiedosto(new StringBuilder("cat.jpg"), 234);
         juurihakemisto.lisaa(cat);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals(2, juurihakemisto.tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
@@ -429,14 +429,14 @@ public class TulkkiTest {
         juurihakemisto.lisaa(kitten);
         Tiedosto t = new Tiedosto(new StringBuilder("kitten123.jpg"), 123);
         kitten.lisaa(t);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
+        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
         assertEquals("Error!", terminaali.tulosteet.alkio(2));
-        assertEquals("kitten", tulkki.tyohakemisto().nimi().toString());
+        assertEquals("kitten", kayttoliittyma.tyohakemisto().nimi().toString());
     }
 
     // Siirrytään ylihakemistoon.
@@ -448,13 +448,13 @@ public class TulkkiTest {
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
         juurihakemisto.lisaa(kitten);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(kitten);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(kitten);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
-        assertEquals("root", tulkki.tyohakemisto().nimi().toString());
+        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
+        assertEquals("root", kayttoliittyma.tyohakemisto().nimi().toString());
     }
 
     // Siirrytään juurihakemistoon.
@@ -468,13 +468,13 @@ public class TulkkiTest {
         juurihakemisto.lisaa(cat);
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), cat);
         cat.lisaa(kitten);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(kitten);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(kitten);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
-        assertEquals(1, tulkki.tyohakemisto().tiedot().koko());
-        assertEquals("root", tulkki.tyohakemisto().nimi().toString());
+        assertEquals(1, kayttoliittyma.tyohakemisto().tiedot().koko());
+        assertEquals("root", kayttoliittyma.tyohakemisto().nimi().toString());
     }
 
     // Tulostetaan virheilmoitus jos yritetään siirtyä juurihakemiston ylihakemistoon.
@@ -484,9 +484,9 @@ public class TulkkiTest {
         terminaali.syotteet.lisaaLoppuun("cd ..");
         terminaali.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals("Error!", terminaali.tulosteet.alkio(1));
     }
@@ -496,9 +496,9 @@ public class TulkkiTest {
     public void testPromptInRoot() {
         TestiTerminaali terminaali = new TestiTerminaali();
         terminaali.syotteet.lisaaLoppuun("exit");
-        Tulkki tulkki = new Tulkki(terminaali);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals("/>", terminaali.kehotteet.alkio(0));
     }
@@ -514,10 +514,10 @@ public class TulkkiTest {
         juurihakemisto.lisaa(cat);
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), cat);
         cat.lisaa(kitten);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(kitten);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(kitten);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals("/cat/kitten/>", terminaali.kehotteet.alkio(1));
     }
@@ -532,10 +532,10 @@ public class TulkkiTest {
         juurihakemisto.lisaa(kitten);
         Hakemisto kitten2 = new Hakemisto(new StringBuilder("kitten2"), kitten);
         kitten.lisaa(kitten2);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
-        tulkki.tyohakemisto(kitten2);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+        kayttoliittyma.tyohakemisto(kitten2);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals("/>", terminaali.kehotteet.alkio(1));
     }
@@ -552,9 +552,9 @@ public class TulkkiTest {
         juurihakemisto.lisaa(kitten2);
         Hakemisto kitten3 = new Hakemisto(new StringBuilder("kitten3"), kitten2);
         kitten2.lisaa(kitten3);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals("/kitten1/ 0", terminaali.tulosteet.alkio(1));
         assertEquals("/kitten2/ 1", terminaali.tulosteet.alkio(2));
@@ -577,9 +577,9 @@ public class TulkkiTest {
         kitten2.lisaa(t1);
         Tiedosto t2 = new Tiedosto(new StringBuilder("farty_kitten.jpg"), 123);
         kitten2.lisaa(t2);
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals("/kitten1/ 0", terminaali.tulosteet.alkio(1));
         assertEquals("/kitten2/ 3", terminaali.tulosteet.alkio(2));
@@ -597,9 +597,9 @@ public class TulkkiTest {
         terminaali.syotteet.lisaaLoppuun("cd kitten");
         terminaali.syotteet.lisaaLoppuun("exit");
         Hakemisto juurihakemisto = new Hakemisto();
-        Tulkki tulkki = new Tulkki(terminaali, juurihakemisto);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
 
-        tulkki.suorita();
+        kayttoliittyma.suorita();
 
         assertEquals("/cat/kitten/>", terminaali.kehotteet.alkio(4));
     }
