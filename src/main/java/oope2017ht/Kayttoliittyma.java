@@ -80,7 +80,9 @@ public class Kayttoliittyma {
                     kopioiTiedosto(osat);
                 // Jos käyttäjä haluaa poistaa tiedon:
                 } else if (osat[0].equals(Tulkki.POISTAMINEN) && osat.length == 2) {
-                    poista(osat);
+                    if (!tulkki.poista(osat)) {
+                        error();
+                    }
                 // Jos käyttäjä haluaa siirtyä takaisin juurihakemistoon, asetetaan työhakemistoksi juurihakemisto.
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat.length == 1) {
                     tulkki.siirryJuurihakemistoon();
@@ -114,18 +116,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodi poistaa hakemistosta tiedon, jonka nimi on parametrina saadun taulukon toinen alkio.
-    private void poista(String[] osat) {
-        // Poistettavan tiedon nimi.
-        String poistettava = osat[1];
-        // Kutsutaan Hakemiston metodia, joka poistaa nimeä vastaavan olion.
-        Tieto poistettavaTieto = tulkki.tyohakemisto.poista(poistettava);
-        // Jos poisto ei onnistunut on paluuarvo null ja tulostetaan virheilmoitus.
-        if (poistettavaTieto == null) {
-            error();
-        }
-    }
 
     // Metodi kopioi tiedoston, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
     private void kopioiTiedosto(String[] osat) {
