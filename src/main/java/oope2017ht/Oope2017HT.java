@@ -13,8 +13,8 @@ package oope2017ht;
 public class Oope2017HT
 {
     public static void main(String[] args) {
-        UI ui = new KonsoliUI();
-        Tulkki tulkki = new Tulkki(ui);
+        Terminaali terminaali = new StdTerminaali();
+        Tulkki tulkki = new Tulkki(terminaali);
 
         tulkki.suorita();
     }

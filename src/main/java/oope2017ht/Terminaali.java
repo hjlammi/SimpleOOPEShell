@@ -10,7 +10,7 @@ package oope2017ht;
 *
 */
 
-public interface UI {
+public interface Terminaali {
 
     public abstract void tulosta(String tuloste);
 

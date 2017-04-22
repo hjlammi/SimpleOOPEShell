@@ -64,7 +64,7 @@ public class Tulkki {
      * Attribuutit.
      */
 
-    private UI ui;
+    private Terminaali terminaali;
 
     private Hakemisto juurihakemisto;
 
@@ -73,14 +73,14 @@ public class Tulkki {
     /*
      * Rakentajat.
      */
-    public Tulkki(UI ui) {
-        this.ui = ui;
+    public Tulkki(Terminaali terminaali) {
+        this.terminaali = terminaali;
         this.juurihakemisto = new Hakemisto();
         this.tyohakemisto = juurihakemisto;
     }
 
-    public Tulkki(UI ui, Hakemisto juurihakemisto) {
-        this.ui = ui;
+    public Tulkki(Terminaali terminaali, Hakemisto juurihakemisto) {
+        this.terminaali = terminaali;
         this.juurihakemisto = juurihakemisto;
         this.tyohakemisto = juurihakemisto;
     }
@@ -99,13 +99,13 @@ public class Tulkki {
 
     public void suorita() {
         // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
-        ui.tulosta(TERVEHDYS);
+        terminaali.tulosta(TERVEHDYS);
 
         String syote;
         do {
             // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen ja
             // lukee käyttäjän antaman syötteen.
-            syote = ui.lueSyote(tyohakemisto.hakemistopolku() + KEHOTE);
+            syote = terminaali.lueSyote(tyohakemisto.hakemistopolku() + KEHOTE);
             // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
             try {
@@ -114,7 +114,7 @@ public class Tulkki {
                     error();
                 // Jos käyttäjä haluaa poistua ohjelmasta tulostetaan lopetusviesti.
                 } else if (osat[0].equals(LOPETUS) && osat.length == 1) {
-                    ui.tulosta(LOPETUSVIESTI);
+                    terminaali.tulosta(LOPETUSVIESTI);
                 // Jos käyttäjä haluaa listata hakemiston sisällön:
                 } else if (osat[0].equals(LISTAAMINEN) && osat.length == 1) {
                     listaaHakemistonSisalto();
@@ -299,7 +299,7 @@ public class Tulkki {
         if (alkio == null) {
             error();
         } else {
-            ui.tulosta(alkio.toString());
+            terminaali.tulosta(alkio.toString());
         }
     }
 
@@ -309,7 +309,7 @@ public class Tulkki {
         OmaLista tiedot = tyohakemisto.tiedot();
         // Tulostetaan työhakemiston tiedot alkio kerrallaan.
         for (int i = 0; i < tiedot.koko(); i++) {
-            ui.tulosta(tiedot.alkio(i).toString());
+            terminaali.tulosta(tiedot.alkio(i).toString());
         }
     }
 
@@ -321,9 +321,9 @@ public class Tulkki {
         for (int i = 0; i < sisalto.koko(); i++) {
             // Asetetaan viite tietoalkioon.
             Tieto tieto = (Tieto)sisalto.alkio(i);
-            // Kutsutaan käyttöliittymän tulostusmetodia, joka ottaa parametrina merkkijonon.
+            // Kutsutaan terminaalin tulostusmetodia, joka ottaa parametrina merkkijonon.
             // Merkkijono koostuu nykyisen hakemiston hakemistopolusta sekä tiedon merkkijonoesityksestä.
-            ui.tulosta(hakemisto.hakemistopolku() + tieto.toString());
+            terminaali.tulosta(hakemisto.hakemistopolku() + tieto.toString());
             // Jos tieto on Hakemisto-tyyppinen, metodi kutsuu itseään ja antaa tiedon parametrina.
             if (tieto instanceof Hakemisto) {
                 puunTulostus((Hakemisto)tieto);
@@ -331,9 +331,9 @@ public class Tulkki {
         }
     }
 
-    // Metodi kutsuu käyttöliittymän tulosta-metodia, joka tulostaa virheilmoituksen.
+    // Metodi kutsuu terminaalin tulosta-metodia, joka tulostaa virheilmoituksen.
     private void error() {
-        ui.tulosta(VIRHEILMOITUS);
+        terminaali.tulosta(VIRHEILMOITUS);
     }
 
     // Apumetodi uudelleennimeämis- ja kopioimiskomentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina

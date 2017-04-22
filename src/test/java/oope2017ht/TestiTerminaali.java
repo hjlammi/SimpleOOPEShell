@@ -1,9 +1,9 @@
 package oope2017ht;
 
-import oope2017ht.UI;
+import oope2017ht.Terminaali;
 import oope2017ht.omalista.OmaLista;
 
-public class TestiUI implements UI {
+public class TestiTerminaali implements Terminaali {
     public OmaLista tulosteet = new OmaLista();
     public OmaLista syotteet = new OmaLista();
     public OmaLista kehotteet = new OmaLista();

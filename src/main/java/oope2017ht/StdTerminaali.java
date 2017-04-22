@@ -2,7 +2,7 @@ package oope2017ht;
 
 import apulaiset.In;
 
-public class KonsoliUI implements UI {
+public class StdTerminaali implements Terminaali {
 
     @Override
     public void tulosta(String tuloste) {
