@@ -65,7 +65,12 @@ public class Kayttoliittyma {
                     listaaHakemistonSisalto();
                 // Jos käyttäjä haluaa tulostaa näytölle tiedon merkkijonoesityksen:
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 2) {
-                    tulostaTietoMjonona(osat);
+                    String mjono = tulkki.tietoMjonona(osat);
+                    if (mjono == null) {
+                        error();
+                    } else {
+                        terminaali.tulosta(mjono);
+                    }
                 // Jos käyttäjä haluaa luoda hakemiston parametrina antamallansa nimellä:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_LUOMINEN) && osat.length == 2) {
                     if (!tulkki.luoHakemisto(osat)) {
@@ -124,22 +129,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot,
-    // jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
-    private void tulostaTietoMjonona(String[] osat) {
-        // Tulostettavan tiedon nimi.
-        String nimi = osat[1];
-        // Haetaan hakemistosta tietoa nimellä hyödyntäen Hakemiston hae-metodia.
-        Tieto alkio = tulkki.tyohakemisto.hae(nimi);
-        // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta, tulostetaan virheilmoitus.
-        // Muussa tapauksessa tulostetaan tiedon merkkijonoesitys.
-        if (alkio == null) {
-            error();
-        } else {
-            terminaali.tulosta(alkio.toString());
-        }
-    }
 
     // Metodi listaa nykyisen hakemiston sisällön.
     private void listaaHakemistonSisalto() {

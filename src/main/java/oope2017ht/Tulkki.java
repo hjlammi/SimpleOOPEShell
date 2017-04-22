@@ -188,4 +188,20 @@ public class Tulkki {
             return false;
         }
     }
+
+    // Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot,
+    // jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
+    public String tietoMjonona(String[] osat) {
+        // Tulostettavan tiedon nimi.
+        String nimi = osat[1];
+        // Haetaan hakemistosta tietoa nimellä hyödyntäen Hakemiston hae-metodia.
+        Tieto alkio = tyohakemisto.hae(nimi);
+        // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta, tulostetaan virheilmoitus.
+        // Muussa tapauksessa tulostetaan tiedon merkkijonoesitys.
+        if (alkio == null) {
+            return null;
+        } else {
+            return alkio.toString();
+        }
+    }
 }
