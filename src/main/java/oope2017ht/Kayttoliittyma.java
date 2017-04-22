@@ -86,7 +86,9 @@ public class Kayttoliittyma {
                     tulkki.siirryJuurihakemistoon();
                 // Jos käyttäjä haluaa siirtyä johonkin alihakemistoistaan:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..") && osat.length == 2) {
-                    siirryAlihakemistoon(osat);
+                    if (!tulkki.siirryAlihakemistoon(osat)) {
+                        error();
+                    }
                 // Jos käyttäjä haluaa siirtyä nykyisen hakemiston ylihakemistoon:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..") && osat.length == 2) {
                     if (!tulkki.siirryYlihakemistoon()) {
@@ -112,21 +114,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodilla asetetaan työhakemistoksi alihakemisto, jonka nimi on parametrina saadun taulukon toinen alkio.
-    private void siirryAlihakemistoon(String[] osat) {
-        // Sen alihakemiston nimi, johon halutaan siirtyä.
-        String nimi = osat[1];
-        // Haetaan hakemistosta nimellä.
-        Tieto alkio = tulkki.tyohakemisto.hae(nimi);
-        // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä
-        // ja että tieto on tyyppiä Hakemisto.
-        if (alkio != null && alkio instanceof Hakemisto) {
-            tulkki.tyohakemisto((Hakemisto)alkio);
-        } else {
-            error();
-        }
-    }
 
     // Metodi poistaa hakemistosta tiedon, jonka nimi on parametrina saadun taulukon toinen alkio.
     private void poista(String[] osat) {

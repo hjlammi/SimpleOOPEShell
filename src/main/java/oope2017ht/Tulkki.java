@@ -75,4 +75,20 @@ public class Tulkki {
             return true;
         }
     }
+
+    // Metodilla asetetaan työhakemistoksi alihakemisto, jonka nimi on parametrina saadun taulukon toinen alkio.
+    public boolean siirryAlihakemistoon(String[] osat) {
+        // Sen alihakemiston nimi, johon halutaan siirtyä.
+        String nimi = osat[1];
+        // Haetaan hakemistosta nimellä.
+        Tieto alkio = tyohakemisto.hae(nimi);
+        // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä
+        // ja että tieto on tyyppiä Hakemisto.
+        if (alkio != null && alkio instanceof Hakemisto) {
+            tyohakemisto((Hakemisto)alkio);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
