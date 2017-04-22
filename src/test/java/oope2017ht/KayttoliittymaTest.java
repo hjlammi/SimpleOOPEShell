@@ -84,7 +84,7 @@ public class KayttoliittymaTest {
         Tiedosto t = new Tiedosto(new StringBuilder("foo.txt"), 123);
         foo.lisaa(t);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(foo);
+        kayttoliittyma.tulkki.tyohakemisto(foo);
 
         kayttoliittyma.suorita();
 
@@ -104,7 +104,7 @@ public class KayttoliittymaTest {
         Tiedosto jee = new Tiedosto(new StringBuilder("jee.txt"), 11);
         foo.lisaa(jee);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(foo);
+        kayttoliittyma.tulkki.tyohakemisto(foo);
 
         kayttoliittyma.suorita();
 
@@ -139,7 +139,7 @@ public class KayttoliittymaTest {
         Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
         juurihakemisto.lisaa(foo);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(foo);
+        kayttoliittyma.tulkki.tyohakemisto(foo);
 
         kayttoliittyma.suorita();
 
@@ -176,7 +176,7 @@ public class KayttoliittymaTest {
         Hakemisto foo = new Hakemisto(new StringBuilder("foo"), juurihakemisto);
         juurihakemisto.lisaa(foo);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(foo);
+        kayttoliittyma.tulkki.tyohakemisto(foo);
 
         kayttoliittyma.suorita();
 
@@ -234,7 +234,7 @@ public class KayttoliittymaTest {
         Tiedosto fool = new Tiedosto(new StringBuilder("fool.txt"), 123);
         bar.lisaa(fool);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(bar);
+        kayttoliittyma.tulkki.tyohakemisto(bar);
 
         kayttoliittyma.suorita();
 
@@ -295,7 +295,7 @@ public class KayttoliittymaTest {
         Tiedosto fool = new Tiedosto(new StringBuilder("fool.txt"), 123);
         foo.lisaa(fool);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(foo);
+        kayttoliittyma.tulkki.tyohakemisto(foo);
 
         kayttoliittyma.suorita();
 
@@ -369,7 +369,7 @@ public class KayttoliittymaTest {
         Tiedosto cat = new Tiedosto(new StringBuilder("cat.txt"), 123);
         foo.lisaa(cat);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(foo);
+        kayttoliittyma.tulkki.tyohakemisto(foo);
 
         kayttoliittyma.suorita();
 
@@ -449,7 +449,7 @@ public class KayttoliittymaTest {
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), juurihakemisto);
         juurihakemisto.lisaa(kitten);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(kitten);
+        kayttoliittyma.tulkki.tyohakemisto(kitten);
 
         kayttoliittyma.suorita();
 
@@ -469,7 +469,7 @@ public class KayttoliittymaTest {
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), cat);
         cat.lisaa(kitten);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(kitten);
+        kayttoliittyma.tulkki.tyohakemisto(kitten);
 
         kayttoliittyma.suorita();
 
@@ -515,7 +515,7 @@ public class KayttoliittymaTest {
         Hakemisto kitten = new Hakemisto(new StringBuilder("kitten"), cat);
         cat.lisaa(kitten);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(kitten);
+        kayttoliittyma.tulkki.tyohakemisto(kitten);
 
         kayttoliittyma.suorita();
 
@@ -533,7 +533,7 @@ public class KayttoliittymaTest {
         Hakemisto kitten2 = new Hakemisto(new StringBuilder("kitten2"), kitten);
         kitten.lisaa(kitten2);
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
-        kayttoliittyma.tyohakemisto(kitten2);
+        kayttoliittyma.tulkki.tyohakemisto(kitten2);
 
         kayttoliittyma.suorita();
 

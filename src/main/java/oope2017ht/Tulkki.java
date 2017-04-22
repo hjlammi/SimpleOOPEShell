@@ -21,6 +21,15 @@ public class Tulkki {
     static final String TERVEHDYS = "Welcome to SOS.";
     static final String LOPETUSVIESTI = "Shell terminated.";
     static final String VIRHEILMOITUS = "Error!";
+
     Hakemisto tyohakemisto;
 
+    /*
+     * Aksessorit.
+     */
+    public void tyohakemisto(Hakemisto hakemisto) {
+        if (hakemisto != null) {
+            this.tyohakemisto = hakemisto;
+        }
+    }
 }

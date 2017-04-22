@@ -25,7 +25,7 @@ public class Kayttoliittyma {
 
     private Hakemisto juurihakemisto;
 
-    private Tulkki tulkki;
+    Tulkki tulkki;
 
     /*
      * Rakentajat.
@@ -48,12 +48,6 @@ public class Kayttoliittyma {
 
     public Hakemisto tyohakemisto() {
         return tulkki.tyohakemisto;
-    }
-
-    public void tyohakemisto(Hakemisto tyohakemisto) {
-        if (tyohakemisto != null) {
-            tulkki.tyohakemisto = tyohakemisto;
-        }
     }
 
     public void suorita() {
@@ -127,7 +121,7 @@ public class Kayttoliittyma {
 
     // Metodilla asetetaan työhakemistoksi juurihakemisto.
     private void siirryJuurihakemistoon() {
-        tyohakemisto(juurihakemisto);
+        tulkki.tyohakemisto(juurihakemisto);
     }
 
     // Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
@@ -139,7 +133,7 @@ public class Kayttoliittyma {
             // Asetetaan viite nykyiseen hakemistoon.
             Hakemisto nykyinenHakemisto = tyohakemisto();
             // Asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
-            tyohakemisto(nykyinenHakemisto.ylihakemisto());
+            tulkki.tyohakemisto(nykyinenHakemisto.ylihakemisto());
         }
     }
 
@@ -152,7 +146,7 @@ public class Kayttoliittyma {
         // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä
         // ja että tieto on tyyppiä Hakemisto.
         if (alkio != null && alkio instanceof Hakemisto) {
-            tyohakemisto((Hakemisto)alkio);
+            tulkki.tyohakemisto((Hakemisto)alkio);
         } else {
             error();
         }
