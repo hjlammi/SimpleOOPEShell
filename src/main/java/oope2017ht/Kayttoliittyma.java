@@ -77,7 +77,9 @@ public class Kayttoliittyma {
                     nimeaUudelleen(osat);
                 // Jos käyttäjä haluaa kopioida tiedoston:
                 } else if (osat[0].equals(Tulkki.KOPIOIMINEN) && osat.length == 3) {
-                    kopioiTiedosto(osat);
+                    if (!tulkki.kopioiTiedosto(osat)) {
+                        error();
+                    }
                 // Jos käyttäjä haluaa poistaa tiedon:
                 } else if (osat[0].equals(Tulkki.POISTAMINEN) && osat.length == 2) {
                     if (!tulkki.poista(osat)) {
@@ -116,28 +118,6 @@ public class Kayttoliittyma {
     /*
      * Apumetodit.
      */
-
-    // Metodi kopioi tiedoston, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
-    private void kopioiTiedosto(String[] osat) {
-        // Kopioitavan tiedoston nimi.
-        String nimi = osat[1];
-        // Kopion nimi on taulukon kolmas alkio.
-        String kopioNimi = osat[2];
-        // Haetaan hakemistosta kopioitava tiedosto nimen perusteella.
-        Tieto kopioitava = tulkki.tyohakemisto.hae(nimi);
-        // Tarkistetaan, että tieto löytyi, että se on Tiedosto-tyyppinen
-        // ja ettei kopion nimi ole jo käytössä hakemistossa.
-        if (kopioitava != null && kopioitava instanceof Tiedosto && !tulkki.nimiVarattu(kopioNimi)) {
-            // Syväkopioidaan tiedosto.
-            Tiedosto kopio = new Tiedosto((Tiedosto)kopioitava);
-            // Annetaan kopiolle nimeksi komentoriviparametrina saatu uusi nimi.
-            kopio.nimi(new StringBuilder(kopioNimi));
-            // Lisätään kopio hakemistoon.
-            tulkki.tyohakemisto.lisaa(kopio);
-        } else {
-            error();
-        }
-    }
 
     // Metodi nimeää uudelleen tiedon, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
     private void nimeaUudelleen(String[] osat) {

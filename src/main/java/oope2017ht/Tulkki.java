@@ -1,6 +1,7 @@
 package oope2017ht;
 
 import oope2017ht.tiedot.Hakemisto;
+import oope2017ht.tiedot.Tiedosto;
 import oope2017ht.tiedot.Tieto;
 
 public class Tulkki {
@@ -103,6 +104,29 @@ public class Tulkki {
             return false;
         } else {
             return true;
+        }
+    }
+
+ // Metodi kopioi tiedoston, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
+    public boolean kopioiTiedosto(String[] osat) {
+        // Kopioitavan tiedoston nimi.
+        String nimi = osat[1];
+        // Kopion nimi on taulukon kolmas alkio.
+        String kopioNimi = osat[2];
+        // Haetaan hakemistosta kopioitava tiedosto nimen perusteella.
+        Tieto kopioitava = tyohakemisto.hae(nimi);
+        // Tarkistetaan, että tieto löytyi, että se on Tiedosto-tyyppinen
+        // ja ettei kopion nimi ole jo käytössä hakemistossa.
+        if (kopioitava != null && kopioitava instanceof Tiedosto && !nimiVarattu(kopioNimi)) {
+            // Syväkopioidaan tiedosto.
+            Tiedosto kopio = new Tiedosto((Tiedosto)kopioitava);
+            // Annetaan kopiolle nimeksi komentoriviparametrina saatu uusi nimi.
+            kopio.nimi(new StringBuilder(kopioNimi));
+            // Lisätään kopio hakemistoon.
+            tyohakemisto.lisaa(kopio);
+            return true;
+        } else {
+            return false;
         }
     }
 }
