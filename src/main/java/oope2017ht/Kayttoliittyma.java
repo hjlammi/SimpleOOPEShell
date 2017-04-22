@@ -25,32 +25,34 @@ public class Kayttoliittyma {
 
     private Hakemisto juurihakemisto;
 
-    private Hakemisto tyohakemisto;
+    private Tulkki tulkki;
 
     /*
      * Rakentajat.
      */
     public Kayttoliittyma(Terminaali terminaali) {
+        this.tulkki = new Tulkki();
         this.terminaali = terminaali;
         this.juurihakemisto = new Hakemisto();
-        this.tyohakemisto = juurihakemisto;
+        tulkki.tyohakemisto = juurihakemisto;
     }
 
     public Kayttoliittyma(Terminaali terminaali, Hakemisto juurihakemisto) {
+        this.tulkki = new Tulkki();
         this.terminaali = terminaali;
         this.juurihakemisto = juurihakemisto;
-        this.tyohakemisto = juurihakemisto;
+        tulkki.tyohakemisto = juurihakemisto;
     }
 
     // Aksessorit.
 
     public Hakemisto tyohakemisto() {
-        return tyohakemisto;
+        return tulkki.tyohakemisto;
     }
 
     public void tyohakemisto(Hakemisto tyohakemisto) {
         if (tyohakemisto != null) {
-            this.tyohakemisto = tyohakemisto;
+            tulkki.tyohakemisto = tyohakemisto;
         }
     }
 
@@ -62,7 +64,7 @@ public class Kayttoliittyma {
         do {
             // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen ja
             // lukee käyttäjän antaman syötteen.
-            syote = terminaali.lueSyote(tyohakemisto.hakemistopolku() + Tulkki.KEHOTE);
+            syote = terminaali.lueSyote(tulkki.tyohakemisto.hakemistopolku() + Tulkki.KEHOTE);
             // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
             try {
@@ -103,7 +105,7 @@ public class Kayttoliittyma {
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..") && osat.length == 2) {
                     siirryYlihakemistoon();
                 } else if (osat[0].equals(Tulkki.REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
-                    puunTulostus(tyohakemisto);
+                    puunTulostus(tulkki.tyohakemisto);
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
                 } else {
@@ -131,7 +133,7 @@ public class Kayttoliittyma {
     // Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto.
     private void siirryYlihakemistoon() {
         // Juurihakemistosta ei voi siirtyä ylihakemistoon.
-        if (tyohakemisto == juurihakemisto) {
+        if (tulkki.tyohakemisto == juurihakemisto) {
             error();
         } else {
             // Asetetaan viite nykyiseen hakemistoon.
@@ -146,7 +148,7 @@ public class Kayttoliittyma {
         // Sen alihakemiston nimi, johon halutaan siirtyä.
         String nimi = osat[1];
         // Haetaan hakemistosta nimellä.
-        Tieto alkio = tyohakemisto.hae(nimi);
+        Tieto alkio = tulkki.tyohakemisto.hae(nimi);
         // Tarkistetaan, että hakemistosta löytyy senniminen alihakemisto, johon halutaan siirtyä
         // ja että tieto on tyyppiä Hakemisto.
         if (alkio != null && alkio instanceof Hakemisto) {
@@ -161,7 +163,7 @@ public class Kayttoliittyma {
         // Poistettavan tiedon nimi.
         String poistettava = osat[1];
         // Kutsutaan Hakemiston metodia, joka poistaa nimeä vastaavan olion.
-        Tieto poistettavaTieto = tyohakemisto.poista(poistettava);
+        Tieto poistettavaTieto = tulkki.tyohakemisto.poista(poistettava);
         // Jos poisto ei onnistunut on paluuarvo null ja tulostetaan virheilmoitus.
         if (poistettavaTieto == null) {
             error();
@@ -175,7 +177,7 @@ public class Kayttoliittyma {
         // Kopion nimi on taulukon kolmas alkio.
         String kopioNimi = osat[2];
         // Haetaan hakemistosta kopioitava tiedosto nimen perusteella.
-        Tieto kopioitava = tyohakemisto.hae(nimi);
+        Tieto kopioitava = tulkki.tyohakemisto.hae(nimi);
         // Tarkistetaan, että tieto löytyi, että se on Tiedosto-tyyppinen
         // ja ettei kopion nimi ole jo käytössä hakemistossa.
         if (kopioitava != null && kopioitava instanceof Tiedosto && !nimiVarattu(kopioNimi)) {
@@ -184,7 +186,7 @@ public class Kayttoliittyma {
             // Annetaan kopiolle nimeksi komentoriviparametrina saatu uusi nimi.
             kopio.nimi(new StringBuilder(kopioNimi));
             // Lisätään kopio hakemistoon.
-            tyohakemisto.lisaa(kopio);
+            tulkki.tyohakemisto.lisaa(kopio);
         } else {
             error();
         }
@@ -202,7 +204,7 @@ public class Kayttoliittyma {
             error();
         } else {
             // Jos hakemistosta löytyy vaihdettavan nimen mukainen tieto, asetetaan alkiolle uusi nimi.
-            Tieto alkio = (Tieto)tyohakemisto.hae(vaihdettavaNimi);
+            Tieto alkio = (Tieto)tulkki.tyohakemisto.hae(vaihdettavaNimi);
                 // Jos haetun nimistä tietoa ei löytynyt tulostetaan virheilmoitus.
                 if (alkio == null) {
                     error();
@@ -222,7 +224,7 @@ public class Kayttoliittyma {
         Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
         // Kutsutaan Hakemiston lisaa-metodia, joka lisää tiedoston työhakemistoon.
         // Paluuarvo on true, jos lisääminen onnistui.
-        boolean onnistui = tyohakemisto.lisaa(lisattava);
+        boolean onnistui = tulkki.tyohakemisto.lisaa(lisattava);
              // Jos paluuarvo oli false, lisääminen ei onnistunut ja tulostetaan virheilmoitus.
         if (!onnistui) {
             error();
@@ -234,10 +236,10 @@ public class Kayttoliittyma {
         // Hakemiston nimi.
         String nimi = osat[1];
         // Luodaan uusi hakemisto-olio parametrina annetulla nimellä.
-        Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tyohakemisto);
+        Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tulkki.tyohakemisto);
         // Kutsutaan Hakemiston lisaa-metodia, joka lisää hakemiston työhakemistoon.
         // Paluuarvo on true, jos lisääminen onnistuu.
-        boolean onnistui = tyohakemisto.lisaa(lisattava);
+        boolean onnistui = tulkki.tyohakemisto.lisaa(lisattava);
         // Jos paluuarvo oli false, lisääminen ei onnistunut ja tulostetaan virheilmoitus.
         if (!onnistui) {
             error();
@@ -250,7 +252,7 @@ public class Kayttoliittyma {
         // Tulostettavan tiedon nimi.
         String nimi = osat[1];
         // Haetaan hakemistosta tietoa nimellä hyödyntäen Hakemiston hae-metodia.
-        Tieto alkio = tyohakemisto.hae(nimi);
+        Tieto alkio = tulkki.tyohakemisto.hae(nimi);
         // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta, tulostetaan virheilmoitus.
         // Muussa tapauksessa tulostetaan tiedon merkkijonoesitys.
         if (alkio == null) {
@@ -263,7 +265,7 @@ public class Kayttoliittyma {
     // Metodi listaa nykyisen hakemiston sisällön.
     private void listaaHakemistonSisalto() {
         // Viite nykyisen hakemiston tietoihin.
-        OmaLista tiedot = tyohakemisto.tiedot();
+        OmaLista tiedot = tulkki.tyohakemisto.tiedot();
         // Tulostetaan työhakemiston tiedot alkio kerrallaan.
         for (int i = 0; i < tiedot.koko(); i++) {
             terminaali.tulosta(tiedot.alkio(i).toString());
@@ -298,7 +300,7 @@ public class Kayttoliittyma {
     // true, jos samannimistä ei löydy, palautetaan false.
     private boolean nimiVarattu(String nimi) {
         // Kutsutaan Hakemiston hae-metodia, joka palauttaa nullin, jos haettavalla nimellä ei löydy Tietoa.
-        Tieto alkio = tyohakemisto.hae(nimi);
+        Tieto alkio = tulkki.tyohakemisto.hae(nimi);
         // Samannimistä ei löytynyt.
         if (alkio == null) {
             return false;

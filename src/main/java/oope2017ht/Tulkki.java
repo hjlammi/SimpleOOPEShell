@@ -1,5 +1,7 @@
 package oope2017ht;
 
+import oope2017ht.tiedot.Hakemisto;
+
 public class Tulkki {
 
     /*
@@ -19,5 +21,6 @@ public class Tulkki {
     static final String TERVEHDYS = "Welcome to SOS.";
     static final String LOPETUSVIESTI = "Shell terminated.";
     static final String VIRHEILMOITUS = "Error!";
+    Hakemisto tyohakemisto;
 
 }
