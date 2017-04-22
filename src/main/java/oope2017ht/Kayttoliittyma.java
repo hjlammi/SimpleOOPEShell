@@ -18,49 +18,6 @@ import oope2017ht.tiedot.Tieto;
 public class Kayttoliittyma {
 
     /*
-     *  Vakiot.
-     */
-
-
-
-    private static final String REKURSIIVINEN_LISTAAMINEN = "find";
-
-
-    private static final String HAKEMISTON_VAIHTAMINEN = "cd";
-
-
-    private static final String POISTAMINEN = "rm";
-
-
-    private static final String KOPIOIMINEN = "cp";
-
-
-    private static final String UUDELLEEN_NIMEAMINEN = "mv";
-
-
-    private static final String TIEDOSTON_LUOMINEN = "mf";
-
-
-    private static final String HAKEMISTON_LUOMINEN = "md";
-
-
-    private static final String LISTAAMINEN = "ls";
-
-
-    private static final String LOPETUS = "exit";
-
-
-
-
-    private static final String KEHOTE = ">";
-
-    private static final String TERVEHDYS = "Welcome to SOS.";
-
-    private static final String LOPETUSVIESTI = "Shell terminated.";
-
-    private static final String VIRHEILMOITUS = "Error!";
-
-    /*
      * Attribuutit.
      */
 
@@ -99,13 +56,13 @@ public class Kayttoliittyma {
 
     public void suorita() {
         // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
-        terminaali.tulosta(TERVEHDYS);
+        terminaali.tulosta(Tulkki.TERVEHDYS);
 
         String syote;
         do {
             // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen ja
             // lukee käyttäjän antaman syötteen.
-            syote = terminaali.lueSyote(tyohakemisto.hakemistopolku() + KEHOTE);
+            syote = terminaali.lueSyote(tyohakemisto.hakemistopolku() + Tulkki.KEHOTE);
             // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
             try {
@@ -113,39 +70,39 @@ public class Kayttoliittyma {
                 if (syote.endsWith(" ") || syote.startsWith(" ")) {
                     error();
                 // Jos käyttäjä haluaa poistua ohjelmasta tulostetaan lopetusviesti.
-                } else if (osat[0].equals(LOPETUS) && osat.length == 1) {
-                    terminaali.tulosta(LOPETUSVIESTI);
+                } else if (osat[0].equals(Tulkki.LOPETUS) && osat.length == 1) {
+                    terminaali.tulosta(Tulkki.LOPETUSVIESTI);
                 // Jos käyttäjä haluaa listata hakemiston sisällön:
-                } else if (osat[0].equals(LISTAAMINEN) && osat.length == 1) {
+                } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 1) {
                     listaaHakemistonSisalto();
                 // Jos käyttäjä haluaa tulostaa näytölle tiedon merkkijonoesityksen:
-                } else if (osat[0].equals(LISTAAMINEN) && osat.length == 2) {
+                } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 2) {
                     tulostaTietoMjonona(osat);
                 // Jos käyttäjä haluaa luoda hakemiston parametrina antamallansa nimellä:
-                } else if (osat[0].equals(HAKEMISTON_LUOMINEN) && osat.length == 2) {
+                } else if (osat[0].equals(Tulkki.HAKEMISTON_LUOMINEN) && osat.length == 2) {
                     luoHakemisto(osat);
                 // Jos käyttäjä haluaa luoda tiedoston antamallaan nimellä ja koolla:
-                } else if (osat[0].equals(TIEDOSTON_LUOMINEN) && osat.length == 3) {
+                } else if (osat[0].equals(Tulkki.TIEDOSTON_LUOMINEN) && osat.length == 3) {
                     luoTiedosto(osat);
                 // Jos käyttäjä haluaa uudelleennimetä olemassa olevan tiedon:
-                } else if (osat[0].equals(UUDELLEEN_NIMEAMINEN) && osat.length == 3) {
+                } else if (osat[0].equals(Tulkki.UUDELLEEN_NIMEAMINEN) && osat.length == 3) {
                     nimeaUudelleen(osat);
                 // Jos käyttäjä haluaa kopioida tiedoston:
-                } else if (osat[0].equals(KOPIOIMINEN) && osat.length == 3) {
+                } else if (osat[0].equals(Tulkki.KOPIOIMINEN) && osat.length == 3) {
                     kopioiTiedosto(osat);
                 // Jos käyttäjä haluaa poistaa tiedon:
-                } else if (osat[0].equals(POISTAMINEN) && osat.length == 2) {
+                } else if (osat[0].equals(Tulkki.POISTAMINEN) && osat.length == 2) {
                     poista(osat);
                 // Jos käyttäjä haluaa siirtyä takaisin juurihakemistoon, asetetaan työhakemistoksi juurihakemisto.
-                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && osat.length == 1) {
+                } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat.length == 1) {
                     siirryJuurihakemistoon();
                 // Jos käyttäjä haluaa siirtyä johonkin alihakemistoistaan:
-                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..") && osat.length == 2) {
+                } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..") && osat.length == 2) {
                     siirryAlihakemistoon(osat);
                 // Jos käyttäjä haluaa siirtyä nykyisen hakemiston ylihakemistoon:
-                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..") && osat.length == 2) {
+                } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..") && osat.length == 2) {
                     siirryYlihakemistoon();
-                } else if (osat[0].equals(REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
+                } else if (osat[0].equals(Tulkki.REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
                     puunTulostus(tyohakemisto);
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
@@ -158,7 +115,7 @@ public class Kayttoliittyma {
                 error();
             }
         // Suoritetaan silmukkaa kunnes käyttäjä syöttää lopetuskomennon.
-        } while (!syote.equals(LOPETUS));
+        } while (!syote.equals(Tulkki.LOPETUS));
     }
 
 
@@ -333,7 +290,7 @@ public class Kayttoliittyma {
 
     // Metodi kutsuu terminaalin tulosta-metodia, joka tulostaa virheilmoituksen.
     private void error() {
-        terminaali.tulosta(VIRHEILMOITUS);
+        terminaali.tulosta(Tulkki.VIRHEILMOITUS);
     }
 
     // Apumetodi uudelleennimeämis- ja kopioimiskomentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina
