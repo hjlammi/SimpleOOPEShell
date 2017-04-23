@@ -90,7 +90,9 @@ public class Kayttoliittyma {
                     }
                 // Jos käyttäjä haluaa kopioida tiedoston:
                 } else if (osat[0].equals(Tulkki.KOPIOIMINEN) && osat.length == 3) {
-                    if (!tulkki.kopioiTiedosto(osat)) {
+                    String nimi = osat[1];
+                    String kopioNimi = osat[2];
+                    if (!tulkki.kopioiTiedosto(nimi, kopioNimi)) {
                         error();
                     }
                 // Jos käyttäjä haluaa poistaa tiedon:

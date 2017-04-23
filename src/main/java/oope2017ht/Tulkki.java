@@ -105,11 +105,7 @@ public class Tulkki {
     }
 
     // Metodi kopioi tiedoston, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
-    public boolean kopioiTiedosto(String[] osat) {
-        // Kopioitavan tiedoston nimi.
-        String nimi = osat[1];
-        // Kopion nimi on taulukon kolmas alkio.
-        String kopioNimi = osat[2];
+    public boolean kopioiTiedosto(String nimi, String kopioNimi) {
         // Haetaan hakemistosta kopioitava tiedosto nimen perusteella.
         Tieto kopioitava = tyohakemisto.hae(nimi);
         // Tarkistetaan, että tieto löytyi, että se on Tiedosto-tyyppinen
