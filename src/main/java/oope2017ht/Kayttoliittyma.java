@@ -75,7 +75,8 @@ public class Kayttoliittyma {
                     }
                 // Jos käyttäjä haluaa luoda hakemiston parametrina antamallansa nimellä:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_LUOMINEN) && osat.length == 2) {
-                    if (!tulkki.luoHakemisto(osat)) {
+                    String nimi = osat[1];
+                    if (!tulkki.luoHakemisto(nimi)) {
                         error();
                     }
                 // Jos käyttäjä haluaa luoda tiedoston antamallaan nimellä ja koolla:

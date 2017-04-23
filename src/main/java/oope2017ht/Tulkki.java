@@ -174,9 +174,7 @@ public class Tulkki {
     }
 
     // Metodi luo hakemiston, jonka nimi on parametrina saadun taulukon toinen alkio.
-    public boolean luoHakemisto(String[] osat) {
-        // Hakemiston nimi.
-        String nimi = osat[1];
+    public boolean luoHakemisto(String nimi) {
         // Luodaan uusi hakemisto-olio parametrina annetulla nimellä.
         Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tyohakemisto);
         // Kutsutaan Hakemiston lisaa-metodia, joka lisää hakemiston työhakemistoon.
