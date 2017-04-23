@@ -93,9 +93,7 @@ public class Tulkki {
     }
 
     // Metodi poistaa hakemistosta tiedon, jonka nimi on parametrina saadun taulukon toinen alkio.
-    public boolean poista(String[] osat) {
-        // Poistettavan tiedon nimi.
-        String poistettava = osat[1];
+    public boolean poista(String poistettava) {
         // Kutsutaan Hakemiston metodia, joka poistaa nimeä vastaavan olion.
         Tieto poistettavaTieto = tyohakemisto.poista(poistettava);
         // Jos poisto ei onnistunut on paluuarvo null ja tulostetaan virheilmoitus.

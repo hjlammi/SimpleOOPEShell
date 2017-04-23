@@ -95,7 +95,8 @@ public class Kayttoliittyma {
                     }
                 // Jos käyttäjä haluaa poistaa tiedon:
                 } else if (osat[0].equals(Tulkki.POISTAMINEN) && osat.length == 2) {
-                    if (!tulkki.poista(osat)) {
+                    String poistettava = osat[1];
+                    if (!tulkki.poista(poistettava)) {
                         error();
                     }
                 // Jos käyttäjä haluaa siirtyä takaisin juurihakemistoon, asetetaan työhakemistoksi juurihakemisto.
