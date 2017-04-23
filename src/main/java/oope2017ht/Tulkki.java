@@ -124,11 +124,7 @@ public class Tulkki {
     }
 
     // Metodi nimeää uudelleen tiedon, jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
-    public boolean nimeaUudelleen(String[] osat) {
-        // Vaihdettava nimi.
-        String vaihdettavaNimi = osat[1];
-        // Uusi nimi on komennon toinen parametri eli taulukon kolmas alkio.
-        String uusiNimi = osat[2];
+    public boolean nimeaUudelleen(String vaihdettavaNimi, String uusiNimi) {
         // Kutsutaan metodia, joka tutkii onko parametrina saamansa uusi nimi jo varattu. Jos nimi on varattu,
         // paluuarvo on true ja tulostetaan virheilmoitus.
         if (nimiVarattu(uusiNimi)) {

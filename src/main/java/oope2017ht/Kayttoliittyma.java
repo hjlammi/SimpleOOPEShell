@@ -85,7 +85,9 @@ public class Kayttoliittyma {
                     }
                 // Jos käyttäjä haluaa uudelleennimetä olemassa olevan tiedon:
                 } else if (osat[0].equals(Tulkki.UUDELLEEN_NIMEAMINEN) && osat.length == 3) {
-                    if (!tulkki.nimeaUudelleen(osat)) {
+                    String vaihdettavaNimi = osat[1];
+                    String uusiNimi = osat[2];
+                    if (!tulkki.nimeaUudelleen(vaihdettavaNimi, uusiNimi)) {
                         error();
                     }
                 // Jos käyttäjä haluaa kopioida tiedoston:
