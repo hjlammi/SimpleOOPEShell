@@ -13,8 +13,7 @@ package oope2017ht;
 public class Oope2017HT
 {
     public static void main(String[] args) {
-        StdTerminaali terminaali = new StdTerminaali();
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
 
         kayttoliittyma.suorita();
     }

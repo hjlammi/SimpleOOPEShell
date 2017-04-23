@@ -1,5 +1,6 @@
 package oope2017ht;
 
+import apulaiset.In;
 import oope2017ht.omalista.OmaLista;
 import oope2017ht.tiedot.Hakemisto;
 
@@ -19,36 +20,33 @@ public class Kayttoliittyma {
      * Attribuutit.
      */
 
-    private StdTerminaali terminaali;
-
     Tulkki tulkki;
 
     /*
      * Rakentajat.
      */
-    public Kayttoliittyma(StdTerminaali terminaali) {
+    public Kayttoliittyma() {
         this.tulkki = new Tulkki();
-        this.terminaali = terminaali;
         tulkki.juurihakemisto = new Hakemisto();
         tulkki.tyohakemisto = tulkki.juurihakemisto;
     }
 
-    public Kayttoliittyma(StdTerminaali terminaali, Hakemisto juurihakemisto) {
+    public Kayttoliittyma(Hakemisto juurihakemisto) {
         this.tulkki = new Tulkki();
-        this.terminaali = terminaali;
         tulkki.juurihakemisto = juurihakemisto;
         tulkki.tyohakemisto = juurihakemisto;
     }
 
     public void suorita() {
         // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
-        terminaali.tulosta(Tulkki.TERVEHDYS);
+        System.out.println(Tulkki.TERVEHDYS);
 
         String syote;
         do {
             // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen ja
             // lukee käyttäjän antaman syötteen.
-            syote = terminaali.lueSyote(tulkki.tyohakemisto.hakemistopolku() + Tulkki.KEHOTE);
+            System.out.print(tulkki.tyohakemisto.hakemistopolku() + Tulkki.KEHOTE);
+            syote = In.readString();
             // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
             try {
@@ -57,12 +55,12 @@ public class Kayttoliittyma {
                     error();
                 // Jos käyttäjä haluaa poistua ohjelmasta tulostetaan lopetusviesti.
                 } else if (osat[0].equals(Tulkki.LOPETUS) && osat.length == 1) {
-                    terminaali.tulosta(Tulkki.LOPETUSVIESTI);
+                    System.out.println(Tulkki.LOPETUSVIESTI);
                 // Jos käyttäjä haluaa listata hakemiston sisällön:
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 1) {
                     OmaLista sisalto = tulkki.hakemistonSisalto();
                     for (int i = 0; i < sisalto.koko(); i++) {
-                        terminaali.tulosta(sisalto.alkio(i).toString());
+                        System.out.println(sisalto.alkio(i).toString());
                     }
                 // Jos käyttäjä haluaa tulostaa näytölle tiedon merkkijonoesityksen:
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 2) {
@@ -70,7 +68,7 @@ public class Kayttoliittyma {
                     if (mjono == null) {
                         error();
                     } else {
-                        terminaali.tulosta(mjono);
+                        System.out.println(mjono);
                     }
                 // Jos käyttäjä haluaa luoda hakemiston parametrina antamallansa nimellä:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_LUOMINEN) && osat.length == 2) {
@@ -113,7 +111,7 @@ public class Kayttoliittyma {
                 } else if (osat[0].equals(Tulkki.REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
                     OmaLista hakemistopuu = tulkki.hakemistopuunSisalto(tulkki.tyohakemisto);
                     for (int i = 0; i < hakemistopuu.koko(); i++) {
-                        terminaali.tulosta(hakemistopuu.alkio(i).toString());
+                        System.out.println(hakemistopuu.alkio(i).toString());
                     }
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
@@ -132,7 +130,7 @@ public class Kayttoliittyma {
 
     // Metodi kutsuu terminaalin tulosta-metodia, joka tulostaa virheilmoituksen.
     private void error() {
-        terminaali.tulosta(Tulkki.VIRHEILMOITUS);
+        System.out.println(Tulkki.VIRHEILMOITUS);
     }
 
 }
