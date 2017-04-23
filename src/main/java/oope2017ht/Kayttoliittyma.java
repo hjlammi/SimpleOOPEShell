@@ -19,21 +19,21 @@ public class Kayttoliittyma {
      * Attribuutit.
      */
 
-    private Terminaali terminaali;
+    private StdTerminaali terminaali;
 
     Tulkki tulkki;
 
     /*
      * Rakentajat.
      */
-    public Kayttoliittyma(Terminaali terminaali) {
+    public Kayttoliittyma(StdTerminaali terminaali) {
         this.tulkki = new Tulkki();
         this.terminaali = terminaali;
         tulkki.juurihakemisto = new Hakemisto();
         tulkki.tyohakemisto = tulkki.juurihakemisto;
     }
 
-    public Kayttoliittyma(Terminaali terminaali, Hakemisto juurihakemisto) {
+    public Kayttoliittyma(StdTerminaali terminaali, Hakemisto juurihakemisto) {
         this.tulkki = new Tulkki();
         this.terminaali = terminaali;
         tulkki.juurihakemisto = juurihakemisto;
