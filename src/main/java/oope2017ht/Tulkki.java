@@ -165,9 +165,7 @@ public class Tulkki {
 
     // Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot,
     // jonka nimi on parametrina saadun taulukon ensimmäinen alkio.
-    public String tietoMjonona(String[] osat) {
-        // Tulostettavan tiedon nimi.
-        String nimi = osat[1];
+    public String tietoMjonona(String nimi) {
         // Haetaan hakemistosta tietoa nimellä hyödyntäen Hakemiston hae-metodia.
         Tieto alkio = tyohakemisto.hae(nimi);
         // Jos nimeä vastaavaa tietoa ei löytynyt hakemistosta, tulostetaan virheilmoitus.

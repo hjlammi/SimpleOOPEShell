@@ -66,7 +66,8 @@ public class Kayttoliittyma {
                     }
                 // Jos käyttäjä haluaa tulostaa näytölle tiedon merkkijonoesityksen:
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 2) {
-                    String mjono = tulkki.tietoMjonona(osat);
+                    String nimi = osat[1];
+                    String mjono = tulkki.tietoMjonona(nimi);
                     if (mjono == null) {
                         error();
                     } else {
