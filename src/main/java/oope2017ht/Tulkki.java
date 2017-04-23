@@ -217,4 +217,28 @@ public class Tulkki {
         }
         return tulos;
     }
+
+    public OmaLista hakemistopuunSisalto(Hakemisto hakemisto) {
+        OmaLista tulos = new OmaLista();
+        hakemistopuunSisalto(hakemisto, tulos);
+        return tulos;
+    }
+
+    // Metodi tulostaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti.
+    private void hakemistopuunSisalto(Hakemisto hakemisto, OmaLista tulos) {
+        // Asetetaan viite parametrina saadun hakemiston tietoihin.
+        OmaLista sisalto = hakemisto.tiedot();
+        // Käydään hakemiston sisältö läpi.
+        for (int i = 0; i < sisalto.koko(); i++) {
+            // Asetetaan viite tietoalkioon.
+            Tieto tieto = (Tieto)sisalto.alkio(i);
+            // Kutsutaan terminaalin tulostusmetodia, joka ottaa parametrina merkkijonon.
+            // Merkkijono koostuu nykyisen hakemiston hakemistopolusta sekä tiedon merkkijonoesityksestä.
+            tulos.lisaaLoppuun(hakemisto.hakemistopolku() + tieto.toString());
+            // Jos tieto on Hakemisto-tyyppinen, metodi kutsuu itseään ja antaa tiedon parametrina.
+            if (tieto instanceof Hakemisto) {
+                hakemistopuunSisalto((Hakemisto)tieto, tulos);
+            }
+        }
+    }
 }

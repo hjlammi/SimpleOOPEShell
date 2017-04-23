@@ -2,7 +2,6 @@ package oope2017ht;
 
 import oope2017ht.omalista.OmaLista;
 import oope2017ht.tiedot.Hakemisto;
-import oope2017ht.tiedot.Tiedosto;
 import oope2017ht.tiedot.Tieto;
 
 /*
@@ -113,7 +112,10 @@ public class Kayttoliittyma {
                         error();
                     }
                 } else if (osat[0].equals(Tulkki.REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
-                    puunTulostus(tulkki.tyohakemisto);
+                    OmaLista hakemistopuu = tulkki.hakemistopuunSisalto(tulkki.tyohakemisto);
+                    for (int i = 0; i < hakemistopuu.koko(); i++) {
+                        terminaali.tulosta(hakemistopuu.alkio(i).toString());
+                    }
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
                 } else {
@@ -128,28 +130,6 @@ public class Kayttoliittyma {
         } while (!syote.equals(Tulkki.LOPETUS));
     }
 
-
-    /*
-     * Apumetodit.
-     */
-
-    // Metodi tulostaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti.
-    private void puunTulostus(Hakemisto hakemisto) {
-        // Asetetaan viite parametrina saadun hakemiston tietoihin.
-        OmaLista sisalto = hakemisto.tiedot();
-        // Käydään hakemiston sisältö läpi.
-        for (int i = 0; i < sisalto.koko(); i++) {
-            // Asetetaan viite tietoalkioon.
-            Tieto tieto = (Tieto)sisalto.alkio(i);
-            // Kutsutaan terminaalin tulostusmetodia, joka ottaa parametrina merkkijonon.
-            // Merkkijono koostuu nykyisen hakemiston hakemistopolusta sekä tiedon merkkijonoesityksestä.
-            terminaali.tulosta(hakemisto.hakemistopolku() + tieto.toString());
-            // Jos tieto on Hakemisto-tyyppinen, metodi kutsuu itseään ja antaa tiedon parametrina.
-            if (tieto instanceof Hakemisto) {
-                puunTulostus((Hakemisto)tieto);
-            }
-        }
-    }
 
     // Metodi kutsuu terminaalin tulosta-metodia, joka tulostaa virheilmoituksen.
     private void error() {
