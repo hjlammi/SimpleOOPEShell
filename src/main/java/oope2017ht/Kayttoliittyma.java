@@ -80,7 +80,9 @@ public class Kayttoliittyma {
                     }
                 // Jos käyttäjä haluaa luoda tiedoston antamallaan nimellä ja koolla:
                 } else if (osat[0].equals(Tulkki.TIEDOSTON_LUOMINEN) && osat.length == 3) {
-                    if (!tulkki.luoTiedosto(osat)) {
+                    String nimi = osat[1];
+                    int koko = Integer.parseInt(osat[2]);
+                    if (!tulkki.luoTiedosto(nimi, koko)) {
                         error();
                     }
                 // Jos käyttäjä haluaa uudelleennimetä olemassa olevan tiedon:

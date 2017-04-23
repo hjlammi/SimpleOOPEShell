@@ -143,22 +143,14 @@ public class Tulkki {
     }
 
  // Metodi luo tiedoston, jonka nimi on parametrina saadun taulukon toinen alkio.
-    public boolean luoTiedosto(String[] osat) {
-        // Tiedoston nimi.
-        String nimi = osat[1];
-        // Tiedoston koko on taulukon kolmas alkio.
-        int koko = Integer.parseInt(osat[2]);
+    public boolean luoTiedosto(String nimi, int koko) {
         // Luodaan uusi tiedosto-olio ja annetaan rakentajalle parametreina käyttäjän antamat nimi ja koko.
         Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
         // Kutsutaan Hakemiston lisaa-metodia, joka lisää tiedoston työhakemistoon.
         // Paluuarvo on true, jos lisääminen onnistui.
         boolean onnistui = tyohakemisto.lisaa(lisattava);
              // Jos paluuarvo oli false, lisääminen ei onnistunut ja tulostetaan virheilmoitus.
-        if (onnistui) {
-            return true;
-        } else {
-            return false;
-        }
+        return onnistui;
     }
 
     // Metodi luo hakemiston, jonka nimi on parametrina saadun taulukon toinen alkio.
