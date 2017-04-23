@@ -181,13 +181,8 @@ public class Tulkki {
         Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tyohakemisto);
         // Kutsutaan Hakemiston lisaa-metodia, joka lisää hakemiston työhakemistoon.
         // Paluuarvo on true, jos lisääminen onnistuu.
-        boolean onnistui = tyohakemisto.lisaa(lisattava);
         // Jos paluuarvo oli false, lisääminen ei onnistunut ja tulostetaan virheilmoitus.
-        if (onnistui) {
-            return true;
-        } else {
-            return false;
-        }
+        return tyohakemisto.lisaa(lisattava);
     }
 
     // Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot,
