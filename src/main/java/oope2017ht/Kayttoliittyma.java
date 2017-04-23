@@ -104,7 +104,8 @@ public class Kayttoliittyma {
                     tulkki.siirryJuurihakemistoon();
                 // Jos käyttäjä haluaa siirtyä johonkin alihakemistoistaan:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..") && osat.length == 2) {
-                    if (!tulkki.siirryAlihakemistoon(osat)) {
+                    String nimi = osat[1];
+                    if (!tulkki.siirryAlihakemistoon(nimi)) {
                         error();
                     }
                 // Jos käyttäjä haluaa siirtyä nykyisen hakemiston ylihakemistoon:
