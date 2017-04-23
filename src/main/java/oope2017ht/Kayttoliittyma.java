@@ -2,14 +2,13 @@ package oope2017ht;
 
 import oope2017ht.omalista.OmaLista;
 import oope2017ht.tiedot.Hakemisto;
-import oope2017ht.tiedot.Tieto;
 
 /*
 * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
 *
 * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
 *
-* Viimeksi muokattu 21.4.2017.
+* Viimeksi muokattu 23.4.2017.
 *
 *
 */
