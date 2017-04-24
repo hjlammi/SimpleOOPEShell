@@ -67,27 +67,14 @@ public class Kayttoliittyma {
                     terminaali.tulosta(Tulkki.LOPETUSVIESTI);
                 // Jos käyttäjä haluaa listata hakemiston sisällön, komento ei sisällä komentoriviparametreja.
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 1) {
-                    // Kutsutaan tulkin metodia, joka antaa hakemiston sisällön paluuarvona.
-                    OmaLista sisalto = tulkki.hakemistonSisalto();
-                    // Käydään paluuarvona saatu lista läpi ja tulostetaan listan alkiot.
-                    for (int i = 0; i < sisalto.koko(); i++) {
-                        terminaali.tulosta(sisalto.alkio(i).toString());
-                    }
+                    // Kutsutaan metodia, joka listaa hakemiston sisällön.
+                    listaaHakemistonSisalto();
                 // Jos käyttäjä haluaa tulostaa näytölle tiedon merkkijonoesityksen, hän antaa
                 // tiedon nimen komentoriviparametrina.
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 2) {
                     // Tiedon nimi.
                     String nimi = osat[1];
-                    // Kutsutaan tulkin metodia, joka saa parametrina tiedon nimen
-                    // ja palauttaa sen merkkijonoesityksen.
-                    String mjono = tulkki.tietoMjonona(nimi);
-                    // Jos metodi palautti nullin eli tietoa ei saatu merkkijonona, tulostetaan virheilmoitus.
-                    if (mjono == null) {
-                        error();
-                    // Jos tiedon merkkijonoesitys saatiin paluuarvona, tulostetaan se.
-                    } else {
-                        terminaali.tulosta(mjono);
-                    }
+                    naytaTietoMjonona(nimi);
                 // Jos käyttäjä haluaa luoda hakemiston komentoriviparametrina antamallansa nimellä:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_LUOMINEN) && osat.length == 2) {
                     // Tiedon nimi.
@@ -165,13 +152,8 @@ public class Kayttoliittyma {
                     }
                 // Jos käyttäjä haluaa listata nykyisen hakemiston hakemistopuun:
                 } else if (osat[0].equals(Tulkki.REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
-                    // Kutsutaan tulkin metodia, joka tallentaa OmaLista-tyyppiseen muuttujaan
-                    // viitteen hakemistopuun sisältöön.
-                    OmaLista hakemistopuu = tulkki.hakemistopuunSisalto(tulkki.tyohakemisto);
-                    // Tulostetaan hakemistopuu-listan sisältö alkio kerrallaan.
-                    for (int i = 0; i < hakemistopuu.koko(); i++) {
-                        terminaali.tulosta(hakemistopuu.alkio(i).toString());
-                    }
+                    // Kutsutaan metodia, joka listaa hakemistopuun rekursiivisesti.
+                    listaaRekursiivisesti();
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
                 // virheilmoitus.
                 } else {
@@ -187,9 +169,42 @@ public class Kayttoliittyma {
     }
 
 
+
     /*
-     * Apumetodit.
+     * Apumetodit suorita-metodin käytettäväksi.
      */
+
+    private void listaaRekursiivisesti() {
+        // Kutsutaan tulkin metodia, joka tallentaa OmaLista-tyyppiseen muuttujaan
+        // viitteen hakemistopuun sisältöön.
+        OmaLista hakemistopuu = tulkki.hakemistopuunSisalto(tulkki.tyohakemisto);
+        // Tulostetaan hakemistopuu-listan sisältö alkio kerrallaan.
+        for (int i = 0; i < hakemistopuu.koko(); i++) {
+            terminaali.tulosta(hakemistopuu.alkio(i).toString());
+        }
+    }
+
+    private void naytaTietoMjonona(String nimi) {
+        // Kutsutaan tulkin metodia, joka saa parametrina tiedon nimen
+        // ja palauttaa sen merkkijonoesityksen.
+        String mjono = tulkki.tietoMjonona(nimi);
+        // Jos metodi palautti nullin eli tietoa ei saatu merkkijonona, tulostetaan virheilmoitus.
+        if (mjono == null) {
+            error();
+        // Jos tiedon merkkijonoesitys saatiin paluuarvona, tulostetaan se.
+        } else {
+            terminaali.tulosta(mjono);
+        }
+    }
+
+    private void listaaHakemistonSisalto() {
+        // Kutsutaan tulkin metodia, joka antaa hakemiston sisällön paluuarvona.
+        OmaLista sisalto = tulkki.hakemistonSisalto();
+        // Käydään paluuarvona saatu lista läpi ja tulostetaan listan alkiot.
+        for (int i = 0; i < sisalto.koko(); i++) {
+            terminaali.tulosta(sisalto.alkio(i).toString());
+        }
+    }
 
     // Metodi kutsuu terminaalin tulosta-metodia, joka tulostaa virheilmoituksen.
     private void error() {
