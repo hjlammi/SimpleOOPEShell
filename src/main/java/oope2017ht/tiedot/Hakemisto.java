@@ -1,7 +1,7 @@
 package oope2017ht.tiedot;
 
 /**
-  * Tieto-luokka, jonka attribuutit ovat OmaLista tiedoille, jotka hakemisto sisältää sekä ylihakemisto.
+  * Hakemisto-luokka, jonka attribuutit ovat OmaLista tiedoille, jotka hakemisto sisältää, sekä ylihakemisto.
   * Luokka korvaa toString-metodin ja toteuttaa Komennettava-rajapinnan.
   * <p>
   * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
@@ -49,7 +49,7 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      * Aksessorit.
      */
 
-    public void sisalto(OmaLista tiedot) {
+    public void tiedot(OmaLista tiedot) {
         this.tiedot = tiedot;
     }
 
@@ -78,15 +78,24 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
     /*
      * Aksessori, joka antaa viitteen hakemiston sisällön säilövään listaan.
      */
+
+    /**
+      * {@inheritDoc}
+      */
     @Override
     public LinkitettyLista sisalto() {
         return tiedot;
     }
 
-    /* Hakee hakemistosta parametrina saatua nimeä vastaavaa tiedostoa tai alihakemistoa.
+    /*
+     * Hakee hakemistosta parametrina saatua nimeä vastaavaa tiedostoa tai alihakemistoa.
      * Hyödyntää OmaLista-luokan hae-operaatiota. Paluuarvo on viite löydettyyn tietoon tai null,
      * jos tietoa ei löydetä.
      */
+    /** {@inheritDoc}
+      *
+      * @return {@inheritDoc}
+      */
     @Override
     public Tieto hae(String nimi) {
         if (nimi != null) {
@@ -106,6 +115,10 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      * lisaa-operaatiota. Paluuarvo on true, jos lisääminen onnistui ja false, jos tieto on null-arvoinen
      * tai hakemistossa on jo tieto parametrina annetulla nimellä.
      */
+    /** {@inheritDoc}
+      *
+      * @return {@inheritDoc}
+      */
     @Override
     public boolean lisaa(Tieto lisattava) {
         // Tarkistetaan, ettei lisättävä ole null-arvoinen.
@@ -130,6 +143,10 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      * Hyödyntää OmaLista-luokan poista-operaatiota. Paluuarvo on viite poistettuun tietoon tai
      * null, jos tietoa ei löydetä.
      */
+    /** {@inheritDoc}
+      *
+      * @return {@inheritDoc}
+      */
     @Override
     public Tieto poista(String nimi) {
         if (nimi != null) {
