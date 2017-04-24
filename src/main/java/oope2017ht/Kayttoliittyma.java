@@ -56,7 +56,7 @@ public class Kayttoliittyma {
      */
 
     // Käyttöliittymä komentaa tulkkia, joka vastaa ohjelman logiikasta.
-    Tulkki tulkki;
+    private Tulkki tulkki;
 
     /*
      * Rakentajat.
