@@ -5,15 +5,15 @@ import oope2017ht.tiedot.Hakemisto;
 import oope2017ht.tiedot.Tiedosto;
 import oope2017ht.tiedot.Tieto;
 
-/*
-* Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
-*
-* Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
-*
-* Viimeksi muokattu 24.4.2017.
-*
-* Tulkki hallinnoi hakemistopuuta toteuttamalla hakemistopuuta käsittelevät metodit.
-*/
+/**
+  * Tulkki hallinnoi hakemistopuuta toteuttamalla hakemistopuuta käsittelevät metodit.
+  * <p>
+  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+  * <p>
+  * Viimeksi muokattu 24.4.2017.
+  * <p>
+  * @author Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+  */
 
 public class Tulkki {
 
@@ -21,10 +21,10 @@ public class Tulkki {
      * Attribuutit.
      */
 
-    // Tulkin nykyinen hakemisto.
+    /** Tulkin nykyinen hakemisto, johon kohdistuu suurin osa komennoista.*/
     private Hakemisto tyohakemisto;
 
-    // Tulkin juurihakemisto.
+    /** Tulkin juurihakemisto on hierarkian ylin hakemisto, joka sisältää kaikki muut hakemistot ja tiedostot.*/
     private Hakemisto juurihakemisto;
 
     /*
@@ -54,9 +54,13 @@ public class Tulkki {
      * Apumetodit.
      */
 
-    // Apumetodi uudelleennimeämis- ja kopioimiskomentojen käytettäväksi. Tutkii onko hakemistossa jo parametrina
-    // annetulla nimellä tiedosto tai hakemisto. Jos samanniminen löytyy, palautetaan
-    // true, jos samannimistä ei löydy, palautetaan false.
+    /** Apumetodi uudelleennimeämis- ja kopioimiskomentojen käytettäväksi.
+      * <p>
+      * Tutkii onko hakemistossa jo parametrina annetulla nimellä tiedosto tai hakemisto.
+      *
+      * @param nimi, jolla haetaan tietoa
+      * @return true, jos samanniminen on jo hakemistossa, false jo samannimistä ei ole
+      */
     private boolean nimiVarattu(String nimi) {
         // Kutsutaan Hakemiston hae-metodia, joka palauttaa nullin, jos haettavalla nimellä ei löydy Tietoa.
         Tieto alkio = tyohakemisto.hae(nimi);
@@ -69,13 +73,15 @@ public class Tulkki {
         }
     }
 
-    // Metodilla asetetaan työhakemistoksi juurihakemisto.
+    /** Metodilla asetetaan työhakemistoksi juurihakemisto.*/
     public void siirryJuurihakemistoon() {
         tyohakemisto(juurihakemisto);
     }
 
-    // Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto. Paluuarvo on false,
-    // jos siirtyminen ei onnistunut ja true, jos onnistui.
+    /**
+      *  Metodilla asetetaan työhakemistoksi nykyisen hakemiston ylihakemisto. Paluuarvo on false,
+      * @return true, jos hakemistoon siirtyminen onnistui, false, jos ei onnistunut
+      */
     public boolean siirryYlihakemistoon() {
         // Juurihakemistosta ei voi siirtyä ylihakemistoon.
         if (tyohakemisto == juurihakemisto) {
@@ -89,8 +95,11 @@ public class Tulkki {
         }
     }
 
-    // Metodilla asetetaan työhakemistoksi alihakemisto, jonka nimi saadaan parametrina.
-    // Jos alihakemistoon siirtyminen ei onnistunut, palautetaan false, jos onnistui, palautetaan true.
+    /**
+      *  Metodilla asetetaan työhakemistoksi alihakemisto, jonka nimi saadaan parametrina.
+      * @param sen alihakemiston nimi, johon siirrytään
+      * @return true, jos alihakemistoon siirtyminen onnistui, false, jos ei onnistunut
+      */
     public boolean siirryAlihakemistoon(String nimi) {
         // Haetaan hakemistosta nimellä.
         Tieto alkio = tyohakemisto.hae(nimi);
@@ -104,8 +113,11 @@ public class Tulkki {
         }
     }
 
-    // Metodi poistaa hakemistosta tiedon, jonka nimi saadaan parametrina. Jos tietoa ei onnistuttu
-    // poistamaan palautetaan false, muussa tapauksessa palautetaan true.
+    /**
+      *  Metodi poistaa hakemistosta tiedon, jonka nimi saadaan parametrina.
+      * @param poistettava tieto
+      * @return false, jos poisto ei onnistunut, true, jos onnistui
+      */
     public boolean poista(String poistettava) {
         // Kutsutaan Hakemiston metodia, joka poistaa nimeä vastaavan olion.
         Tieto poistettavaTieto = tyohakemisto.poista(poistettava);
@@ -117,8 +129,12 @@ public class Tulkki {
         }
     }
 
-    // Metodi kopioi tiedoston. Kopioitavan tiedoston nimi ja kopiolle annettava nimi saadaan parametreina.
-    // Jos kopiointi onnistui palautetaan true, jos ei onnistunut, palautetaan false.
+    /**
+      *  Metodi kopioi tiedoston. Kopioitavan tiedoston nimi ja kopiolle annettava nimi saadaan parametreina.
+      * @param sen tiedoston nimi, joka halutaan kopioida
+      * @param kopioNimi on nimi, joka annetaan kopiolle
+      * @return true, jos kopiointi onnistui, false, jos ei onnistunut
+      */
     public boolean kopioiTiedosto(String nimi, String kopioNimi) {
         // Haetaan hakemistosta kopioitava tiedosto nimen perusteella.
         Tieto kopioitava = tyohakemisto.hae(nimi);
@@ -137,9 +153,13 @@ public class Tulkki {
         }
     }
 
-    // Metodi nimeää tiedon uudelleen. Vaihdettavan tiedon vanha ja uusi nimi saadaan parametreina.
-    // Jos vaihtaminen onnistui palautetaan true. Jos uusi nimi on varattu tai vaihdettavan nimistä
-    // tietoa ei löydy hakemistosta, palautetaan false.
+    /**
+      *  Metodi nimeää hakemistossa olevan tiedon uudelleen.
+      * @param vaihdettavaNimi, on sen tiedon nimi, joka halutaan vaihtaa
+      * @param uusiNimi
+      * @return true, jos vaihtaminen onnistui, false, jos uusi nimi on varattu tai vaihdettavan
+      * nimistä ei löydy hakemistosta, jolloin vaihtaminen epäonnistuu
+      */
     public boolean nimeaUudelleen(String vaihdettavaNimi, String uusiNimi) {
         // Kutsutaan metodia, joka tutkii onko parametrina saamansa uusi nimi jo varattu. Jos nimi on varattu,
         // paluuarvo on true ja tulostetaan virheilmoitus.
@@ -159,8 +179,12 @@ public class Tulkki {
         }
     }
 
-    // Metodi luo tiedoston, jonka nimi ja koko saadaan parametreina. Jos tiedoston lisääminen hakemistoon
-    // onnistui palautetaan true, muuten palautetaan false.
+    /**
+      *  Metodi luo tiedoston ja lisää sen työhakemistoon.
+      * @param uuden tiedoston nimi
+      * @param uuden tiedoston koko
+      * @return true, jos tiedoston lisääminen onnistui, false, jos ei onnistunut
+      */
     public boolean luoTiedosto(String nimi, int koko) {
         // Luodaan uusi tiedosto-olio ja annetaan rakentajalle parametreina käyttäjän antamat nimi ja koko.
         Tiedosto lisattava = new Tiedosto(new StringBuilder(nimi), koko);
@@ -169,8 +193,11 @@ public class Tulkki {
         return tyohakemisto.lisaa(lisattava);
     }
 
-    // Metodi luo hakemiston, jonka nimi saadaan parametrina. Jos hakemiston lisääminen nykyiseen hakemistoon onnistui,
-    // palautetaan true, jos ei onnistunut, palautetaan false.
+    /**
+      *  Metodi luo hakemiston ja lisää sen työhakemistoon.
+      * @param uuden hakemiston nimi
+      * @return true, jos hakemiston lisääminen onnistui, false, jos ei onnistunut
+      */
     public boolean luoHakemisto(String nimi) {
         // Luodaan uusi hakemisto-olio parametrina annetulla nimellä.
         Hakemisto lisattava = new Hakemisto(new StringBuilder(nimi), tyohakemisto);
@@ -179,9 +206,11 @@ public class Tulkki {
         return tyohakemisto.lisaa(lisattava);
     }
 
-    // Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot,
-    // jonka nimi annetaan parametrina. Jos haettavaa tietoa ei löydy, palautetaan null,
-    // jos löytyy, palautetaant tiedon merkkijonoesitys.
+    /**
+      * Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot, jonka nimi annetaan parametrina.
+      * @param tiedoston tai hakemiston nimi, jonka tiedot halutaan merkkijonona
+      * @return null, jos haettavaa tietoa ei ole hakemistossa tai tieto merkkijonona, jos tieto löytyy hakemistosta
+      */
     public String tietoMjonona(String nimi) {
         // Haetaan hakemistosta tietoa nimellä hyödyntäen Hakemiston hae-metodia.
         Tieto alkio = tyohakemisto.hae(nimi);
@@ -194,8 +223,10 @@ public class Tulkki {
         }
     }
 
-    // Metodi listaa nykyisen hakemiston koko sisällön aakkosjärjestyksessä.
-    // Paluuarvo on OmaLista-tyyppinen lista hakemiston sisällöstä.
+    /**
+      *  Metodi listaa nykyisen hakemiston koko sisällön aakkosjärjestyksessä.
+      * @return tulos eli lista hakemiston sisällöstä.
+      */
     public OmaLista hakemistonSisalto() {
         // Viite nykyisen hakemiston tietoihin.
         OmaLista tiedot = tyohakemisto.tiedot();
@@ -209,8 +240,11 @@ public class Tulkki {
         return tulos;
     }
 
-    // Metodi tallentaa parametrina saamansa hakemiston hakemistopuun sisällön OmaLista-tyyppiseen
-    // muuttujaan, jonka antaa kutsujalle parametrina.
+    /**
+      *  Metodi tallentaa parametrina saamansa hakemiston hakemistopuun sisällön OmaLista-tyyppiseen muuttujaan.
+      * @param hakemisto, jonka hakemistopuu halutaan lisätä listaan.
+      * @return tulos eli hakemistopuu tallennettuna listalle.
+      */
     public OmaLista hakemistopuunSisalto(Hakemisto hakemisto) {
         // Luodaan uusi OmaLista-olio.
         OmaLista tulos = new OmaLista();
@@ -220,9 +254,12 @@ public class Tulkki {
         return tulos;
     }
 
-    // Yksityinen metodi listaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti
-    // OmaLista-tyyppiselle listalle, jonka antaa paluuarvona kutsuvaan paikkaan. Ylihakemisto
-    // listataan ennen alihakemistojaan.
+    /**
+      *  Metodi listaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti esijärjestyksessä
+      *  OmaLista-tyyppiselle listalle.
+      * @param hakemisto, jonka hakemistopuu halutaan lisätä listaan.
+      * @param tulos-lista, johon hakemistopuu tallennetaan
+      */
     private void hakemistopuunSisalto(Hakemisto hakemisto, OmaLista tulos) {
         // Asetetaan viite parametrina saadun hakemiston tietoihin.
         OmaLista sisalto = hakemisto.tiedot();
