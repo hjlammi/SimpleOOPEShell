@@ -1,5 +1,9 @@
 package oope2017ht.tiedot;
 
+import apulaiset.Komennettava;
+import fi.uta.csjola.oope.lista.LinkitettyLista;
+import oope2017ht.omalista.OmaLista;
+
 /**
   * Hakemisto-luokka, jonka attribuutit ovat OmaLista tiedoille, jotka hakemisto sisältää, sekä ylihakemisto.
   * Luokka korvaa toString-metodin ja toteuttaa Komennettava-rajapinnan.
@@ -10,10 +14,6 @@ package oope2017ht.tiedot;
   * <p>
   * @author Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
   */
-
-import apulaiset.Komennettava;
-import fi.uta.csjola.oope.lista.LinkitettyLista;
-import oope2017ht.omalista.OmaLista;
 
 public class Hakemisto extends Tieto implements Komennettava<Tieto> {
 
@@ -75,26 +75,17 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      * Komennettava-rajapinnan korvattavat metodit.
      */
 
-    /*
-     * Aksessori, joka antaa viitteen hakemiston sisällön säilövään listaan.
-     */
-
     /**
-      * {@inheritDoc}
+      * Aksessori, joka antaa viitteen hakemiston sisällön säilövään listaan.
       */
     @Override
     public LinkitettyLista sisalto() {
         return tiedot;
     }
 
-    /*
-     * Hakee hakemistosta parametrina saatua nimeä vastaavaa tiedostoa tai alihakemistoa.
-     * Hyödyntää OmaLista-luokan hae-operaatiota. Paluuarvo on viite löydettyyn tietoon tai null,
-     * jos tietoa ei löydetä.
-     */
-    /** {@inheritDoc}
-      *
-      * @return {@inheritDoc}
+    /** Hakee hakemistosta parametrina saatua nimeä vastaavaa tiedostoa tai alihakemistoa.
+      * Hyödyntää OmaLista-luokan hae-operaatiota. Paluuarvo on viite löydettyyn tietoon tai null,
+      * jos tietoa ei löydetä.
       */
     @Override
     public Tieto hae(String nimi) {
@@ -111,13 +102,9 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
         }
     }
 
-    /* Lisää hakemistoon parametrina annetun tiedoston tai alihakemiston. Hyödyntää OmaLista-luokan
-     * lisaa-operaatiota. Paluuarvo on true, jos lisääminen onnistui ja false, jos tieto on null-arvoinen
-     * tai hakemistossa on jo tieto parametrina annetulla nimellä.
-     */
-    /** {@inheritDoc}
-      *
-      * @return {@inheritDoc}
+    /** Lisää hakemistoon parametrina annetun tiedoston tai alihakemiston. Hyödyntää OmaLista-luokan
+      * lisaa-operaatiota. Paluuarvo on true, jos lisääminen onnistui ja false, jos tieto on null-arvoinen
+      * tai hakemistossa on jo tieto parametrina annetulla nimellä.
       */
     @Override
     public boolean lisaa(Tieto lisattava) {
@@ -139,13 +126,10 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
         }
     }
 
-    /* Poistaa hakemistosta parametrina saatua nimeä vastaavan tiedoston tai alihakemiston.
-     * Hyödyntää OmaLista-luokan poista-operaatiota. Paluuarvo on viite poistettuun tietoon tai
-     * null, jos tietoa ei löydetä.
-     */
-    /** {@inheritDoc}
-      *
-      * @return {@inheritDoc}
+    /**
+      *  Poistaa hakemistosta parametrina saatua nimeä vastaavan tiedoston tai alihakemiston.
+      * Hyödyntää OmaLista-luokan poista-operaatiota. Paluuarvo on viite poistettuun tietoon tai
+      * null, jos tietoa ei löydetä.
       */
     @Override
     public Tieto poista(String nimi) {

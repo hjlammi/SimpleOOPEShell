@@ -1,28 +1,25 @@
 package oope2017ht.omalista;
 
-/*
- * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
- *
- * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
- *
- * Viimeksi muokattu 13.3.2017.
- *
- * OmaLista-luokka periytyy LinkitettyLista-luokasta ja toteuttaa Ooperoiva-rajapinnan.
- */
-
 import apulaiset.Ooperoiva;
-
 import fi.uta.csjola.oope.lista.LinkitettyLista;
+
+/**
+  * OmaLista-luokka periytyy LinkitettyLista-luokasta ja toteuttaa Ooperoiva-rajapinnan.
+  * <p>
+  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+  * <p>
+  * Viimeksi muokattu 13.3.2017.
+  * <p>
+  * @author Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+  */
 
 public class OmaLista extends LinkitettyLista implements Ooperoiva {
 
-    /*
-     * Hakee listalta parametri-oliota equals-mielessä vastaavan olion, johon antaa viitteen paluuarvona.
-     * Oletetaan, että listassa on korkeintaan yksi samanlainen olio. Paluuarvo on null,
-     * jos parametri on null, jos lista on tyhjä tai jos vastaavaa alkiota ei löydy.
-     * (non-Javadoc)
-     * @see apulaiset.Ooperoiva#hae(java.lang.Object)
-     */
+    /**
+      * Hakee listalta parametri-oliota equals-mielessä vastaavan olion, johon antaa viitteen paluuarvona.
+      * Oletetaan, että listassa on korkeintaan yksi samanlainen olio. Paluuarvo on null,
+      * jos parametri on null, jos lista on tyhjä tai jos vastaavaa alkiota ei löydy.
+      */
     public Object hae(Object haettava) {
         // Tarkistetaan ettei parametri ole null-arvoinen ja ettei lista ole tyhjä.
         if (haettava != null && !onkoTyhja()) {
@@ -39,16 +36,14 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva {
         }
     }
 
-    /*
-     * Lisaa-metodi vertailee parametrina saamaansa oliota ja listassa olevaa olioita compareTo-metodilla
-     * ja sijoittaa parametri-olion kaikkien itseään pienempien tai yhtä suurien alkioiden
-     * jälkeen ja ennen kaikkia itseään suurempia alkioita. Metodilla saadaan siis tehtyä
-     * kasvavassa suuruusjärjestyksessä oleva lista. Paluuarvo on true, jos lisäys onnistui
-     * ja false, jos parametri on null, jos olioita ei voitu vertailla tai jos oliot eivät ole samantyyppisiä,
-     * jolloin niitä ei voi vertailla keskenään.
-     * (non-Javadoc)
-     * @see apulaiset.Ooperoiva#lisaa(java.lang.Object)
-     */
+    /**
+      * Lisaa-metodi vertailee parametrina saamaansa oliota ja listassa olevaa olioita compareTo-metodilla
+      * ja sijoittaa parametri-olion kaikkien itseään pienempien tai yhtä suurien alkioiden
+      * jälkeen ja ennen kaikkia itseään suurempia alkioita. Metodilla saadaan siis tehtyä
+      * kasvavassa suuruusjärjestyksessä oleva lista. Paluuarvo on true, jos lisäys onnistui
+      * ja false, jos parametri on null, jos olioita ei voitu vertailla tai jos oliot eivät ole samantyyppisiä,
+      * jolloin niitä ei voi vertailla keskenään.
+      */
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public boolean lisaa(Object uusi) {
@@ -78,13 +73,11 @@ public class OmaLista extends LinkitettyLista implements Ooperoiva {
         }
     }
 
-    /*
-     * Poistaa listalta parametri-oliota equals-mielessä vastaavan olion, johon antaa viitteen paluuarvona.
-     * Oletetaan, että listassa on korkeintaan yksi samanlainen olio. Paluuarvo on null,
-     * jos parametri on null, jos lista on tyhjä tai jos poistettavaa alkiota ei löydy.
-     * (non-Javadoc)
-     * @see apulaiset.Ooperoiva#hae(java.lang.Object)
-     */
+    /**
+      * Poistaa listalta parametri-oliota equals-mielessä vastaavan olion, johon antaa viitteen paluuarvona.
+      * Oletetaan, että listassa on korkeintaan yksi samanlainen olio. Paluuarvo on null,
+      * jos parametri on null, jos lista on tyhjä tai jos poistettavaa alkiota ei löydy.
+      */
     public Object poista(Object poistettava) {
         // Tarkistetaan, ettei poistettava ole null-arvoinen eikä taulukko ole tyhjä.
         if (poistettava != null && !onkoTyhja()) {
