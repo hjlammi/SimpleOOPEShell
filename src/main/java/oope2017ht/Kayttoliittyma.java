@@ -237,7 +237,7 @@ public class Kayttoliittyma {
 
     /** Metodi tulostaa parametrina saamaansa nimeä vastaavan tiedon merkkijonoesityksen.
       *
-      * @param nimi, jota vastaavat tiedot tulostetaan merkkijonona.
+      * @param nimi viittaa tietoon, joka tulostetaan merkkijonona.
       */
     private void tulostaTietoMjonona(String nimi) {
         // Kutsutaan tulkin metodia, joka saa parametrina tiedon nimen

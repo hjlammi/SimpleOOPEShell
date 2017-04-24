@@ -58,7 +58,7 @@ public class Tulkki {
       * <p>
       * Tutkii onko hakemistossa jo parametrina annetulla nimellä tiedosto tai hakemisto.
       *
-      * @param nimi, jolla haetaan tietoa
+      * @param nimi viittaa tietoon, jota haetaan
       * @return true, jos samanniminen on jo hakemistossa, false jo samannimistä ei ole
       */
     private boolean nimiVarattu(String nimi) {
@@ -116,7 +116,7 @@ public class Tulkki {
     /**
       *  Metodi poistaa hakemistosta tiedon, jonka nimi saadaan parametrina.
       * @param poistettava tieto
-      * @return false, jos poisto ei onnistunut, true, jos onnistui
+      * @return true, jos poisto onnistui, false, jos ei onnistunut
       */
     public boolean poista(String poistettava) {
         // Kutsutaan Hakemiston metodia, joka poistaa nimeä vastaavan olion.
@@ -131,8 +131,8 @@ public class Tulkki {
 
     /**
       *  Metodi kopioi tiedoston. Kopioitavan tiedoston nimi ja kopiolle annettava nimi saadaan parametreina.
-      * @param sen tiedoston nimi, joka halutaan kopioida
-      * @param kopioNimi on nimi, joka annetaan kopiolle
+      * @param nimi viittaa tiedostoon, joka halutaan kopioida
+      * @param kopioNimi viittaa nimeen, joka annetaan kopiolle
       * @return true, jos kopiointi onnistui, false, jos ei onnistunut
       */
     public boolean kopioiTiedosto(String nimi, String kopioNimi) {
@@ -155,7 +155,7 @@ public class Tulkki {
 
     /**
       *  Metodi nimeää hakemistossa olevan tiedon uudelleen.
-      * @param vaihdettavaNimi, on sen tiedon nimi, joka halutaan vaihtaa
+      * @param vaihdettavaNimi viittaa sen tiedon nimeen, joka halutaan vaihtaa
       * @param uusiNimi
       * @return true, jos vaihtaminen onnistui, false, jos uusi nimi on varattu tai vaihdettavan
       * nimistä ei löydy hakemistosta, jolloin vaihtaminen epäonnistuu
@@ -181,8 +181,8 @@ public class Tulkki {
 
     /**
       *  Metodi luo tiedoston ja lisää sen työhakemistoon.
-      * @param uuden tiedoston nimi
-      * @param uuden tiedoston koko
+      * @param nimi
+      * @param koko
       * @return true, jos tiedoston lisääminen onnistui, false, jos ei onnistunut
       */
     public boolean luoTiedosto(String nimi, int koko) {
@@ -195,7 +195,7 @@ public class Tulkki {
 
     /**
       *  Metodi luo hakemiston ja lisää sen työhakemistoon.
-      * @param uuden hakemiston nimi
+      * @param nimi
       * @return true, jos hakemiston lisääminen onnistui, false, jos ei onnistunut
       */
     public boolean luoHakemisto(String nimi) {
@@ -208,7 +208,7 @@ public class Tulkki {
 
     /**
       * Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot, jonka nimi annetaan parametrina.
-      * @param tiedoston tai hakemiston nimi, jonka tiedot halutaan merkkijonona
+      * @param nimi viittaa tiedostoon tai hakemistoon, jonka tiedot halutaan merkkijonona
       * @return null, jos haettavaa tietoa ei ole hakemistossa tai tieto merkkijonona, jos tieto löytyy hakemistosta
       */
     public String tietoMjonona(String nimi) {
@@ -257,8 +257,8 @@ public class Tulkki {
     /**
       *  Metodi listaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti esijärjestyksessä
       *  OmaLista-tyyppiselle listalle.
-      * @param hakemisto, jonka hakemistopuu halutaan lisätä listaan.
-      * @param tulos-lista, johon hakemistopuu tallennetaan
+      * @param hakemisto viittaa hakemistoon, jonka hakemistopuu halutaan lisätä listaan.
+      * @param tulos eli lista, johon hakemistopuu tallennetaan
       */
     private void hakemistopuunSisalto(Hakemisto hakemisto, OmaLista tulos) {
         // Asetetaan viite parametrina saadun hakemiston tietoihin.
