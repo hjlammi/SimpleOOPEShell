@@ -4,16 +4,16 @@ import apulaiset.In;
 import oope2017ht.omalista.OmaLista;
 import oope2017ht.tiedot.Hakemisto;
 
-/*
-* Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
-*
-* Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
-*
-* Viimeksi muokattu 24.4.2017.
-*
-* Käyttöliittymä vastaa vuorovaikutuksesta käyttäjän kanssa. Käyttäjä antaa käyttöliittymän välityksellä
-* ohjelmalle komentoja, jotka käyttöliittymä välittää tulkille toteutettavaksi.
-*/
+/**
+  * Käyttöliittymä vastaa vuorovaikutuksesta käyttäjän kanssa. Käyttäjä antaa käyttöliittymän välityksellä
+  * ohjelmalle komentoja, jotka käyttöliittymä välittää tulkille toteutettavaksi.
+  * <p>
+  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+  * <p>
+  * Viimeksi muokattu 24.4.2017.
+  * <p>
+  * @author Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+  */
 
 public class Kayttoliittyma {
 
@@ -22,32 +22,47 @@ public class Kayttoliittyma {
      */
 
     // Käyttäjän antamat komennot.
+
+    /** Komennolla listataan nykyisen hakemiston hakemistopuu rekursiivisesti esijärjestyksessä. */
     private static final String REKURSIIVINEN_LISTAAMINEN = "find";
 
+    /** Komennolla vaihdetaan hakemistoa.*/
     private static final String HAKEMISTON_VAIHTAMINEN = "cd";
 
+    /** Komennolla poistetaan hakemisto tai tiedosto.*/
     private static final String POISTAMINEN = "rm";
 
+    /** Komennolla kopioidaan hakemisto tai tiedosto.*/
     private static final String KOPIOIMINEN = "cp";
 
+    /** Komennolla nimetään hakemisto tai tiedosto uudelleen.*/
     private static final String UUDELLEEN_NIMEAMINEN = "mv";
 
+    /** Komennolla luodaan tiedosto.*/
     private static final String TIEDOSTON_LUOMINEN = "mf";
 
+    /** Komennolla luodaan hakemisto.*/
     private static final String HAKEMISTON_LUOMINEN = "md";
 
+    /** Komennolla listataan hakemiston sisältö tai tulostetaan parametrina annetun tiedon merkkijonoesitys.*/
     private static final String LISTAAMINEN = "ls";
 
+    /** Komennolla poistutaan ohjelmasta.*/
     private static final String LOPETUS = "exit";
 
 
     // Tulosteet käyttäjälle.
+
+    /** Merkin jälkeen odotetaan käyttäjän syötettä.*/
     private static final String KEHOTE = ">";
 
+    /** Tervehdysteksti ohjelman alussa.*/
     private static final String TERVEHDYS = "Welcome to SOS.";
 
+    /** Lopetusviesti poistumiskomennon jälkeen.*/
     private static final String LOPETUSVIESTI = "Shell terminated.";
 
+    /** Virheilmoitus.*/
     private static final String VIRHEILMOITUS = "Error!";
 
 
@@ -55,14 +70,14 @@ public class Kayttoliittyma {
      * Attribuutit.
      */
 
-    // Käyttöliittymä komentaa tulkkia, joka vastaa ohjelman logiikasta.
+    /** Käyttöliittymä komentaa tulkkia, joka toteuttaa ohjelman komennot.*/
     private Tulkki tulkki;
 
     /*
      * Rakentajat.
      */
 
-    // Oletusrakentaja juurihakemiston luomiseen.
+    /** Oletusrakentaja, jossa luodaan oletusjuurihakemisto.*/
     public Kayttoliittyma() {
         this.tulkki = new Tulkki();
         tulkki.juurihakemisto(new Hakemisto());
@@ -75,8 +90,9 @@ public class Kayttoliittyma {
         tulkki.tyohakemisto(juurihakemisto);
     }
 
-    // Metodi pyytää käyttäjältä komentoja ja kutsuu komentoja vastaavia tulkkiluokan metodeja.
-    // Metodin suoritusta jatketaan, kunnes käyttäjä syöttää lopetuskomennon.
+    /** Metodi pyytää käyttäjältä komentoja ja kutsuu komentoja vastaavia tulkkiluokan metodeja.
+      * Metodin suoritusta jatketaan, kunnes käyttäjä syöttää lopetuskomennon.
+      */
     public void suorita() {
         // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
         System.out.println(TERVEHDYS);
@@ -202,12 +218,13 @@ public class Kayttoliittyma {
     }
 
 
-
     /*
      * Apumetodit suorita-metodin käytettäväksi.
      */
 
-    // Metodi tulostaa hakemistopuun sisällön rekursiivisesti eli ylihakemisto tulostetaan ennen alihakemistojaan.
+    /** Metodi tulostaa hakemistopuun sisällön rekursiivisesti niin,
+      * että ylihakemisto tulostetaan ennen alihakemistojaan.
+      */
     private void listaaRekursiivisesti() {
         // Kutsutaan tulkin metodia, joka tallentaa OmaLista-tyyppiseen muuttujaan
         // viitteen hakemistopuun sisältöön.
@@ -218,7 +235,10 @@ public class Kayttoliittyma {
         }
     }
 
-    // Metodi tulostaa parametrina saamaansa nimeä vastaavan tiedon merkkijonoesityksen.
+    /** Metodi tulostaa parametrina saamaansa nimeä vastaavan tiedon merkkijonoesityksen.
+      *
+      * @param nimi, jota vastaavat tiedot tulostetaan merkkijonona.
+      */
     private void tulostaTietoMjonona(String nimi) {
         // Kutsutaan tulkin metodia, joka saa parametrina tiedon nimen
         // ja palauttaa sen merkkijonoesityksen.
@@ -232,8 +252,9 @@ public class Kayttoliittyma {
         }
     }
 
-    // Metodi tulostaa näytölle hakemiston sisällön nousevassa aakkosjärjestyksessä
-    // (koska tiedot ovat hakemistossa valmiiksi aakkosjärjestyksessä).
+    /** Metodi tulostaa näytölle hakemiston sisällön nousevassa aakkosjärjestyksessä
+      * (koska tiedot ovat hakemistossa valmiiksi aakkosjärjestyksessä).
+      */
     private void listaaHakemistonSisalto() {
         // Kutsutaan tulkin metodia, joka antaa hakemiston sisällön paluuarvona.
         OmaLista sisalto = tulkki.hakemistonSisalto();
@@ -243,7 +264,7 @@ public class Kayttoliittyma {
         }
     }
 
-    // Metodi kutsuu terminaalin tulosta-metodia, joka tulostaa virheilmoituksen.
+    /** Metodi tulostaa virheilmoituksen.*/
     private void error() {
         System.out.println(VIRHEILMOITUS);
     }
