@@ -65,14 +65,14 @@ public class Kayttoliittyma {
     // Oletusrakentaja juurihakemiston luomiseen.
     public Kayttoliittyma() {
         this.tulkki = new Tulkki();
-        tulkki.juurihakemisto = new Hakemisto();
-        tulkki.tyohakemisto = tulkki.juurihakemisto;
+        tulkki.juurihakemisto(new Hakemisto());
+        tulkki.tyohakemisto(tulkki.juurihakemisto());
     }
 
     public Kayttoliittyma(Hakemisto juurihakemisto) {
         this.tulkki = new Tulkki();
-        tulkki.juurihakemisto = juurihakemisto;
-        tulkki.tyohakemisto = juurihakemisto;
+        tulkki.juurihakemisto(juurihakemisto);
+        tulkki.tyohakemisto(juurihakemisto);
     }
 
     // Metodi pyytää käyttäjältä komentoja ja kutsuu komentoja vastaavia tulkkiluokan metodeja.
@@ -87,7 +87,7 @@ public class Kayttoliittyma {
         do {
             // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen ja
             // lukee käyttäjän antaman syötteen  syote-muuttujaan.
-            System.out.print(tulkki.tyohakemisto.hakemistopolku() + KEHOTE);
+            System.out.print(tulkki.tyohakemisto().hakemistopolku() + KEHOTE);
             syote = In.readString();
             // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
@@ -211,7 +211,7 @@ public class Kayttoliittyma {
     private void listaaRekursiivisesti() {
         // Kutsutaan tulkin metodia, joka tallentaa OmaLista-tyyppiseen muuttujaan
         // viitteen hakemistopuun sisältöön.
-        OmaLista hakemistopuu = tulkki.hakemistopuunSisalto(tulkki.tyohakemisto);
+        OmaLista hakemistopuu = tulkki.hakemistopuunSisalto(tulkki.tyohakemisto());
         // Tulostetaan hakemistopuun sisältö alkio kerrallaan.
         for (int i = 0; i < hakemistopuu.koko(); i++) {
             System.out.println(hakemistopuu.alkio(i).toString());

@@ -22,10 +22,10 @@ public class Tulkki {
      */
 
     // Tulkin nykyinen hakemisto.
-    Hakemisto tyohakemisto;
+    private Hakemisto tyohakemisto;
 
     // Tulkin juurihakemisto.
-    Hakemisto juurihakemisto;
+    private Hakemisto juurihakemisto;
 
     /*
      * Aksessorit.
@@ -38,6 +38,16 @@ public class Tulkki {
 
     public Hakemisto tyohakemisto() {
         return tyohakemisto;
+    }
+
+    public void juurihakemisto(Hakemisto juurihakemisto) {
+        if (juurihakemisto != null) {
+            this.juurihakemisto = juurihakemisto;
+        }
+    }
+
+    public Hakemisto juurihakemisto() {
+        return juurihakemisto;
     }
 
     /*
