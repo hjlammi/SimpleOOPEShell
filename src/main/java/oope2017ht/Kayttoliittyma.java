@@ -10,7 +10,8 @@ import oope2017ht.tiedot.Hakemisto;
 *
 * Viimeksi muokattu 24.4.2017.
 *
-* Käyttöliittymä vastaa vuorovaikutuksesta käyttäjän kanssa.
+* Käyttöliittymä vastaa vuorovaikutuksesta käyttäjän kanssa. Käyttäjä antaa käyttöliittymän välityksellä
+* ohjelmalle komentoja, jotka käyttöliittymä välittää tulkille toteutettavaksi.
 */
 
 public class Kayttoliittyma {
@@ -43,8 +44,8 @@ public class Kayttoliittyma {
         tulkki.tyohakemisto = juurihakemisto;
     }
 
-    // Metodi pyytää käyttäjältä komentoja ja suorittaa komentojen mukaiset asiat siihen asti,
-    // kunnes käyttäjä syöttää lopetuskomennon.
+    // Metodi pyytää käyttäjältä komentoja ja kutsuu komentoja vastaavia tulkkiluokan metodeja.
+    // Metodin suoritusta jatketaan, kunnes käyttäjä syöttää lopetuskomennon.
     public void suorita() {
         // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
         terminaali.tulosta(Tulkki.TERVEHDYS);
@@ -74,7 +75,7 @@ public class Kayttoliittyma {
                 } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 2) {
                     // Tiedon nimi.
                     String nimi = osat[1];
-                    naytaTietoMjonona(nimi);
+                    tulostaTietoMjonona(nimi);
                 // Jos käyttäjä haluaa luoda hakemiston komentoriviparametrina antamallansa nimellä:
                 } else if (osat[0].equals(Tulkki.HAKEMISTON_LUOMINEN) && osat.length == 2) {
                     // Tiedon nimi.
@@ -174,17 +175,19 @@ public class Kayttoliittyma {
      * Apumetodit suorita-metodin käytettäväksi.
      */
 
+    // Metodi tulostaa hakemistopuun sisällön rekursiivisesti eli ylihakemisto tulostetaan ennen alihakemistojaan.
     private void listaaRekursiivisesti() {
         // Kutsutaan tulkin metodia, joka tallentaa OmaLista-tyyppiseen muuttujaan
         // viitteen hakemistopuun sisältöön.
         OmaLista hakemistopuu = tulkki.hakemistopuunSisalto(tulkki.tyohakemisto);
-        // Tulostetaan hakemistopuu-listan sisältö alkio kerrallaan.
+        // Tulostetaan hakemistopuun sisältö alkio kerrallaan.
         for (int i = 0; i < hakemistopuu.koko(); i++) {
             terminaali.tulosta(hakemistopuu.alkio(i).toString());
         }
     }
 
-    private void naytaTietoMjonona(String nimi) {
+    // Metodi tulostaa parametrina saamaansa nimeä vastaavan tiedon merkkijonoesityksen.
+    private void tulostaTietoMjonona(String nimi) {
         // Kutsutaan tulkin metodia, joka saa parametrina tiedon nimen
         // ja palauttaa sen merkkijonoesityksen.
         String mjono = tulkki.tietoMjonona(nimi);
@@ -197,6 +200,8 @@ public class Kayttoliittyma {
         }
     }
 
+    // Metodi tulostaa näytölle hakemiston sisällön nousevassa aakkosjärjestyksessä
+    // (koska tiedot ovat hakemistossa valmiiksi aakkosjärjestyksessä).
     private void listaaHakemistonSisalto() {
         // Kutsutaan tulkin metodia, joka antaa hakemiston sisällön paluuarvona.
         OmaLista sisalto = tulkki.hakemistonSisalto();
