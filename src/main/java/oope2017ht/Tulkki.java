@@ -10,9 +10,9 @@ import oope2017ht.tiedot.Tieto;
 *
 * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
 *
-* Viimeksi muokattu 23.4.2017.
+* Viimeksi muokattu 24.4.2017.
 *
-*
+* Tulkki hallinnoi hakemistopuuta toteuttamalla hakemistopuuta käsittelevät metodit.
 */
 
 public class Tulkki {
@@ -219,8 +219,8 @@ public class Tulkki {
         }
     }
 
-    // Metodi listaa nykyisen hakemiston sisällön. Paluuarvo on OmaLista-tyyppinen lista
-    // hakemiston sisällöstä.
+    // Metodi listaa nykyisen hakemiston koko sisällön aakkosjärjestyksessä.
+    // Paluuarvo on OmaLista-tyyppinen lista hakemiston sisällöstä.
     public OmaLista hakemistonSisalto() {
         // Viite nykyisen hakemiston tietoihin.
         OmaLista tiedot = tyohakemisto.tiedot();
@@ -234,8 +234,8 @@ public class Tulkki {
         return tulos;
     }
 
-    // Metodi tallentaa parametrina saamansa hakemiston sisällön OmaLista-tyyppiseen
-    // muuttujaan, jonka antaa parametrina.
+    // Metodi tallentaa parametrina saamansa hakemiston hakemistopuun sisällön OmaLista-tyyppiseen
+    // muuttujaan, jonka antaa kutsujalle parametrina.
     public OmaLista hakemistopuunSisalto(Hakemisto hakemisto) {
         // Luodaan uusi OmaLista-olio.
         OmaLista tulos = new OmaLista();
@@ -246,7 +246,8 @@ public class Tulkki {
     }
 
     // Yksityinen metodi listaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti
-    // OmaLista-tyyppiselle listalle, jonka antaa paluuarvona kutsuvaan paikkaan.
+    // OmaLista-tyyppiselle listalle, jonka antaa paluuarvona kutsuvaan paikkaan. Ylihakemisto
+    // listataan ennen alihakemistojaan.
     private void hakemistopuunSisalto(Hakemisto hakemisto, OmaLista tulos) {
         // Asetetaan viite parametrina saadun hakemiston tietoihin.
         OmaLista sisalto = hakemisto.tiedot();
@@ -254,7 +255,7 @@ public class Tulkki {
         for (int i = 0; i < sisalto.koko(); i++) {
             // Asetetaan viite tietoalkioon.
             Tieto tieto = (Tieto)sisalto.alkio(i);
-            // Kutsutaan tulos-listan metodia, joka lisää listan loppuun merkkijonon, joka
+            // Kutsutaan metodia, joka lisää listan loppuun merkkijonon, joka
             // koostuu nykyisen hakemiston hakemistopolusta sekä tiedon merkkijonoesityksestä.
             tulos.lisaaLoppuun(hakemisto.hakemistopolku() + tieto.toString());
             // Jos tieto on Hakemisto-tyyppinen, metodi kutsuu itseään ja antaa hakemiston sekä
