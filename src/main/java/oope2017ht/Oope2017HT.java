@@ -1,14 +1,14 @@
 package oope2017ht;
 
-/*
-* Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
-*
-* Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
-*
-* Viimeksi muokattu 23.4.2017.
-*
-* Ajoluokan tehtävänä on luoda käyttöliittymä ja kutsua sen suorita-metodia.
-*/
+/**
+  * Ajoluokan tehtävänä on luoda käyttöliittymä ja suorittaa ohjelma.
+  * <p>
+  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+  * <p>
+  * Viimeksi muokattu 23.4.2017.
+  * <p>
+  * @author Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+  */
 
 public class Oope2017HT
 {
