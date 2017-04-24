@@ -1,18 +1,24 @@
 package oope2017ht.tiedot;
 
-/*
- * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
- *
- * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
- *
- * Viimeksi muokattu 28.3.2017.
- *
- * Tiedosto-luokka periytyy Tieto-luokasta ja korvaa toString-metodin.
- */
+/**
+  * Tiedosto-luokka periytyy Tieto-luokasta ja korvaa toString-metodin.
+  * <p>
+  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+  * <p>
+  * Viimeksi muokattu 28.3.2017.
+  * <p>
+  * @author Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+  */
 
 public class Tiedosto extends Tieto {
 
-    // Attribuutti tiedoston koolle tavuina.
+    /*
+     * Attribuutti.
+     */
+
+    /**
+      * Tiedoston koko tavuina.
+      */
     private int koko;
 
     /*

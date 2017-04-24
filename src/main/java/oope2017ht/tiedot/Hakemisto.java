@@ -1,15 +1,15 @@
 package oope2017ht.tiedot;
 
-/*
- * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
- *
- * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
- *
- * Viimeksi muokattu 21.4.2017.
- *
- * Tieto-luokka, jonka attribuutit ovat OmaLista hakemiston tiedoille ja ylihakemisto.
- * Luokka korvaa toString-metodin ja toteuttaa Komennettava-rajapinnan.
- */
+/**
+  * Tieto-luokka, jonka attribuutit ovat OmaLista tiedoille, jotka hakemisto sisältää sekä ylihakemisto.
+  * Luokka korvaa toString-metodin ja toteuttaa Komennettava-rajapinnan.
+  * <p>
+  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+  * <p>
+  * Viimeksi muokattu 21.4.2017.
+  * <p>
+  * @author Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+  */
 
 import apulaiset.Komennettava;
 import fi.uta.csjola.oope.lista.LinkitettyLista;
@@ -21,16 +21,17 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      * Attribuutit.
      */
 
-    // OmaLista-tyyppinen attribuutti säilöö listan sisällön eli listassa olevat tiedot.
+    /** OmaLista-tyyppinen attribuutti säilöö listan sisällön eli listassa olevat tiedot.*/
     private OmaLista tiedot;
 
-    // Se hakemisto, joka sisältää tämän hakemiston.
+    /** Se hakemisto, joka sisältää tämän hakemiston.*/
     private Hakemisto ylihakemisto;
 
     /*
-     * Rakentaja.
+     * Rakentajat.
      */
-    // Oletusrakentaja juurihakemiston luomista varten.
+
+    /** Oletusrakentaja juurihakemiston luomista varten.*/
     public Hakemisto() {
         super();
         tiedot = new OmaLista();
@@ -145,7 +146,10 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
         }
     }
 
-    // Metodi palauttaa merkkijonona hakemiston hakemistopolun.
+    /** Metodi palauttaa merkkijonona hakemiston hakemistopolun.
+      *
+      * @return hakemiston hakemistopolku
+      */
     public String hakemistopolku() {
         // Jos ylihakemisto on null (eli kyseessä on juurihakemisto), palautetaan hakemiston nimi merkkijonona.
         if (ylihakemisto == null) {

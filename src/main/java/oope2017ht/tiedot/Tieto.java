@@ -1,29 +1,29 @@
 package oope2017ht.tiedot;
 
-/*
- * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
- *
- * Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
- *
- * Viimeksi muokattu 5.4.2017.
- *
- * Tieto-luokka, jonka ainoa attribuutti on nimi. Luokka toteuttaa Comparable-rajapinnan ja
- * korvaa toString- ja equals-metodit.
- */
+/**
+  * Tieto-luokka, jonka ainoa attribuutti on nimi. Luokka toteuttaa Comparable-rajapinnan ja
+  * korvaa toString- ja equals-metodit.
+  * <p>
+  * Harjoitustyö, Olio-ohjelmoinnin perusteet, kevät 2017.
+  * <p>
+  * Viimeksi muokattu 5.4.2017.
+  * <p>
+  * @author Heidi Lammi-Mihaljov, Lammi-Mihaljov.Heidi.J@student.uta.fi.
+  */
 
 public abstract class Tieto implements Comparable<Tieto>{
 
-    // Vakioitu erotin toString-metodin käytettäväksi.
+    /** Vakioitu erotin toString-metodin käytettäväksi.*/
     protected final String EROTIN = " ";
 
-    // Atribuutti nimelle.
+    /** Tiedon nimi*/
     private StringBuilder nimi;
 
     /*
      * Rakentajat.
      */
 
-    // Oletusrakentaja juurihakemiston nimen asettamista varten.
+    /** Oletusrakentaja juurihakemiston nimen asettamista varten.*/
     public Tieto() {
         this.nimi = new StringBuilder("/");
     }
@@ -60,10 +60,13 @@ public abstract class Tieto implements Comparable<Tieto>{
      * Apumetodit nimen oikeellisuuden tarkistamiseen. Public static -määreet, jotta voi käyttää yksikkötestausta.
      */
 
-    // Tutkii, onko parametrina saatu merkkijono ok ja palauttaa tosi, jos merkkijono on ok
-    // ja epätosi, jos merkkijono ei ole ok. Tarkistaa, että nimi on vähintään yhden mittainen ja
-    // kutsuu apumetodeja, jotka tarkistavat, että nimessä on vain sallittuja merkkejä ja että
-    // nimessä on maksimissaan yksi piste, mutta myös muita merkkejä kuin piste.
+    /**
+     * Tutkii, onko parametrina saatu merkkijono ok. Tarkistaa, että nimi on vähintään yhden merkin mittainen ja
+     * kutsuu apumetodeja, jotka tarkistavat, että nimessä on vain sallittuja merkkejä ja että
+     * nimessä on maksimissaan yksi piste, mutta myös muita merkkejä kuin piste. ja palauttaa tosi, jos merkkijono on ok
+     * @param nimi tarkistettava nimi
+     * @return true, jos merkkijono on ok, muuten false
+     */
     public static boolean nimiOk(StringBuilder nimi) {
         if ((nimi.length() > 0) && (vainSallittujaMerkkeja(nimi)) &&
            (pisteitaMaxYksi(nimi))) {
@@ -73,18 +76,25 @@ public abstract class Tieto implements Comparable<Tieto>{
         }
     }
 
-    // Tutkii onko merkkijonossa vain sallittuja merkkejä. Palauttaa tosi, jos kaikki merkit ovat ok
-    // false, jos löytyy yksikin väärä merkki.
+    /**
+      *  Tutkii onko merkkijonossa vain sallittuja merkkejä eli a-z, A-Z, 0-9, alaviiva tai piste.
+      * @param nimi tarkistettava nimi
+      * @return true, jos kaikki merkit ovat sallittuja, muuten false
+      */
     public static boolean vainSallittujaMerkkeja(StringBuilder nimi) {
         boolean merkitOk = true;
         boolean loytyiVaaraMerkki = false;
+        // Käydään nimeä läpi merkki merkiltä, kunnes löytyy vääränlainen merkki tai nimi on käyty läpi.
         for (int i = 0; i < nimi.length() && !loytyiVaaraMerkki; i++) {
             if ((nimi.charAt(i) >= 'a' && nimi.charAt(i) <= 'z') ||
             (nimi.charAt(i) >= 'A' && nimi.charAt(i) <= 'Z') ||
             (nimi.charAt(i) >= '0' && nimi.charAt(i) <= '9') ||
             (nimi.charAt(i) == '_') || (nimi.charAt(i) == '.')){
+                // Jos tutkittava merkki on jokin ylläolevista, merkit ovat edelleen ok.
                 merkitOk = true;
             } else {
+                // Jos merkki on jokin muu kuin yllämainitut merkit, kaikki merkit eivät ole oikeanlaisia,
+                // poistutaan silmukasta ja palautetaan false.
                 merkitOk = false;
                 loytyiVaaraMerkki = true;
             }
@@ -92,20 +102,26 @@ public abstract class Tieto implements Comparable<Tieto>{
         return merkitOk;
     }
 
-    // Tutkii onko nimessä piste-merkkejä vain yksi ja ettei piste ole nimen ainut merkki.
-    // Paluuarvo on false, jos pisteitä on enemmän kuin yksi tai jos piste on nimen ainut
-    // merkki.
+    /**
+     *  Tutkii onko nimessä piste-merkkejä vain yksi ja ettei piste ole nimen ainut merkki.
+     * @param nimi tarkistettava nimi
+     * @return false, jos pisteitä on enemmän kuin yksi tai jos piste on nimen ainut merkki, muuten true
+     */
     public static boolean pisteitaMaxYksi(StringBuilder nimi) {
+        // Muuttuja pisteiden lukumäärälle.
         int pisteidenLkm = 0;
+        // Tarkistetaan, ettei piste ole nimen ainut merkki. Jos on, poistutaan metodista ja palautetaan false.
         if (nimi.length() == 1 && nimi.charAt(0) == '.') {
             return false;
         } else {
+            // Käydään nimi läpi ja kasvatetaan laskuria, jos kohdataan piste.
             for (int i = 0; i < nimi.length(); i++) {
                 if (nimi.charAt(i) == '.') {
                     pisteidenLkm++;
                 }
             }
 
+            // Jos pisteiden lukumäärä on enemmän kuin yksi, paluuarvo on false.
             if (pisteidenLkm > 1) {
                 return false;
             } else {
