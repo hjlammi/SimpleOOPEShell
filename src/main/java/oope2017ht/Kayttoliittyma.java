@@ -2,7 +2,6 @@ package oope2017ht;
 
 import apulaiset.In;
 import oope2017ht.omalista.OmaLista;
-import oope2017ht.tiedot.Hakemisto;
 
 /**
   * Käyttöliittymä vastaa vuorovaikutuksesta käyttäjän kanssa. Käyttäjä antaa käyttöliittymän välityksellä
@@ -77,17 +76,8 @@ public class Kayttoliittyma {
      * Rakentajat.
      */
 
-    /** Oletusrakentaja, jossa luodaan oletusjuurihakemisto.*/
     public Kayttoliittyma() {
         this.tulkki = new Tulkki();
-        tulkki.juurihakemisto(new Hakemisto());
-        tulkki.tyohakemisto(tulkki.juurihakemisto());
-    }
-
-    public Kayttoliittyma(Hakemisto juurihakemisto) {
-        this.tulkki = new Tulkki();
-        tulkki.juurihakemisto(juurihakemisto);
-        tulkki.tyohakemisto(juurihakemisto);
     }
 
     /** Metodi pyytää käyttäjältä komentoja ja kutsuu komentoja vastaavia tulkkiluokan metodeja.

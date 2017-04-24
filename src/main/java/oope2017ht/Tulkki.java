@@ -28,6 +28,14 @@ public class Tulkki {
     private Hakemisto juurihakemisto;
 
     /*
+     * Rakentaja.
+     */
+    public Tulkki() {
+        this.juurihakemisto(new Hakemisto());
+        this.tyohakemisto(juurihakemisto);
+    }
+
+    /*
      * Aksessorit.
      */
     public void tyohakemisto(Hakemisto hakemisto) {
