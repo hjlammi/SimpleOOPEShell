@@ -17,6 +17,40 @@ import oope2017ht.tiedot.Hakemisto;
 public class Kayttoliittyma {
 
     /*
+     *  Vakiot.
+     */
+
+    // Käyttäjän antamat komennot.
+    private static final String REKURSIIVINEN_LISTAAMINEN = "find";
+
+    private static final String HAKEMISTON_VAIHTAMINEN = "cd";
+
+    private static final String POISTAMINEN = "rm";
+
+    private static final String KOPIOIMINEN = "cp";
+
+    private static final String UUDELLEEN_NIMEAMINEN = "mv";
+
+    private static final String TIEDOSTON_LUOMINEN = "mf";
+
+    private static final String HAKEMISTON_LUOMINEN = "md";
+
+    private static final String LISTAAMINEN = "ls";
+
+    private static final String LOPETUS = "exit";
+
+
+    // Tulosteet käyttäjälle.
+    private static final String KEHOTE = ">";
+
+    private static final String TERVEHDYS = "Welcome to SOS.";
+
+    private static final String LOPETUSVIESTI = "Shell terminated.";
+
+    private static final String VIRHEILMOITUS = "Error!";
+
+
+    /*
      * Attribuutit.
      */
 
@@ -48,7 +82,7 @@ public class Kayttoliittyma {
     // Metodin suoritusta jatketaan, kunnes käyttäjä syöttää lopetuskomennon.
     public void suorita() {
         // Kun ohjelma käynnistyy tulostetaan tervehdysviesti.
-        terminaali.tulosta(Tulkki.TERVEHDYS);
+        terminaali.tulosta(TERVEHDYS);
 
         // Luodaan muuttuja käyttäjän antamalle syötteelle.
         String syote;
@@ -56,7 +90,7 @@ public class Kayttoliittyma {
         do {
             // Kutsutaan metodia, tulostaa näytölle nykyisen työhakemiston hakemistopolun sekä kehotteen
             // ja lukee käyttäjän antaman syötteen syote-muuttujaan.
-            syote = terminaali.lueSyote(tulkki.tyohakemisto.hakemistopolku() + Tulkki.KEHOTE);
+            syote = terminaali.lueSyote(tulkki.tyohakemisto.hakemistopolku() + KEHOTE);
             // Pilkotaan syöte osiin välilyöntien kohdalta ja tallennetaan syötteen osat taulukkoon.
             String osat[] = syote.split(" ");
             try {
@@ -64,20 +98,20 @@ public class Kayttoliittyma {
                 if (syote.endsWith(" ") || syote.startsWith(" ")) {
                     error();
                 // Jos käyttäjä haluaa poistua ohjelmasta tulostetaan lopetusviesti.
-                } else if (osat[0].equals(Tulkki.LOPETUS) && osat.length == 1) {
-                    terminaali.tulosta(Tulkki.LOPETUSVIESTI);
+                } else if (osat[0].equals(LOPETUS) && osat.length == 1) {
+                    terminaali.tulosta(LOPETUSVIESTI);
                 // Jos käyttäjä haluaa listata hakemiston sisällön, komento ei sisällä komentoriviparametreja.
-                } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 1) {
+                } else if (osat[0].equals(LISTAAMINEN) && osat.length == 1) {
                     // Kutsutaan metodia, joka listaa hakemiston sisällön.
                     listaaHakemistonSisalto();
                 // Jos käyttäjä haluaa tulostaa näytölle tiedon merkkijonoesityksen, hän antaa
                 // tiedon nimen komentoriviparametrina.
-                } else if (osat[0].equals(Tulkki.LISTAAMINEN) && osat.length == 2) {
+                } else if (osat[0].equals(LISTAAMINEN) && osat.length == 2) {
                     // Tiedon nimi.
                     String nimi = osat[1];
                     tulostaTietoMjonona(nimi);
                 // Jos käyttäjä haluaa luoda hakemiston komentoriviparametrina antamallansa nimellä:
-                } else if (osat[0].equals(Tulkki.HAKEMISTON_LUOMINEN) && osat.length == 2) {
+                } else if (osat[0].equals(HAKEMISTON_LUOMINEN) && osat.length == 2) {
                     // Tiedon nimi.
                     String nimi = osat[1];
                     // Jos tulkin luoHakemisto-metodi palauttaa falsen, hakemiston luominen ei onnistunut,
@@ -86,7 +120,7 @@ public class Kayttoliittyma {
                         error();
                     }
                 // Jos käyttäjä haluaa luoda tiedoston komentoriviparametreinaan antamillaan nimellä ja koolla:
-                } else if (osat[0].equals(Tulkki.TIEDOSTON_LUOMINEN) && osat.length == 3) {
+                } else if (osat[0].equals(TIEDOSTON_LUOMINEN) && osat.length == 3) {
                     // Luotavan tiedoston nimi.
                     String nimi = osat[1];
                     // Luotavan tiedoston koko.
@@ -97,7 +131,7 @@ public class Kayttoliittyma {
                         error();
                     }
                 // Jos käyttäjä haluaa uudelleennimetä olemassa olevan tiedon:
-                } else if (osat[0].equals(Tulkki.UUDELLEEN_NIMEAMINEN) && osat.length == 3) {
+                } else if (osat[0].equals(UUDELLEEN_NIMEAMINEN) && osat.length == 3) {
                     // Ensimmäinen komentoriviparametri on vaihdettavan tiedon nimi.
                     String vaihdettavaNimi = osat[1];
                     // Toinen komentoriviparametri on uusi nimi tiedolle.
@@ -108,7 +142,7 @@ public class Kayttoliittyma {
                         error();
                     }
                 // Jos käyttäjä haluaa kopioida tiedoston:
-                } else if (osat[0].equals(Tulkki.KOPIOIMINEN) && osat.length == 3) {
+                } else if (osat[0].equals(KOPIOIMINEN) && osat.length == 3) {
                     // Kopioitavan tiedoston nimi on ensimmäinen komentoriviparametri.
                     String nimi = osat[1];
                     // Kopion nimi on toinen komentoriviparametri.
@@ -120,7 +154,7 @@ public class Kayttoliittyma {
                         error();
                     }
                 // Jos käyttäjä haluaa poistaa tiedon, jonka nimen antaa ensimmäisenä komentoriviparametrina:
-                } else if (osat[0].equals(Tulkki.POISTAMINEN) && osat.length == 2) {
+                } else if (osat[0].equals(POISTAMINEN) && osat.length == 2) {
                     // Poistettavan tiedon nimi.
                     String poistettava = osat[1];
                     // Jos poisto ei onnistunut, tulostetaan virheilmoitus.
@@ -129,12 +163,12 @@ public class Kayttoliittyma {
                     }
                 // Jos käyttäjä haluaa siirtyä takaisin juurihakemistoon, kutsutaan tulkin metodia, joka
                 // vaihtaa työhakemistoksi juurihakemiston.
-                } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat.length == 1) {
+                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && osat.length == 1) {
                     tulkki.siirryJuurihakemistoon();
                 // Jos käyttäjä haluaa siirtyä johonkin alihakemistoistaan,
                 // ensimmäinen komentoriviparametri on sen alihakemiston nimi, johon halutaan siirtyä.
                 // Tarkistetaan kuitenkin ettei parametri ole "..", jolla siirrytään ylihakemistoon.
-                } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..")
+                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && !osat[1].equals("..")
                 && osat.length == 2) {
                     // Alihakemiston nimi.
                     String nimi = osat[1];
@@ -144,7 +178,7 @@ public class Kayttoliittyma {
                         error();
                     }
                 // Jos käyttäjä haluaa siirtyä nykyisen hakemiston ylihakemistoon, komentoriviparametri on "..".
-                } else if (osat[0].equals(Tulkki.HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..")
+                } else if (osat[0].equals(HAKEMISTON_VAIHTAMINEN) && osat[1].equals("..")
                 && osat.length == 2) {
                     // Kutsutaan tulkin metodia, joka vaihtaa työhakemistoksi nykyisen hakemiston ylihakemiston.
                     // Jos paluuarvo on false, siirtyminen ei onnistunut ja tulostetaan virheilmoitus.
@@ -152,7 +186,7 @@ public class Kayttoliittyma {
                         error();
                     }
                 // Jos käyttäjä haluaa listata nykyisen hakemiston hakemistopuun:
-                } else if (osat[0].equals(Tulkki.REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
+                } else if (osat[0].equals(REKURSIIVINEN_LISTAAMINEN) && osat.length == 1) {
                     // Kutsutaan metodia, joka listaa hakemistopuun rekursiivisesti.
                     listaaRekursiivisesti();
                 // Jos syöte ei ole mikään hyväksytyistä syötteistä tulostetaan
@@ -166,7 +200,7 @@ public class Kayttoliittyma {
                 error();
             }
         // Suoritetaan silmukkaa kunnes käyttäjä syöttää lopetuskomennon.
-        } while (!syote.equals(Tulkki.LOPETUS));
+        } while (!syote.equals(LOPETUS));
     }
 
 
@@ -213,7 +247,7 @@ public class Kayttoliittyma {
 
     // Metodi kutsuu terminaalin tulosta-metodia, joka tulostaa virheilmoituksen.
     private void error() {
-        terminaali.tulosta(Tulkki.VIRHEILMOITUS);
+        terminaali.tulosta(VIRHEILMOITUS);
     }
 
 }
