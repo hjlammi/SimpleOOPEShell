@@ -66,6 +66,12 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
     }
 
     // Korvattava toString-metodi.
+
+    /**
+     * Korvattu toString-metodi kutsuu yliluokan toString-metodia.
+     * @return merkkijono, joka koostuu tiedoston nimestä, kauttaviivasta, välilyönnistä ja kokonaisluvusta,
+     * joka kertoo montako tiedostoa ja alihakemistoa hakemisto sisältää.
+     */
     @Override
     public String toString() {
         return super.toString() + "/" + EROTIN + tiedot.koko();

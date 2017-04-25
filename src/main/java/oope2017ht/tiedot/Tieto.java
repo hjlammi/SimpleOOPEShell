@@ -140,18 +140,32 @@ public abstract class Tieto implements Comparable<Tieto>{
      * Korvatut metodit.
      */
 
+    /**
+     * Korvattu toString-metodi, joka palauttaa tiedon nimen merkkijonona.
+     * @return merkkijono, joka koostuu tiedon nimestä.
+     */
     @Override
     public String toString() {
         return nimi.toString();
     }
 
+    /**
+     * Korvattu compareTo-metodi, jolla vertaillaan tietojen nimiä keskenään.
+     * @return vertailtavien merkkijonojen etäisyys niiden merkkien välisenä etäisyytenä.
+     */
     @Override
     public int compareTo(Tieto t) {
         String tama = this.nimi().toString();
         String toinen = t.nimi().toString();
+        // Vertaillaan merkkijonoja toisiinsa ja paluuarvo on vertailtavien merkkijonojen etäisyys.
         return tama.compareTo(toinen);
     }
 
+    /**
+     * Korvattu equals-metodi, jolla vertaillaan tietojen nimiä keskenään: oliot ovat samat,
+     * jos niiden nimet ovat merkilleen samat.
+     * @return true, jos olioiden nimet ovat samat, false, jos nimissä on eroa
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj != null && obj instanceof Tieto) {

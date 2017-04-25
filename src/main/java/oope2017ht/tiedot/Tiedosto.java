@@ -55,6 +55,11 @@ public class Tiedosto extends Tieto {
     /*
      * Korvatut metodit.
      */
+
+    /**
+     * Korvattu toString-metodi kutsuu yliluokan toString-metodia.
+     * @return merkkijono, joka koostuu tiedoston nimestä, välilyönnistä ja tiedoston koosta.
+     */
     @Override
     public String toString() {
         return super.toString() + EROTIN + koko;
