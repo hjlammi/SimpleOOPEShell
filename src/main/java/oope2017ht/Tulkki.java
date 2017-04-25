@@ -66,7 +66,7 @@ public class Tulkki {
       * <p>
       * Tutkii onko hakemistossa jo parametrina annetulla nimellä tiedosto tai hakemisto.
       *
-      * @param nimi viittaa tietoon, jota haetaan
+      * @param nimi sen tiedon nimi, jota haetaan
       * @return true, jos samanniminen on jo hakemistossa, false jo samannimistä ei ole
       */
     private boolean nimiVarattu(String nimi) {
@@ -105,7 +105,7 @@ public class Tulkki {
 
     /**
       *  Metodilla asetetaan työhakemistoksi alihakemisto, jonka nimi saadaan parametrina.
-      * @param sen alihakemiston nimi, johon siirrytään
+      * @param nimi sen alihakemiston nimi, johon siirrytään
       * @return true, jos alihakemistoon siirtyminen onnistui, false, jos ei onnistunut
       */
     public boolean siirryAlihakemistoon(String nimi) {
@@ -123,7 +123,7 @@ public class Tulkki {
 
     /**
       *  Metodi poistaa hakemistosta tiedon, jonka nimi saadaan parametrina.
-      * @param poistettava tieto
+      * @param poistettava tieto, joka poistetaan
       * @return true, jos poisto onnistui, false, jos ei onnistunut
       */
     public boolean poista(String poistettava) {
@@ -139,8 +139,8 @@ public class Tulkki {
 
     /**
       *  Metodi kopioi tiedoston. Kopioitavan tiedoston nimi ja kopiolle annettava nimi saadaan parametreina.
-      * @param nimi viittaa tiedostoon, joka halutaan kopioida
-      * @param kopioNimi viittaa nimeen, joka annetaan kopiolle
+      * @param nimi sen tiedoston nimi, joka halutaan kopioida
+      * @param kopioNimi nimi, joka annetaan kopiolle
       * @return true, jos kopiointi onnistui, false, jos ei onnistunut
       */
     public boolean kopioiTiedosto(String nimi, String kopioNimi) {
@@ -163,8 +163,8 @@ public class Tulkki {
 
     /**
       *  Metodi nimeää hakemistossa olevan tiedon uudelleen.
-      * @param vaihdettavaNimi viittaa sen tiedon nimeen, joka halutaan vaihtaa
-      * @param uusiNimi
+      * @param vaihdettavaNimi sen tiedon nimi, joka halutaan vaihtaa
+      * @param uusiNimi tiedon uusi nimi
       * @return true, jos vaihtaminen onnistui, false, jos uusi nimi on varattu tai vaihdettavan
       * nimistä ei löydy hakemistosta, jolloin vaihtaminen epäonnistuu
       */
@@ -189,8 +189,8 @@ public class Tulkki {
 
     /**
       *  Metodi luo tiedoston ja lisää sen työhakemistoon.
-      * @param nimi
-      * @param koko
+      * @param nimi luotavan tiedoston nimi
+      * @param koko luotavan tiedoston koko
       * @return true, jos tiedoston lisääminen onnistui, false, jos ei onnistunut
       */
     public boolean luoTiedosto(String nimi, int koko) {
@@ -203,7 +203,7 @@ public class Tulkki {
 
     /**
       *  Metodi luo hakemiston ja lisää sen työhakemistoon.
-      * @param nimi
+      * @param nimi luotavana hakemiston nimi
       * @return true, jos hakemiston lisääminen onnistui, false, jos ei onnistunut
       */
     public boolean luoHakemisto(String nimi) {
@@ -216,7 +216,7 @@ public class Tulkki {
 
     /**
       * Metodi tulostaa merkkijonona sen tiedoston tai hakemiston tiedot, jonka nimi annetaan parametrina.
-      * @param nimi viittaa tiedostoon tai hakemistoon, jonka tiedot halutaan merkkijonona
+      * @param nimi sen tiedoston tai hakemiston nimi, jonka tiedot halutaan merkkijonona
       * @return null, jos haettavaa tietoa ei ole hakemistossa tai tieto merkkijonona, jos tieto löytyy hakemistosta
       */
     public String tietoMjonona(String nimi) {
@@ -250,7 +250,7 @@ public class Tulkki {
 
     /**
       *  Metodi tallentaa parametrina saamansa hakemiston hakemistopuun sisällön OmaLista-tyyppiseen muuttujaan.
-      * @param hakemisto, jonka hakemistopuu halutaan lisätä listaan.
+      * @param hakemisto sen hakemiston nimi, jonka hakemistopuu halutaan tallentaa listalle.
       * @return tulos eli hakemistopuu tallennettuna listalle.
       */
     public OmaLista hakemistopuunSisalto(Hakemisto hakemisto) {
@@ -265,7 +265,7 @@ public class Tulkki {
     /**
       *  Metodi listaa parametrina saamansa hakemiston hakemistopuun rekursiivisesti esijärjestyksessä
       *  OmaLista-tyyppiselle listalle.
-      * @param hakemisto viittaa hakemistoon, jonka hakemistopuu halutaan lisätä listaan.
+      * @param hakemisto sen hakemiston nimi, jonka hakemistopuu halutaan lisätä listaan.
       * @param tulos eli lista, johon hakemistopuu tallennetaan
       */
     private void hakemistopuunSisalto(Hakemisto hakemisto, OmaLista tulos) {

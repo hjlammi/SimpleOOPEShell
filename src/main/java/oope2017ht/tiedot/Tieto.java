@@ -33,7 +33,7 @@ public abstract class Tieto implements Comparable<Tieto>{
     }
 
     // Kopiorakentaja.
-    public Tieto(Tieto toinen) {
+    public Tieto(Tieto toinen) throws IllegalArgumentException {
         if (toinen == null) {
             throw new IllegalArgumentException();
         }
@@ -42,6 +42,12 @@ public abstract class Tieto implements Comparable<Tieto>{
 
     /*
      * Aksessorit.
+     */
+
+    /**
+     * Setteri nimelle. Kutsuu metodia, joka tarkistaa, että parametrina saatu nimi on oikeanlainen.
+     * @param nimi
+     * @throws IllegalArgumentException, jos nimi ei ole kelvollinen
      */
 
     public void nimi(StringBuilder nimi) throws IllegalArgumentException{
