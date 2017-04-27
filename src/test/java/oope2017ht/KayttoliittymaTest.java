@@ -604,4 +604,24 @@ public class KayttoliittymaTest {
         assertEquals("/cat/kitten/>", terminaali.kehotteet.alkio(4));
     }
 
+    //Open mv-testi
+    @Test
+    public void testMv() {
+        TestiTerminaali terminaali = new TestiTerminaali();
+        terminaali.syotteet.lisaaLoppuun("mv a.txt t.txt");
+        terminaali.syotteet.lisaaLoppuun("ls");
+        terminaali.syotteet.lisaaLoppuun("exit");
+        Hakemisto juurihakemisto = new Hakemisto(new StringBuilder("root"), null);
+        Tiedosto a = new Tiedosto(new StringBuilder("a.txt"), 1);
+        juurihakemisto.lisaa(a);
+        Tiedosto s = new Tiedosto(new StringBuilder("s.txt"), 2);
+        juurihakemisto.lisaa(s);
+        Kayttoliittyma kayttoliittyma = new Kayttoliittyma(terminaali, juurihakemisto);
+
+        kayttoliittyma.suorita();
+
+        assertEquals(2, kayttoliittyma.tulkki.tyohakemisto().tiedot().koko());
+        assertEquals("s.txt 2", terminaali.tulosteet.alkio(1));
+    }
+
 }
