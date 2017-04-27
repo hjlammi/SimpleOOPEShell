@@ -230,15 +230,19 @@ public class Kayttoliittyma {
       * @param nimi viittaa tietoon, joka tulostetaan merkkijonona.
       */
     private void tulostaTietoMjonona(String nimi) {
-        // Kutsutaan tulkin metodia, joka saa parametrina tiedon nimen
-        // ja palauttaa sen merkkijonoesityksen.
-        String mjono = tulkki.tietoMjonona(nimi);
-        // Jos metodi palautti nullin eli tietoa ei saatu merkkijonona, tulostetaan virheilmoitus.
-        if (mjono == null) {
+        if (nimi == null) {
             error();
-        // Jos tiedon merkkijonoesitys saatiin paluuarvona, tulostetaan se.
         } else {
-            System.out.println(mjono);
+            // Kutsutaan tulkin metodia, joka saa parametrina tiedon nimen
+            // ja palauttaa sen merkkijonoesityksen.
+            String mjono = tulkki.tietoMjonona(nimi);
+            // Jos metodi palautti nullin eli tietoa ei saatu merkkijonona, tulostetaan virheilmoitus.
+            if (mjono == null) {
+                error();
+            // Jos tiedon merkkijonoesitys saatiin paluuarvona, tulostetaan se.
+            } else {
+                System.out.println(mjono);
+            }
         }
     }
 
