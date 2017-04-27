@@ -180,8 +180,24 @@ public class Tulkki {
                 if (alkio == null) {
                     return false;
                 } else {
-                    // Asetetaan alkiolle uusi nimi.
-                    alkio.nimi(new StringBuilder(uusiNimi));
+                    // Poistetaan alkio, jonka nimi halutaan vaihtaa, jotta saadaan lisättyä uudenniminen tieto
+                    // aakkosissa oikealle kohdalle hakemistossa.
+                    tyohakemisto.poista(vaihdettavaNimi);
+                    // Tarkistetaan, onko tieto Tiedosto- vai Hakemisto-tyyppinen.
+                    if (alkio instanceof Tiedosto) {
+                        // Pätkitään alkion tiedot eli nimi ja koko taulukkoon.
+                        String tiedot[] = alkio.toString().split(" ");
+                        // Tiedoston koko on toisessa indeksissä.
+                        int koko = Integer.parseInt(tiedot[1]);
+                        // Luodaan uuden niminen, mutta vanhan kokoinen tiedosto-olio.
+                        Tiedosto uusi = new Tiedosto(new StringBuilder(uusiNimi), koko);
+                        // Lisätään uusi tiedosto työhakemistoon.
+                        tyohakemisto.lisaa(uusi);
+                    } else {
+                        // Jos kyseessä ei ollut Tiedosto, luodaan uusi hakemisto ja lisätään se työhakemistoon.
+                        Hakemisto uusi = new Hakemisto(new StringBuilder(uusiNimi), tyohakemisto);
+                        tyohakemisto.lisaa(uusi);
+                    }
                     return true;
                 }
         }
