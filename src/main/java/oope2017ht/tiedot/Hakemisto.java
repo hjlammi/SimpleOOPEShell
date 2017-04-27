@@ -49,7 +49,9 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
      */
 
     public void sisalto(OmaLista tiedot) {
-        this.tiedot = tiedot;
+        if (tiedot != null) {
+            this.tiedot = tiedot;
+        }
     }
 
     public OmaLista tiedot() {
@@ -57,7 +59,9 @@ public class Hakemisto extends Tieto implements Komennettava<Tieto> {
     }
 
     public void ylihakemisto(Hakemisto ylihakemisto) {
-        this.ylihakemisto = ylihakemisto;
+        if (ylihakemisto != null) {
+            this.ylihakemisto = ylihakemisto;
+        }
     }
 
     public Hakemisto ylihakemisto() {
