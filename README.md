@@ -1,5 +1,7 @@
 # SimpleOOPEShell
 
+The program was an assignment at an object-oriented Java programming course at the university. SimpleOOPEShell simulates a textual user interface that takes commands from the user and processes files and folders accordingly. The program uses Linked List as the data structure for the folders and the data is stored in RAM.
+
 ## Examples
 
 md <somefile> command creates new folder of given name. ls lists the contents of the current folder.
